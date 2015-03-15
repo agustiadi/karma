@@ -20,12 +20,15 @@ class LoginViewController: UIViewController {
                 
                 if user.isNew {
                     println("User signed up and logged in through Facebook!")
+                    self.getUserInfo()
                     self.performSegueWithIdentifier("userLoggedIn", sender: self)
                     
                 } else {
                     println("User logged in through Facebook!")
+                    self.getUserInfo()
                     self.performSegueWithIdentifier("userLoggedIn", sender: self)
                 }
+                
             } else {
                 println("Uh oh. The user cancelled the Facebook login.")
                 self.dismissViewControllerAnimated(true, completion: nil)
@@ -50,6 +53,17 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func getUserInfo(){
+        FBRequestConnection.startWithGraphPath("me?fields=id,name,picture", completionHandler: {(connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
+            if (result? != nil) {
+                NSLog("error = \(error)")
+                
+                println(result.name)
+                println(result.picture)
+                
+            }
+        } as FBRequestHandler)
+    }
 
 
     /*

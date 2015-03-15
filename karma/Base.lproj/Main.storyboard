@@ -31,12 +31,12 @@
                     <navigationItem key="navigationItem" id="nx7-AQ-IrM"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <segue destination="1QJ-Zg-Etp" kind="show" identifier="userLoggedIn" id="GKg-Ja-B1O"/>
+                        <segue destination="1QJ-Zg-Etp" kind="show" identifier="userLoggedIn" id="Ei8-vf-baE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2250.5" y="430.5"/>
+            <point key="canvasLocation" x="2248.5" y="515.5"/>
         </scene>
         <!--Item List-->
         <scene sceneID="IDW-s8-LJM">
@@ -70,13 +70,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4a6-qH-rjY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3185.5" y="430.5"/>
+            <point key="canvasLocation" x="3165.5" y="515.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="F64-o6-Bxz">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1QJ-Zg-Etp" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pKX-2R-wcg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -88,7 +89,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rXR-v6-HlQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2713.5" y="430.5"/>
+            <point key="canvasLocation" x="2696.5" y="515.5"/>
         </scene>
     </scenes>
     <resources>
