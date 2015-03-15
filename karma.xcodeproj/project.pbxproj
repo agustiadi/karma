@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A8F928E31AB17BFB006AB6AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F928E21AB17BFB006AB6AB /* AppDelegate.swift */; };
-		A8F928E51AB17BFB006AB6AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F928E41AB17BFB006AB6AB /* ViewController.swift */; };
-		A8F928E81AB17BFB006AB6AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8F928E61AB17BFB006AB6AB /* Main.storyboard */; };
 		A8F928EA1AB17BFB006AB6AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8F928E91AB17BFB006AB6AB /* Images.xcassets */; };
 		A8F928ED1AB17BFB006AB6AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8F928EB1AB17BFB006AB6AB /* LaunchScreen.xib */; };
 		A8F928F91AB17BFB006AB6AB /* karmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F928F81AB17BFB006AB6AB /* karmaTests.swift */; };
@@ -26,6 +24,11 @@
 		A8F929171AB2BCE6006AB6AB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F929161AB2BCE6006AB6AB /* SystemConfiguration.framework */; };
 		A8F929191AB2BCEE006AB6AB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F929181AB2BCEE006AB6AB /* libz.dylib */; };
 		A8F9291B1AB2BCF7006AB6AB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F9291A1AB2BCF7006AB6AB /* libsqlite3.dylib */; };
+		A8F929211AB2C09A006AB6AB /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F929201AB2C09A006AB6AB /* FacebookSDK.framework */; };
+		A8F929291AB2CB69006AB6AB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F929281AB2CB69006AB6AB /* LoginViewController.swift */; };
+		A8F9292B1AB2CBE8006AB6AB /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F9292A1AB2CBE8006AB6AB /* ParseFacebookUtils.framework */; };
+		A8F929341AB5B936006AB6AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8F929321AB5B936006AB6AB /* Main.storyboard */; };
+		A8F929361AB5BADE006AB6AB /* ItemListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F929351AB5BADE006AB6AB /* ItemListTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,8 +45,6 @@
 		A8F928DD1AB17BFB006AB6AB /* karma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = karma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8F928E11AB17BFB006AB6AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8F928E21AB17BFB006AB6AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A8F928E41AB17BFB006AB6AB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A8F928E71AB17BFB006AB6AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A8F928E91AB17BFB006AB6AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A8F928EC1AB17BFB006AB6AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A8F928F21AB17BFB006AB6AB /* karmaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = karmaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +64,11 @@
 		A8F929181AB2BCEE006AB6AB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A8F9291A1AB2BCF7006AB6AB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		A8F9291C1AB2BD3A006AB6AB /* karma-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "karma-Bridging-Header.h"; sourceTree = "<group>"; };
+		A8F929201AB2C09A006AB6AB /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		A8F929281AB2CB69006AB6AB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
+		A8F9292A1AB2CBE8006AB6AB /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		A8F929331AB5B936006AB6AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A8F929351AB5BADE006AB6AB /* ItemListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +84,13 @@
 				A8F929111AB2BCD2006AB6AB /* QuartzCore.framework in Frameworks */,
 				A8F9290F1AB2BCCC006AB6AB /* MobileCoreServices.framework in Frameworks */,
 				A8F9290D1AB2BCC6006AB6AB /* CoreLocation.framework in Frameworks */,
+				A8F9292B1AB2CBE8006AB6AB /* ParseFacebookUtils.framework in Frameworks */,
 				A8F9290B1AB2BCC1006AB6AB /* CoreGraphics.framework in Frameworks */,
 				A8F929091AB2BCBB006AB6AB /* CFNetwork.framework in Frameworks */,
 				A8F929071AB2BCA8006AB6AB /* AudioToolbox.framework in Frameworks */,
 				A8F929051AB2BC82006AB6AB /* Parse.framework in Frameworks */,
 				A8F929041AB2BC82006AB6AB /* Bolts.framework in Frameworks */,
+				A8F929211AB2C09A006AB6AB /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,9 +127,10 @@
 		A8F928DF1AB17BFB006AB6AB /* karma */ = {
 			isa = PBXGroup;
 			children = (
+				A8F929321AB5B936006AB6AB /* Main.storyboard */,
 				A8F928E21AB17BFB006AB6AB /* AppDelegate.swift */,
-				A8F928E41AB17BFB006AB6AB /* ViewController.swift */,
-				A8F928E61AB17BFB006AB6AB /* Main.storyboard */,
+				A8F929281AB2CB69006AB6AB /* LoginViewController.swift */,
+				A8F929351AB5BADE006AB6AB /* ItemListTableViewController.swift */,
 				A8F928E91AB17BFB006AB6AB /* Images.xcassets */,
 				A8F928EB1AB17BFB006AB6AB /* LaunchScreen.xib */,
 				A8F928E01AB17BFB006AB6AB /* Supporting Files */,
@@ -157,6 +166,8 @@
 		A8F9291F1AB2BDDE006AB6AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A8F9292A1AB2CBE8006AB6AB /* ParseFacebookUtils.framework */,
+				A8F929201AB2C09A006AB6AB /* FacebookSDK.framework */,
 				A8F929031AB2BC82006AB6AB /* Parse.framework */,
 				A8F929021AB2BC82006AB6AB /* Bolts.framework */,
 				A8F9291A1AB2BCF7006AB6AB /* libsqlite3.dylib */,
@@ -254,7 +265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8F928E81AB17BFB006AB6AB /* Main.storyboard in Resources */,
+				A8F929341AB5B936006AB6AB /* Main.storyboard in Resources */,
 				A8F928ED1AB17BFB006AB6AB /* LaunchScreen.xib in Resources */,
 				A8F928EA1AB17BFB006AB6AB /* Images.xcassets in Resources */,
 			);
@@ -274,8 +285,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8F928E51AB17BFB006AB6AB /* ViewController.swift in Sources */,
+				A8F929291AB2CB69006AB6AB /* LoginViewController.swift in Sources */,
 				A8F928E31AB17BFB006AB6AB /* AppDelegate.swift in Sources */,
+				A8F929361AB5BADE006AB6AB /* ItemListTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,20 +310,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A8F928E61AB17BFB006AB6AB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A8F928E71AB17BFB006AB6AB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A8F928EB1AB17BFB006AB6AB /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A8F928EC1AB17BFB006AB6AB /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		A8F929321AB5B936006AB6AB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A8F929331AB5B936006AB6AB /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -402,6 +414,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/karma",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = karma/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -419,6 +432,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/karma",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = karma/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
