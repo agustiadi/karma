@@ -22,12 +22,6 @@ class ItemListTableViewController: UITableViewController{
           self.performSegueWithIdentifier("userProfile", sender: self)
     }
     
-    @IBAction func logout(sender: AnyObject) {
-        PFUser.logOut()
-        println("Logout Successful")
-        navigationController?.popToRootViewControllerAnimated(true)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

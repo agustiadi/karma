@@ -10,6 +10,14 @@ import UIKit
 
 class UserProfileViewController: UIViewController {
 
+    @IBAction func logoutBtn(sender: AnyObject) {
+        
+        PFUser.logOut()
+        println("Logout Successful")
+        navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +30,7 @@ class UserProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated:true)
         navigationController?.setToolbarHidden(true, animated: true)
     }
 

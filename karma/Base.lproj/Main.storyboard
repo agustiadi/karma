@@ -52,7 +52,7 @@
                     <connections>
                         <segue destination="tT6-XC-oB1" kind="show" identifier="emailLogin" id="gHT-xn-tWU"/>
                         <segue destination="hgd-2G-Jfj" kind="show" identifier="emailSignup" id="Ew8-XP-E5d"/>
-                        <segue destination="Luu-L6-la9" kind="show" identifier="fbLoggedIn" id="234-8C-3j8"/>
+                        <segue destination="Luu-L6-la9" kind="show" identifier="fbLoggedIn" id="LgN-ka-Iws"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -140,7 +140,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Photo and Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2y-ME-FFQ">
                                 <rect key="frame" x="89" y="223" width="209" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -156,7 +156,7 @@
         <!--User Profile-->
         <scene sceneID="QRy-CL-zzs">
             <objects>
-                <viewController title="User Profile" id="V0F-mV-YAg" customClass="UserProfileViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="V0F-mV-YAg" customClass="UserProfileViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oa3-4O-d0Q"/>
                         <viewControllerLayoutGuide type="bottom" id="B5W-bM-CF5"/>
@@ -168,12 +168,20 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Hg-sa-JfZ">
                                 <rect key="frame" x="126" y="238" width="123" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="User Profile" id="0yW-5w-FjM">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="XzW-ub-nq4">
+                            <connections>
+                                <action selector="logoutBtn:" destination="V0F-mV-YAg" id="Wv2-G6-MSG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
@@ -273,7 +281,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="OIQ-MF-bmw">
-                            <color key="tintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                         <barButtonItem systemItem="organize" id="spZ-Ds-dhI">
                             <connections>
@@ -283,13 +291,7 @@
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="r2A-E9-eNd"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Item List" id="f1a-Ne-VM4">
-                        <barButtonItem key="rightBarButtonItem" title="Logout" id="jBS-6U-add">
-                            <connections>
-                                <action selector="logout:" destination="Luu-L6-la9" id="4JR-Fz-aA4"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Item List" id="f1a-Ne-VM4"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -316,7 +318,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Detailed description of item" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWG-zc-Rig">
                                 <rect key="frame" x="108" y="261" width="161" height="135"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -358,6 +360,6 @@
         <image name="fbLogin" width="290" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="234-8C-3j8"/>
+        <segue reference="LgN-ka-Iws"/>
     </inferredMetricsTieBreakers>
 </document>
