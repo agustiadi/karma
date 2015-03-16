@@ -1,5 +1,5 @@
 //
-//  UserProfileViewController.swift
+//  ListingItemViewController.swift
 //  karma
 //
 //  Created by Agustiadi on 16/3/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController {
+class ListingItemViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -9,7 +9,19 @@
 import UIKit
 
 class ItemListTableViewController: UITableViewController{
+    
+    //Toolbar Buttons
+    
+    @IBAction func listItemToolBarBtn(sender: AnyObject) {
+        
+          self.performSegueWithIdentifier("listItem", sender: self)
+    }
 
+    @IBAction func userProfileToolBarBtn(sender: AnyObject) {
+        
+          self.performSegueWithIdentifier("userProfile", sender: self)
+    }
+    
     @IBAction func logout(sender: AnyObject) {
         PFUser.logOut()
         println("Logout Successful")
