@@ -20,6 +20,7 @@ class LandingPageViewController: UIViewController{
     
     override func viewWillAppear(animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated:true)
+        navigationController?.setToolbarHidden(true, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

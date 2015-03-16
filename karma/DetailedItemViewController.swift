@@ -1,5 +1,5 @@
 //
-//  ListingItemViewController.swift
+//  DetailedItemViewController.swift
 //  karma
 //
 //  Created by Agustiadi on 16/3/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListingItemViewController: UIViewController {
+class DetailedItemViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,6 @@ class ListingItemViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         navigationController?.setToolbarHidden(true, animated: true)
     }
-    
 
     /*
     // MARK: - Navigation

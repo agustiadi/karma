@@ -21,6 +21,9 @@ class UserProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        navigationController?.setToolbarHidden(true, animated: true)
+    }
 
     /*
     // MARK: - Navigation

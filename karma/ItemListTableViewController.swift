@@ -41,6 +41,7 @@ class ItemListTableViewController: UITableViewController{
     
     override func viewWillAppear(animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated:true)
+        navigationController?.setToolbarHidden(false, animated: true)
         self.navigationItem.setHidesBackButton(true, animated: false)
     }
 
@@ -60,7 +61,7 @@ class ItemListTableViewController: UITableViewController{
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 5
+        return 25
     }
 
     
@@ -72,6 +73,9 @@ class ItemListTableViewController: UITableViewController{
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("item", sender: self)
+    }
 
     /*
     // Override to support conditional editing of the table view.
