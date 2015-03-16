@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A8F3D7D81AB6C23800F98297 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F3D7D71AB6C23800F98297 /* EmailLoginViewController.swift */; };
+		A8F3D7DA1AB6C30B00F98297 /* EmailSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F3D7D91AB6C30B00F98297 /* EmailSignupViewController.swift */; };
 		A8F928E31AB17BFB006AB6AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F928E21AB17BFB006AB6AB /* AppDelegate.swift */; };
 		A8F928EA1AB17BFB006AB6AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8F928E91AB17BFB006AB6AB /* Images.xcassets */; };
 		A8F928ED1AB17BFB006AB6AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8F928EB1AB17BFB006AB6AB /* LaunchScreen.xib */; };
@@ -25,7 +27,7 @@
 		A8F929191AB2BCEE006AB6AB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F929181AB2BCEE006AB6AB /* libz.dylib */; };
 		A8F9291B1AB2BCF7006AB6AB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F9291A1AB2BCF7006AB6AB /* libsqlite3.dylib */; };
 		A8F929211AB2C09A006AB6AB /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F929201AB2C09A006AB6AB /* FacebookSDK.framework */; };
-		A8F929291AB2CB69006AB6AB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F929281AB2CB69006AB6AB /* LoginViewController.swift */; };
+		A8F929291AB2CB69006AB6AB /* LandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F929281AB2CB69006AB6AB /* LandingPageViewController.swift */; };
 		A8F9292B1AB2CBE8006AB6AB /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F9292A1AB2CBE8006AB6AB /* ParseFacebookUtils.framework */; };
 		A8F929341AB5B936006AB6AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8F929321AB5B936006AB6AB /* Main.storyboard */; };
 		A8F929361AB5BADE006AB6AB /* ItemListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F929351AB5BADE006AB6AB /* ItemListTableViewController.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A8F3D7D71AB6C23800F98297 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
+		A8F3D7D91AB6C30B00F98297 /* EmailSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSignupViewController.swift; sourceTree = "<group>"; };
 		A8F928DD1AB17BFB006AB6AB /* karma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = karma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8F928E11AB17BFB006AB6AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8F928E21AB17BFB006AB6AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +69,7 @@
 		A8F9291A1AB2BCF7006AB6AB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		A8F9291C1AB2BD3A006AB6AB /* karma-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "karma-Bridging-Header.h"; sourceTree = "<group>"; };
 		A8F929201AB2C09A006AB6AB /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
-		A8F929281AB2CB69006AB6AB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
+		A8F929281AB2CB69006AB6AB /* LandingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LandingPageViewController.swift; path = ../LandingPageViewController.swift; sourceTree = "<group>"; };
 		A8F9292A1AB2CBE8006AB6AB /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		A8F929331AB5B936006AB6AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A8F929351AB5BADE006AB6AB /* ItemListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListTableViewController.swift; sourceTree = "<group>"; };
@@ -128,8 +132,10 @@
 			isa = PBXGroup;
 			children = (
 				A8F929321AB5B936006AB6AB /* Main.storyboard */,
+				A8F3D7D91AB6C30B00F98297 /* EmailSignupViewController.swift */,
+				A8F3D7D71AB6C23800F98297 /* EmailLoginViewController.swift */,
 				A8F928E21AB17BFB006AB6AB /* AppDelegate.swift */,
-				A8F929281AB2CB69006AB6AB /* LoginViewController.swift */,
+				A8F929281AB2CB69006AB6AB /* LandingPageViewController.swift */,
 				A8F929351AB5BADE006AB6AB /* ItemListTableViewController.swift */,
 				A8F928E91AB17BFB006AB6AB /* Images.xcassets */,
 				A8F928EB1AB17BFB006AB6AB /* LaunchScreen.xib */,
@@ -285,7 +291,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8F929291AB2CB69006AB6AB /* LoginViewController.swift in Sources */,
+				A8F929291AB2CB69006AB6AB /* LandingPageViewController.swift in Sources */,
+				A8F3D7DA1AB6C30B00F98297 /* EmailSignupViewController.swift in Sources */,
+				A8F3D7D81AB6C23800F98297 /* EmailLoginViewController.swift in Sources */,
 				A8F928E31AB17BFB006AB6AB /* AppDelegate.swift in Sources */,
 				A8F929361AB5BADE006AB6AB /* ItemListTableViewController.swift in Sources */,
 			);

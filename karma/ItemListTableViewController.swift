@@ -8,14 +8,12 @@
 
 import UIKit
 
-class ItemListTableViewController: UITableViewController {
+class ItemListTableViewController: UITableViewController{
 
-    @IBAction func logoutBtn(sender: AnyObject) {
-        
+    @IBAction func logout(sender: AnyObject) {
         PFUser.logOut()
-        println("User Logged Out")
-        dismissViewControllerAnimated(true, completion: nil)
-        
+        println("Logout Successful")
+        navigationController?.popToRootViewControllerAnimated(true)
     }
     
     override func viewDidLoad() {
@@ -26,6 +24,12 @@ class ItemListTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated:true)
+        self.navigationItem.setHidesBackButton(true, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
