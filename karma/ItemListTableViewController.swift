@@ -9,7 +9,7 @@
 import UIKit
 
 class ItemListTableViewController: UITableViewController{
-    
+        
     //Toolbar Buttons
     
     @IBAction func listItemToolBarBtn(sender: AnyObject) {
@@ -57,12 +57,20 @@ class ItemListTableViewController: UITableViewController{
         // Return the number of rows in the section.
         return 25
     }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 300
+    }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as UITableViewCell
-
-        cell.textLabel?.text = "Testing 123"
+        let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as ItemListTableViewCell
+        
+        cell.itemName.text = "Testing Name \(indexPath.row + 1)"
+        cell.itemImage.image = UIImage(named: "chair.png")
+        cell.itemCategory.text = "Category \(indexPath.row + 1)"
+        cell.userName.text = "User \(indexPath.row + 1)"
+        cell.profilePic.image = UIImage(named: "displayPic.png")
         
         return cell
     }

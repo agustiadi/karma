@@ -249,20 +249,53 @@
             </objects>
             <point key="canvasLocation" x="2624.5" y="1331.5"/>
         </scene>
-        <!--Item List-->
+        <!--Karma-->
         <scene sceneID="IDW-s8-LJM">
             <objects>
                 <tableViewController id="Luu-L6-la9" customClass="ItemListTableViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="pyE-5z-5OM">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="229" sectionHeaderHeight="22" sectionFooterHeight="22" id="pyE-5z-5OM">
                         <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" id="8bV-6C-sgc">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" rowHeight="300" id="8bV-6C-sgc" customClass="ItemListTableViewCell" customModule="karma" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8bV-6C-sgc" id="0Oa-Qb-mth">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QG8-bC-tgA">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name of Item" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LLW-nR-oXh">
+                                            <rect key="frame" x="16" y="236" width="249" height="29"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eey-QM-3gS">
+                                            <rect key="frame" x="16" y="270" width="151" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jq8-bb-uio">
+                                            <rect key="frame" x="316" y="238" width="44" height="33"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name of Giver" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNZ-qA-iE1">
+                                            <rect key="frame" x="219" y="275" width="141" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="itemCategory" destination="eey-QM-3gS" id="7Fw-JJ-ewe"/>
+                                    <outlet property="itemImage" destination="QG8-bC-tgA" id="ybD-dz-RB7"/>
+                                    <outlet property="itemName" destination="LLW-nR-oXh" id="qPC-oQ-K2W"/>
+                                    <outlet property="profilePic" destination="Jq8-bb-uio" id="NUx-M0-k6i"/>
+                                    <outlet property="userName" destination="kNZ-qA-iE1" id="u4O-Aa-BcK"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -291,7 +324,7 @@
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="r2A-E9-eNd"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Item List" id="f1a-Ne-VM4"/>
+                    <navigationItem key="navigationItem" title="Karma" id="f1a-Ne-VM4"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -301,7 +334,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4a6-qH-rjY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3527.5" y="515.5"/>
+            <point key="canvasLocation" x="3527.5" y="505.5"/>
         </scene>
         <!--Detailed Item View Controller-->
         <scene sceneID="mG1-rg-sGo">
