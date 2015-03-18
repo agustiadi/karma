@@ -15,8 +15,16 @@ class UserProfileViewController: UIViewController {
         PFUser.logOut()
         println("Logout Successful")
         navigationController?.popToRootViewControllerAnimated(true)
+        
     }
     
+    @IBAction func browseBtn(sender: AnyObject) {
+        self.performSegueWithIdentifier("browseListing", sender: self)
+    }
+    
+    @IBAction func giveBtn(sender: AnyObject) {
+        self.performSegueWithIdentifier("listItem2", sender: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +39,7 @@ class UserProfileViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated:true)
-        navigationController?.setToolbarHidden(true, animated: true)
-    }
+        navigationController?.setToolbarHidden(false, animated: true)    }
 
     /*
     // MARK: - Navigation

@@ -46,8 +46,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem systemItem="bookmarks" id="ZZM-kc-JkF"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="nx7-AQ-IrM"/>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <segue destination="tT6-XC-oB1" kind="show" identifier="emailLogin" id="gHT-xn-tWU"/>
@@ -134,7 +137,7 @@
                         <viewControllerLayoutGuide type="bottom" id="4KL-nc-gMY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gZJ-2f-Eza">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Photo and Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2y-ME-FFQ">
@@ -162,7 +165,7 @@
                         <viewControllerLayoutGuide type="bottom" id="B5W-bM-CF5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="aiL-Lk-6FX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Hg-sa-JfZ">
@@ -171,9 +174,34 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gb0-vB-QPW">
+                                <rect key="frame" x="0.0" y="559" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" id="LxW-qX-meb"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="TQF-kU-i6g"/>
+                        <barButtonItem systemItem="bookmarks" id="Pm0-H1-2Tr">
+                            <connections>
+                                <action selector="browseBtn:" destination="V0F-mV-YAg" id="jFH-Ba-kWx"/>
+                                <segue destination="Luu-L6-la9" kind="show" identifier="browseListing" id="eLd-Sm-QBu"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="w6b-j4-xfM"/>
+                        <barButtonItem systemItem="camera" id="1CT-bH-13L">
+                            <connections>
+                                <action selector="giveBtn:" destination="V0F-mV-YAg" id="OF5-zn-wtm"/>
+                                <segue destination="BT2-HG-OZ9" kind="show" identifier="listItem2" id="q05-wd-a7m"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Krq-rU-nkI"/>
+                        <barButtonItem systemItem="organize" id="CS2-rq-5yp"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="eti-Xq-N9X"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="User Profile" id="0yW-5w-FjM">
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="XzW-ub-nq4">
                             <connections>
@@ -182,7 +210,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OAU-op-h7L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -254,7 +282,7 @@
             <objects>
                 <tableViewController id="Luu-L6-la9" customClass="ItemListTableViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="229" sectionHeaderHeight="22" sectionFooterHeight="22" id="pyE-5z-5OM">
-                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -279,7 +307,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jq8-bb-uio">
-                                            <rect key="frame" x="316" y="238" width="44" height="33"/>
+                                            <rect key="frame" x="316" y="235" width="40" height="40"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name of Giver" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNZ-qA-iE1">
                                             <rect key="frame" x="219" y="275" width="141" height="21"/>
@@ -305,7 +333,7 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="DDb-vQ-KZ0"/>
-                        <barButtonItem systemItem="bookmarks" id="ZZM-kc-JkF"/>
+                        <barButtonItem systemItem="bookmarks" id="7ss-yi-nYk"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="kMZ-sO-MkS"/>
                         <barButtonItem systemItem="camera" id="aeA-zW-bCc">
                             <connections>
@@ -393,6 +421,7 @@
         <image name="fbLogin" width="290" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LgN-ka-Iws"/>
+        <segue reference="q05-wd-a7m"/>
+        <segue reference="eLd-Sm-QBu"/>
     </inferredMetricsTieBreakers>
 </document>

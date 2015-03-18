@@ -16,16 +16,23 @@ class ItemListTableViewCell: UITableViewCell {
     @IBOutlet var itemCategory: UILabel!
     @IBOutlet var profilePic: UIImageView!
     @IBOutlet var userName: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        
+        //Profile Picture UI Set-up
+        profilePic.layer.cornerRadius = 20.0
+        profilePic.clipsToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        
     }
 
 }
