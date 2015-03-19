@@ -22,6 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Parse FB Initialization
         PFFacebookUtils.initializeFacebook()
         
+        //Navigation Controller Set-Up
+        UINavigationBar.appearance().barTintColor = UIColor(red: 175.0/255.0, green: 171.0/255.0, blue: 158.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        
+        //Toolbar Set-Up
+        UIToolbar.appearance().barTintColor = UIColor(red: 175.0/255.0, green: 171.0/255.0, blue: 158.0/255.0, alpha: 1.0)
+        UIToolbar.appearance().tintColor = UIColor.whiteColor()
+
         return true
     }
     

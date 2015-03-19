@@ -22,6 +22,7 @@ class ListingItemViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated:true)
         navigationController?.setToolbarHidden(true, animated: true)
     }
     

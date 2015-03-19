@@ -22,6 +22,10 @@ class ItemListTableViewController: UITableViewController{
           self.performSegueWithIdentifier("userProfile", sender: self)
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,9 +38,14 @@ class ItemListTableViewController: UITableViewController{
     
     
     override func viewWillAppear(animated: Bool) {
+        
+        //Navigation Bar Set-Up
         navigationController?.setNavigationBarHidden(false, animated:true)
-        navigationController?.setToolbarHidden(false, animated: true)
         self.navigationItem.setHidesBackButton(true, animated: false)
+        
+        //Toolbar Set-Up
+        navigationController?.setToolbarHidden(false, animated: true)
+    
     }
 
     override func didReceiveMemoryWarning() {

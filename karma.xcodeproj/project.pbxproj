@@ -11,6 +11,7 @@
 		A85F883F1AB7135B00064845 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85F883E1AB7135B00064845 /* UserProfileViewController.swift */; };
 		A85F88411AB7161000064845 /* DetailedItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85F88401AB7161000064845 /* DetailedItemViewController.swift */; };
 		A8D04F021AB926A2005E8446 /* ItemListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D04F011AB926A2005E8446 /* ItemListTableViewCell.swift */; };
+		A8D1BC891ABACCCA00A4DB43 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8D1BC881ABACCCA00A4DB43 /* Default-568h@2x.png */; };
 		A8F3D7D81AB6C23800F98297 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F3D7D71AB6C23800F98297 /* EmailLoginViewController.swift */; };
 		A8F3D7DA1AB6C30B00F98297 /* EmailSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F3D7D91AB6C30B00F98297 /* EmailSignupViewController.swift */; };
 		A8F928E31AB17BFB006AB6AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F928E21AB17BFB006AB6AB /* AppDelegate.swift */; };
@@ -52,6 +53,7 @@
 		A85F883E1AB7135B00064845 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		A85F88401AB7161000064845 /* DetailedItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedItemViewController.swift; sourceTree = "<group>"; };
 		A8D04F011AB926A2005E8446 /* ItemListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListTableViewCell.swift; sourceTree = "<group>"; };
+		A8D1BC881ABACCCA00A4DB43 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A8F3D7D71AB6C23800F98297 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
 		A8F3D7D91AB6C30B00F98297 /* EmailSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSignupViewController.swift; sourceTree = "<group>"; };
 		A8F928DD1AB17BFB006AB6AB /* karma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = karma.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +121,7 @@
 		A8F928D41AB17BFB006AB6AB = {
 			isa = PBXGroup;
 			children = (
+				A8D1BC881ABACCCA00A4DB43 /* Default-568h@2x.png */,
 				A8F9291F1AB2BDDE006AB6AB /* Frameworks */,
 				A8F928DF1AB17BFB006AB6AB /* karma */,
 				A8F928F51AB17BFB006AB6AB /* karmaTests */,
@@ -284,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8F929341AB5B936006AB6AB /* Main.storyboard in Resources */,
+				A8D1BC891ABACCCA00A4DB43 /* Default-568h@2x.png in Resources */,
 				A8F928ED1AB17BFB006AB6AB /* LaunchScreen.xib in Resources */,
 				A8F928EA1AB17BFB006AB6AB /* Images.xcassets in Resources */,
 			);

@@ -131,13 +131,13 @@
         <!--Listing Item-->
         <scene sceneID="Uue-iy-OPw">
             <objects>
-                <viewController title="Listing Item" id="BT2-HG-OZ9" customClass="ListingItemViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BT2-HG-OZ9" customClass="ListingItemViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xLf-t3-o6z"/>
                         <viewControllerLayoutGuide type="bottom" id="4KL-nc-gMY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gZJ-2f-Eza">
-                        <rect key="frame" x="0.0" y="64" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Photo and Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2y-ME-FFQ">
@@ -149,6 +149,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Listing Item" id="RNH-0s-emY">
+                        <barButtonItem key="rightBarButtonItem" title="Submit" id="YXv-I0-NBI"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
@@ -373,7 +377,7 @@
                         <viewControllerLayoutGuide type="bottom" id="I4Z-pO-BVC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uve-ov-PI5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Detailed description of item" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWG-zc-Rig">
@@ -421,7 +425,7 @@
         <image name="fbLogin" width="290" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="q05-wd-a7m"/>
         <segue reference="eLd-Sm-QBu"/>
+        <segue reference="nWu-lX-Jow"/>
     </inferredMetricsTieBreakers>
 </document>
