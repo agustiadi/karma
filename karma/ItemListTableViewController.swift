@@ -22,10 +22,6 @@ class ItemListTableViewController: UITableViewController{
           self.performSegueWithIdentifier("userProfile", sender: self)
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,6 +39,9 @@ class ItemListTableViewController: UITableViewController{
         navigationController?.setNavigationBarHidden(false, animated:true)
         self.navigationItem.setHidesBackButton(true, animated: false)
         
+        let backBtn = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backBtn
+
         //Toolbar Set-Up
         navigationController?.setToolbarHidden(false, animated: true)
     

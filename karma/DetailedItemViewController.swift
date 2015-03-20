@@ -8,8 +8,8 @@
 
 import UIKit
 
-class DetailedItemViewController: UIViewController {
-
+class DetailedItemViewController: UIViewController{
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,7 +23,11 @@ class DetailedItemViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         navigationController?.setToolbarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
+    
+
+
 
     /*
     // MARK: - Navigation

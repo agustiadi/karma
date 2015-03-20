@@ -64,10 +64,6 @@ class EmailSignupViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
-    
-    func backToLandingPage() {
-
-    }
 
 
     /*

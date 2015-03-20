@@ -237,7 +237,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3aa-1n-ZsQ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="agus@test.com" borderStyle="roundedRect" placeholder="email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3aa-1n-ZsQ">
                                 <rect key="frame" x="78" y="156" width="222" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -251,7 +251,7 @@
                                     <action selector="loginBtn:" destination="tT6-XC-oB1" eventType="touchUpInside" id="F07-6F-sUd"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dQP-qa-kB3">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="password" borderStyle="roundedRect" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dQP-qa-kB3">
                                 <rect key="frame" x="78" y="207" width="222" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -376,7 +376,7 @@
             </objects>
             <point key="canvasLocation" x="3527.5" y="505.5"/>
         </scene>
-        <!--Detailed Item View Controller-->
+        <!--Item's Detail-->
         <scene sceneID="mG1-rg-sGo">
             <objects>
                 <viewController id="ejA-4i-wsO" customClass="DetailedItemViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
@@ -385,7 +385,7 @@
                         <viewControllerLayoutGuide type="bottom" id="I4Z-pO-BVC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uve-ov-PI5">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Detailed description of item" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWG-zc-Rig">
@@ -397,7 +397,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Item's Detail" id="urq-R0-n8e"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="seR-JM-qHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -437,7 +439,7 @@
         <image name="profileIconYellow" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eLd-Sm-QBu"/>
+        <segue reference="LgN-ka-Iws"/>
         <segue reference="q05-wd-a7m"/>
     </inferredMetricsTieBreakers>
 </document>
