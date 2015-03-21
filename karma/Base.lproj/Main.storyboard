@@ -458,10 +458,10 @@
         <image name="Facebook Login" width="240" height="45"/>
         <image name="Login" width="240" height="45"/>
         <image name="Sign Up" width="240" height="45"/>
-        <image name="browseIconYellow" width="22" height="22"/>
-        <image name="cameraIconWhite" width="22" height="22"/>
-        <image name="profileIconWhite" width="22" height="22"/>
-        <image name="profileIconYellow" width="22" height="22"/>
+        <image name="browseIconYellow" width="38" height="29"/>
+        <image name="cameraIconWhite" width="38" height="30"/>
+        <image name="profileIconWhite" width="33" height="35"/>
+        <image name="profileIconYellow" width="33" height="35"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Uhn-Pd-w9p"/>
