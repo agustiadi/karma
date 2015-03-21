@@ -19,8 +19,15 @@ class LandingPageViewController: UIViewController{
     }
     
     override func viewWillAppear(animated: Bool) {
+        
         navigationController?.setNavigationBarHidden(true, animated:true)
         navigationController?.setToolbarHidden(true, animated: true)
+        
+        self.view.backgroundColor = UIColor(red: 175.0/255.0, green: 171.0/255.0, blue: 158.0/255.0, alpha: 1.0)
+        
+//        let bgImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/2))
+//        bgImage.image = UIImage(named: "landingBgImage")
+//        self.view.addSubview(bgImage)
     }
     
     override func didReceiveMemoryWarning() {

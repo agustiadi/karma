@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MFK-Sv-SUa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MFK-Sv-SUa">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PMN-xi-VAd">
-                                <rect key="frame" x="65" y="252" width="240" height="45"/>
+                                <rect key="frame" x="65" y="289" width="240" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="5To-Xf-qEf"/>
                                     <constraint firstAttribute="width" constant="240" id="eFo-1S-Qpw"/>
@@ -30,7 +30,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jjf-hZ-baB">
-                                <rect key="frame" x="65" y="313" width="240" height="45"/>
+                                <rect key="frame" x="65" y="350" width="240" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="LQG-cj-vxb"/>
                                     <constraint firstAttribute="width" constant="240" id="piF-EX-n6M"/>
@@ -43,7 +43,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3T-zQ-3YH">
-                                <rect key="frame" x="65" y="398" width="240" height="45"/>
+                                <rect key="frame" x="65" y="435" width="240" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="MXV-Zv-6H1"/>
                                     <constraint firstAttribute="width" constant="240" id="dKj-3j-bKt"/>
@@ -464,7 +464,7 @@
         <image name="profileIconYellow" width="33" height="35"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uhn-Pd-w9p"/>
+        <segue reference="LgN-ka-Iws"/>
         <segue reference="nWu-lX-Jow"/>
     </inferredMetricsTieBreakers>
 </document>

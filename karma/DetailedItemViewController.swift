@@ -68,6 +68,7 @@ class DetailedItemViewController: UIViewController{
         let wantItBtn = UIButton(frame: CGRectMake(0, self.view.frame.height + navBarHeight! - 50, self.view.frame.width, 50))
         wantItBtn.backgroundColor = UIColor.grayColor()
         wantItBtn.setTitle("Want It !", forState: UIControlState.Normal)
+        //wantItBtn.addTarget(self, action: "wantIt:", forControlEvents: UIControlEvents.TouchUpInside)
 
         self.view.addSubview(scrollView)
         self.view.addSubview(wantItBtn)

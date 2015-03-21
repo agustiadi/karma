@@ -64,6 +64,11 @@ class EmailSignupViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        self.view.backgroundColor = UIColor(red: 175.0/255.0, green: 171.0/255.0, blue: 158.0/255.0, alpha: 1.0)
+    }
 
 
     /*
