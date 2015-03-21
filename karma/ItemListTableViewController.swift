@@ -14,14 +14,15 @@ class ItemListTableViewController: UITableViewController{
     
     @IBAction func listItemToolBarBtn(sender: AnyObject) {
         
-          self.performSegueWithIdentifier("listItem", sender: self)
+        self.performSegueWithIdentifier("listItem", sender: self)
     }
 
     @IBAction func userProfileToolBarBtn(sender: AnyObject) {
         
-          self.performSegueWithIdentifier("userProfile", sender: self)
+        self.performSegueWithIdentifier("userProfile", sender: self)
+        
     }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +46,21 @@ class ItemListTableViewController: UITableViewController{
         //Toolbar Set-Up
         navigationController?.setToolbarHidden(false, animated: true)
     
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "item" {
+            let destinationVC = segue.destinationViewController as DetailedItemViewController
+            destinationVC.nameOfItem = "Testing Name 1"
+            destinationVC.categoryOfItem = "Category 1"
+            destinationVC.imagePic = UIImage(named: "chair.png")!
+            destinationVC.nameOfGiver = "User 1"
+            destinationVC.giverPic = UIImage(named: "displayPic.png")!
+            destinationVC.descriptionOfItem = " Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "
+            
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
