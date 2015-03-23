@@ -10,6 +10,10 @@ import UIKit
 
 class LandingPageViewController: UIViewController{
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    var processingView = UIView()
+    
     let permissions = ["public_profile", "email"]
     
     override func viewDidLoad() {
@@ -34,7 +38,18 @@ class LandingPageViewController: UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        self.processingView.removeFromSuperview()
+    }
+    
     @IBAction func fbLogin(sender: AnyObject) {
+        
+        processingView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+        processingView.backgroundColor = UIColor.blackColor()
+        processingView.alpha = 0.8
+        self.view.addSubview(processingView)
+        
+        startActivityIndicator()
         
             PFFacebookUtils.logInWithPermissions(permissions, { (user: PFUser!, error: NSError!) -> Void in
                 if let user = user {
@@ -42,13 +57,19 @@ class LandingPageViewController: UIViewController{
                         println("User signed up and logged in through Facebook!")
                         self.performSegueWithIdentifier("fbLoggedIn", sender: self)
                         self.saveFBUserAdditionalInfo()
+                        self.stopActivityIndicator()
+
                     } else {
                         println("User logged in through Facebook!")
                         self.performSegueWithIdentifier("fbLoggedIn", sender: self)
+                        self.stopActivityIndicator()
+
                     }
                 } else {
                   println("Uh oh. The user cancelled the Facebook login.")
                   self.dismissViewControllerAnimated(true, completion: nil)
+                    self.stopActivityIndicator()
+
                 }
             })
     }
@@ -102,6 +123,25 @@ class LandingPageViewController: UIViewController{
             })
             
         }
+        
+    }
+    
+    func startActivityIndicator() {
+        
+        //Spinner Activity Indicator. Do not forget to initialize it and put a stop activity when its done.
+        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+        activityIndicator.center = CGPoint(x: self.processingView.frame.width/2, y: self.processingView.frame.height/2)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        self.processingView.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+    }
+    
+    func stopActivityIndicator(){
+        
+        self.activityIndicator.stopAnimating()
+        UIApplication.sharedApplication().endIgnoringInteractionEvents()
         
     }
 

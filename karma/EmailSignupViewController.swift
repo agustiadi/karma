@@ -14,6 +14,7 @@ class EmailSignupViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
+    
     @IBAction func signupBtn(sender: AnyObject) {
         
         if nameField.text == "" || emailField.text == "" || passwordField.text == ""{
@@ -51,6 +52,8 @@ class EmailSignupViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,8 +72,7 @@ class EmailSignupViewController: UIViewController {
         
         self.view.backgroundColor = UIColor(red: 175.0/255.0, green: 171.0/255.0, blue: 158.0/255.0, alpha: 1.0)
     }
-
-
+    
     /*
     // MARK: - Navigation
 
