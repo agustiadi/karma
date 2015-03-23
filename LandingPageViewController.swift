@@ -26,7 +26,7 @@ class LandingPageViewController: UIViewController{
         navigationController?.setNavigationBarHidden(true, animated:true)
         navigationController?.setToolbarHidden(true, animated: true)
         
-        self.view.backgroundColor = UIColor(red: 175.0/255.0, green: 171.0/255.0, blue: 158.0/255.0, alpha: 1.0)
+        self.view.backgroundColor = UIColor(red: 127.0/255.0, green: 132.0/255.0, blue: 118.0/255.0, alpha: 1.0)
         
 //        let bgImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/2))
 //        bgImage.image = UIImage(named: "landingBgImage")

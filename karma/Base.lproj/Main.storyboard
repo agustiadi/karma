@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MFK-Sv-SUa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MFK-Sv-SUa">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
@@ -55,10 +55,41 @@
                                     <action selector="emailSignUp:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Joa-rl-oIm"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S41-3t-bRg">
+                                <rect key="frame" x="9" y="153" width="357" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="357" id="7cM-HH-2ae"/>
+                                </constraints>
+                                <string key="text">“Happiness doesn't result from what we 
+get, but from what we give.”</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" red="0.30980392156862746" green="0.32156862745098042" blue="0.29019607843137257" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Ben Carson" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnt-vI-fgO">
+                                <rect key="frame" x="19" y="188" width="357" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="357" id="BGE-7S-4vX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" red="0.30980392159999998" green="0.32156862749999998" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Karma" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXh-1l-Rvz">
+                                <rect key="frame" x="130" y="52" width="134" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="134" id="x8l-G6-p3W"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="C3T-zQ-3YH" secondAttribute="centerX" id="2bX-kA-lXh"/>
+                            <constraint firstAttribute="centerX" secondItem="mnt-vI-fgO" secondAttribute="centerX" id="Rpp-GK-UUv"/>
+                            <constraint firstAttribute="centerX" secondItem="qXh-1l-Rvz" secondAttribute="centerX" id="Xlp-Tz-pea"/>
+                            <constraint firstAttribute="centerX" secondItem="S41-3t-bRg" secondAttribute="centerX" id="e8A-v6-b2b"/>
                             <constraint firstAttribute="centerX" secondItem="PMN-xi-VAd" secondAttribute="centerX" id="hN8-ib-oNH"/>
                             <constraint firstAttribute="centerX" secondItem="Jjf-hZ-baB" secondAttribute="centerX" id="vBV-GY-JLB"/>
                         </constraints>
