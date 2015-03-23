@@ -16,12 +16,15 @@ class DetailedItemViewController: UIViewController{
     var nameOfItem = String()
     var categoryOfItem = String()
     var descriptionOfItem = String()
+    var itemImageView = UIView()
+    var itemImageIndex = 0
+    var itemImage = UIImageView()
+    var itemImages = ["image1", "image2", "image3", "image4", "image5"]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,8 +49,19 @@ class DetailedItemViewController: UIViewController{
         let giverNameLabel = UILabel(frame: CGRectMake(70, 15, 200, 30))
         giverNameLabel.text = nameOfGiver
         
-        let itemImage = UIImageView(frame: CGRectMake(0, 60, self.view.frame.width, 250))
-        itemImage.image = imagePic
+        itemImage = UIImageView(frame: CGRectMake(0, 60, self.view.frame.width, 250))
+        itemImage.userInteractionEnabled = true
+        itemImage.image = UIImage(named: itemImages[0])
+        
+        // Adding Swipe Gesture Recognizer
+        var swipeLeft = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
+        itemImage.addGestureRecognizer(swipeLeft)
+
+        
+        var swipeRight = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+        itemImage.addGestureRecognizer(swipeRight)
         
         let itemNameLabel = UILabel(frame: CGRectMake(10, 315, 200, 30))
         itemNameLabel.text = nameOfItem
@@ -72,14 +86,59 @@ class DetailedItemViewController: UIViewController{
 
         self.view.addSubview(scrollView)
         self.view.addSubview(wantItBtn)
+        scrollView.addSubview(itemImage)
         scrollView.addSubview(profilePic)
         scrollView.addSubview(giverNameLabel)
-        scrollView.addSubview(itemImage)
         scrollView.addSubview(itemNameLabel)
         scrollView.addSubview(categoryLabel)
         scrollView.addSubview(descriptionLabel)
         
     }
+    
+    
+    func respondToSwipeGesture(gesture: UIGestureRecognizer){
+        
+        let swipeGesture = gesture as? UISwipeGestureRecognizer
+        
+        if swipeGesture?.direction == UISwipeGestureRecognizerDirection.Left {
+            
+            println("swipeLeft")
+            
+            if itemImageIndex == 0 {
+                
+                itemImageIndex = itemImages.count - 1
+                
+            } else {
+                
+                itemImageIndex--
+                
+            }
+            
+            itemImage.image = UIImage(named: itemImages[itemImageIndex])
+                
+        }
+                
+        else if swipeGesture?.direction == UISwipeGestureRecognizerDirection.Right{
+            
+            println("swipeRight")
+                
+            if itemImageIndex == itemImages.count - 1  {
+                
+                itemImageIndex = 0
+                
+            } else {
+                
+                itemImageIndex++
+                
+            }
+            
+            itemImage.image = UIImage(named: itemImages[itemImageIndex])
+        
+        }
+        
+    }
+
+
     
 
     /*
