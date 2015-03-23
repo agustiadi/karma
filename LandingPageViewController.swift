@@ -11,7 +11,6 @@ import UIKit
 class LandingPageViewController: UIViewController{
     
     let permissions = ["public_profile", "email"]
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +41,7 @@ class LandingPageViewController: UIViewController{
                     if user.isNew {
                         println("User signed up and logged in through Facebook!")
                         self.performSegueWithIdentifier("fbLoggedIn", sender: self)
+                        self.saveFBUserAdditionalInfo()
                     } else {
                         println("User logged in through Facebook!")
                         self.performSegueWithIdentifier("fbLoggedIn", sender: self)
@@ -61,6 +61,50 @@ class LandingPageViewController: UIViewController{
     @IBAction func emailSignUp(sender: AnyObject) {
         self.performSegueWithIdentifier("emailSignup", sender: self)
     }
+    
+    func saveFBUserAdditionalInfo() {
+        
+        let current_user = PFUser.currentUser()
+        
+        //Get User's Full Name from FB
+        
+        FBRequestConnection.startWithGraphPath("me?fields=email,name,id", completionHandler: {(connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
+            if (result? != nil) {
+                NSLog("error = \(error)")
+            
+                current_user["name"] = result.name
+                current_user["email"] = result.email
+                current_user.saveEventually()
+                
+            }
+            
+        } as FBRequestHandler)
+        
+        //Get User's Profile Picture from FB
+        
+        var fbSession = PFFacebookUtils.session()
+        var accessToken = fbSession.accessTokenData.accessToken
+        let url = NSURL(string: "https://graph.facebook.com/me/picture?type=large&return_ssl_resources=1&access_token="+accessToken)
+        let urlRequest = NSURLRequest(URL: url!)
+        
+        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response:NSURLResponse!, data:NSData!, error:NSError!) -> Void in
+            
+        let imageFile = PFFile(name: "Profile Picture", data: data)
+        current_user["profilePic"] = imageFile
+            current_user.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
+                
+                if success == false {
+                    println(error)
+                } else {
+                    println("saving user image successful")
+                }
+                
+            })
+            
+        }
+        
+    }
+
 
     /*
     // MARK: - Navigation
