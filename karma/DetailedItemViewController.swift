@@ -16,10 +16,10 @@ class DetailedItemViewController: UIViewController{
     var nameOfItem = String()
     var categoryOfItem = String()
     var descriptionOfItem = String()
-    var itemImageView = UIView()
     var itemImageIndex = 0
     var itemImage = UIImageView()
-    var itemImages = ["image1", "image2", "image3", "image4", "image5"]
+    var imageLabel = UILabel()
+    var itemImages = ["image1", "image2", "image3", "image4"]
     
     
     override func viewDidLoad() {
@@ -57,11 +57,21 @@ class DetailedItemViewController: UIViewController{
         var swipeLeft = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
         swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
         itemImage.addGestureRecognizer(swipeLeft)
-
         
         var swipeRight = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
         itemImage.addGestureRecognizer(swipeRight)
+        
+        //Add Image Index Indicator Label
+        imageLabel = UILabel(frame: CGRectMake(0, 0, 50, 15))
+        imageLabel.center = CGPoint(x: self.itemImage.frame.width - 30, y: self.itemImage.frame.height - 15)
+        imageLabel.backgroundColor = UIColor.blackColor()
+        imageLabel.alpha = 0.35
+        imageLabel.textColor = UIColor.whiteColor()
+        imageLabel.text = "1 of \(itemImages.count)"
+        imageLabel.textAlignment = NSTextAlignment.Center
+        imageLabel.font = UIFont(name: "Helvetica Neue", size: 10)
+        itemImage.addSubview(imageLabel)
         
         let itemNameLabel = UILabel(frame: CGRectMake(10, 315, 200, 30))
         itemNameLabel.text = nameOfItem
@@ -115,6 +125,7 @@ class DetailedItemViewController: UIViewController{
             }
             
             itemImage.image = UIImage(named: itemImages[itemImageIndex])
+            imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
                 
         }
                 
@@ -133,6 +144,7 @@ class DetailedItemViewController: UIViewController{
             }
             
             itemImage.image = UIImage(named: itemImages[itemImageIndex])
+            imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
         
         }
         
