@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class DetailedItemViewController: UIViewController{
     
     var nameOfGiver = String()
