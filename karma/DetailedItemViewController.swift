@@ -11,6 +11,22 @@ import UIKit
 
 class DetailedItemViewController: UIViewController{
     
+    //IBOutlets Connections
+    
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var profilePic: UIImageView!
+    @IBOutlet var giverNameLabel: UILabel!
+    @IBOutlet var itemImage: UIImageView!
+    @IBOutlet var imageLabel: UILabel!
+    @IBOutlet var itemNameLabel: UILabel!
+    @IBOutlet var categoryLabel: UILabel!
+    @IBOutlet var descriptionLabel: UILabel!
+    
+    @IBAction func wantItBtn(sender: AnyObject) {
+        performSegueWithIdentifier("wantIt", sender: self)
+        println("Want It Button Pressed")
+    }
+    
     var nameOfGiver = String()
     var giverPic = UIImage()
     var imagePic = UIImage()
@@ -18,27 +34,20 @@ class DetailedItemViewController: UIViewController{
     var categoryOfItem = String()
     var descriptionOfItem = String()
     var itemImageIndex = 0
-    var itemImage = UIImageView()
-    var imageLabel = UILabel()
     var itemImages = ["image1", "image2", "image3", "image4"]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let navBarHeight = navigationController?.navigationBar.frame.height
         
-        let scrollView = UIScrollView(frame: CGRectMake(0, 0 , self.view.frame.width, self.view.frame.height + navBarHeight!))
-        
-        let profilePic = UIImageView(frame: CGRectMake(10, 5, 50, 50))
-        profilePic.layer.cornerRadius = 25
+        profilePic.layer.cornerRadius = 20
         profilePic.clipsToBounds = true
         profilePic.image = giverPic
         
-        let giverNameLabel = UILabel(frame: CGRectMake(70, 15, 200, 30))
         giverNameLabel.text = nameOfGiver
         
-        itemImage = UIImageView(frame: CGRectMake(0, 60, self.view.frame.width, 250))
         itemImage.userInteractionEnabled = true
         itemImage.image = UIImage(named: itemImages[0])
         
@@ -52,39 +61,24 @@ class DetailedItemViewController: UIViewController{
         itemImage.addGestureRecognizer(swipeRight)
         
         //Add Image Index Indicator Label
-        imageLabel = UILabel(frame: CGRectMake(0, 0, 50, 15))
-        imageLabel.center = CGPoint(x: self.itemImage.frame.width - 30, y: self.itemImage.frame.height - 15)
         imageLabel.backgroundColor = UIColor.blackColor()
         imageLabel.alpha = 0.35
         imageLabel.textColor = UIColor.whiteColor()
         imageLabel.text = "1 of \(itemImages.count)"
         imageLabel.textAlignment = NSTextAlignment.Center
         imageLabel.font = UIFont(name: "Helvetica Neue", size: 10)
-        itemImage.addSubview(imageLabel)
         
-        let itemNameLabel = UILabel(frame: CGRectMake(10, 315, 200, 30))
         itemNameLabel.text = nameOfItem
         
-        let categoryLabel = UILabel(frame: CGRectMake(10, 345, 200, 30))
         categoryLabel.text = categoryOfItem
         categoryLabel.font = categoryLabel.font.fontWithSize(15)
         
-        
-        let descriptionLabel = UILabel(frame: CGRectMake(10, 380, self.view.frame.width-20, 9999))
         descriptionLabel.numberOfLines = 0
         descriptionLabel.text = descriptionOfItem
         descriptionLabel.sizeToFit()
-        
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 400 + navBarHeight! + descriptionLabel.frame.height + 100 )
-        
-        scrollView.addSubview(itemImage)
-        scrollView.addSubview(profilePic)
-        scrollView.addSubview(giverNameLabel)
-        scrollView.addSubview(itemNameLabel)
-        scrollView.addSubview(categoryLabel)
-        scrollView.addSubview(descriptionLabel)
-        
-        self.view.addSubview(scrollView)
+        descriptionLabel.textAlignment = NSTextAlignment.Justified
+                
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: descriptionLabel.frame.maxY + 10)
         
     }
     
@@ -98,22 +92,13 @@ class DetailedItemViewController: UIViewController{
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.setToolbarHidden(true, animated: true)
         
-        let navBarHeight = navigationController?.navigationBar.frame.height
-        
-        let wantItBtn = UIButton(frame: CGRectMake(0, self.view.frame.height + navBarHeight! - 50, self.view.frame.width, 50))
-        wantItBtn.backgroundColor = UIColor.grayColor()
-        wantItBtn.setTitle("Want It !", forState: UIControlState.Normal)
-        wantItBtn.addTarget(self, action: "wantIt:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(wantItBtn)
-
     }
     
-    func wantIt(sender: UIButton) {
+    override func viewDidDisappear(animated: Bool) {
         
-        performSegueWithIdentifier("wantIt", sender: self)
-        println("Want It Button Pressed")
-        
+        scrollView.setContentOffset(CGPointZero, animated: true)
     }
+
     
     func respondToSwipeGesture(gesture: UIGestureRecognizer){
         
