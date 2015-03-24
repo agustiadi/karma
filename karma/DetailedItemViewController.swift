@@ -93,7 +93,7 @@ class DetailedItemViewController: UIViewController{
         let wantItBtn = UIButton(frame: CGRectMake(0, self.view.frame.height + navBarHeight! - 50, self.view.frame.width, 50))
         wantItBtn.backgroundColor = UIColor.grayColor()
         wantItBtn.setTitle("Want It !", forState: UIControlState.Normal)
-        //wantItBtn.addTarget(self, action: "wantIt:", forControlEvents: UIControlEvents.TouchUpInside)
+        wantItBtn.addTarget(self, action: "wantIt:", forControlEvents: UIControlEvents.TouchUpInside)
 
         self.view.addSubview(scrollView)
         self.view.addSubview(wantItBtn)
@@ -106,6 +106,12 @@ class DetailedItemViewController: UIViewController{
         
     }
     
+    func wantIt(sender: UIButton) {
+        
+        //performSegueWithIdentifier("wantIt", sender: self)
+        println("Want It Button Pressed")
+        
+    }
     
     func respondToSwipeGesture(gesture: UIGestureRecognizer){
         
@@ -114,6 +120,25 @@ class DetailedItemViewController: UIViewController{
         if swipeGesture?.direction == UISwipeGestureRecognizerDirection.Left {
             
             println("swipeLeft")
+            
+            if itemImageIndex == itemImages.count - 1  {
+                
+                itemImageIndex = 0
+                
+            } else {
+                
+                itemImageIndex++
+                
+            }
+            
+            itemImage.image = UIImage(named: itemImages[itemImageIndex])
+            imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
+                
+        }
+                
+        else if swipeGesture?.direction == UISwipeGestureRecognizerDirection.Right{
+            
+            println("swipeRight")
             
             if itemImageIndex == 0 {
                 
@@ -127,29 +152,12 @@ class DetailedItemViewController: UIViewController{
             
             itemImage.image = UIImage(named: itemImages[itemImageIndex])
             imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
-                
-        }
-                
-        else if swipeGesture?.direction == UISwipeGestureRecognizerDirection.Right{
-            
-            println("swipeRight")
-                
-            if itemImageIndex == itemImages.count - 1  {
-                
-                itemImageIndex = 0
-                
-            } else {
-                
-                itemImageIndex++
-                
-            }
-            
-            itemImage.image = UIImage(named: itemImages[itemImageIndex])
-            imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
-        
+
         }
         
     }
+    
+
 
 
     
