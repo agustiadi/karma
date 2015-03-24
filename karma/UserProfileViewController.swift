@@ -11,7 +11,7 @@ import UIKit
 class UserProfileViewController: UIViewController {
     
     var profilePicView = UIImageView()
-    var profilePic = UIImage(named: "profilePlaceholder")
+    var userProfilePic = UIImage()
     let current_User = PFUser.currentUser()
     
     @IBAction func logoutBtn(sender: AnyObject) {
@@ -42,8 +42,9 @@ class UserProfileViewController: UIViewController {
         profilePicView.layer.cornerRadius = 25
         profilePicView.clipsToBounds = true
         profilePicView.contentMode = UIViewContentMode.ScaleAspectFill
-        profilePicView.image = profilePic
+        profilePicView.image = UIImage(named: "profilePlaceholder")
         
+    
         let usernameLabel = UILabel(frame: CGRectMake(80, 10, 200, 50))
         usernameLabel.text = current_User["name"] as? String
         
@@ -73,6 +74,7 @@ class UserProfileViewController: UIViewController {
                     
                     let image = UIImage(data: imageData)
                     self.profilePicView.image = image
+                    self.userProfilePic = image!
                     
                 } else {
                     

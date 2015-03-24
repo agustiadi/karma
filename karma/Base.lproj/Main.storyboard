@@ -272,6 +272,25 @@ get, but from what we give.”</string>
             </objects>
             <point key="canvasLocation" x="3938.5" y="1337.5"/>
         </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="2G8-Qr-waw">
+            <objects>
+                <viewController id="qaz-h0-WeY" customClass="ChatViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SWp-hU-bcQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="qXZ-eO-LtZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="p5Y-it-DAV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eh4-m4-wvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4780.5" y="1305.5"/>
+        </scene>
         <!--Email Login View Controller-->
         <scene sceneID="0MP-aY-wFF">
             <objects>
@@ -448,6 +467,9 @@ get, but from what we give.”</string>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <segue destination="qaz-h0-WeY" kind="show" identifier="wantIt" id="7tb-xz-5fQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="seR-JM-qHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

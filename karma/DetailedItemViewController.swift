@@ -26,18 +26,6 @@ class DetailedItemViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.setToolbarHidden(true, animated: true)
-        
         let navBarHeight = navigationController?.navigationBar.frame.height
         
         let scrollView = UIScrollView(frame: CGRectMake(0, 0 , self.view.frame.width, self.view.frame.height + navBarHeight!))
@@ -81,22 +69,14 @@ class DetailedItemViewController: UIViewController{
         categoryLabel.text = categoryOfItem
         categoryLabel.font = categoryLabel.font.fontWithSize(15)
         
-            
+        
         let descriptionLabel = UILabel(frame: CGRectMake(10, 380, self.view.frame.width-20, 9999))
         descriptionLabel.numberOfLines = 0
         descriptionLabel.text = descriptionOfItem
         descriptionLabel.sizeToFit()
         
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 400 + navBarHeight! + descriptionLabel.frame.height )
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 400 + navBarHeight! + descriptionLabel.frame.height + 100 )
         
-        
-        let wantItBtn = UIButton(frame: CGRectMake(0, self.view.frame.height + navBarHeight! - 50, self.view.frame.width, 50))
-        wantItBtn.backgroundColor = UIColor.grayColor()
-        wantItBtn.setTitle("Want It !", forState: UIControlState.Normal)
-        wantItBtn.addTarget(self, action: "wantIt:", forControlEvents: UIControlEvents.TouchUpInside)
-
-        self.view.addSubview(scrollView)
-        self.view.addSubview(wantItBtn)
         scrollView.addSubview(itemImage)
         scrollView.addSubview(profilePic)
         scrollView.addSubview(giverNameLabel)
@@ -104,11 +84,33 @@ class DetailedItemViewController: UIViewController{
         scrollView.addSubview(categoryLabel)
         scrollView.addSubview(descriptionLabel)
         
+        self.view.addSubview(scrollView)
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setToolbarHidden(true, animated: true)
+        
+        let navBarHeight = navigationController?.navigationBar.frame.height
+        
+        let wantItBtn = UIButton(frame: CGRectMake(0, self.view.frame.height + navBarHeight! - 50, self.view.frame.width, 50))
+        wantItBtn.backgroundColor = UIColor.grayColor()
+        wantItBtn.setTitle("Want It !", forState: UIControlState.Normal)
+        wantItBtn.addTarget(self, action: "wantIt:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(wantItBtn)
+
     }
     
     func wantIt(sender: UIButton) {
         
-        //performSegueWithIdentifier("wantIt", sender: self)
+        performSegueWithIdentifier("wantIt", sender: self)
         println("Want It Button Pressed")
         
     }
