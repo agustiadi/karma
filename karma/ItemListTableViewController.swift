@@ -9,7 +9,15 @@
 import UIKit
 
 class ItemListTableViewController: UITableViewController{
-        
+    
+    var objectIDs = [String]()
+    var itemsName = [String]()
+    var itemsImage = [PFFile]()
+    var categories = [String]()
+    var userIDs = [String]()
+    var giverName = [String]()
+    var userProfilePic = [PFFile]()
+    
     //Toolbar Buttons
     
     @IBAction func listItemToolBarBtn(sender: AnyObject) {
@@ -26,11 +34,8 @@ class ItemListTableViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        refreshItemData()
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     
@@ -45,8 +50,45 @@ class ItemListTableViewController: UITableViewController{
 
         //Toolbar Set-Up
         navigationController?.setToolbarHidden(false, animated: true)
-    
+        
     }
+    
+    func refreshItemData() {
+    
+        var itemQuery = PFQuery(className: "Item")
+        itemQuery.addDescendingOrder("createdAt")
+        itemQuery.findObjectsInBackgroundWithBlock {
+            (itemObjects: [AnyObject]!, error: NSError!) -> Void in
+            
+            self.objectIDs.removeAll(keepCapacity: true)
+            self.itemsName.removeAll(keepCapacity: true)
+            self.itemsImage.removeAll(keepCapacity: true)
+            self.categories.removeAll(keepCapacity: true)
+            self.userIDs.removeAll(keepCapacity: true)
+            self.giverName.removeAll(keepCapacity: true)
+            self.userProfilePic.removeAll(keepCapacity: true)
+            
+            if error == nil {
+                
+                for item in itemObjects {
+                    
+                    self.objectIDs.append(item.objectId as String)
+                    self.itemsName.append(item["itemName"] as String)
+                    self.itemsImage.append(item["image_1"] as PFFile)
+                    self.categories.append(item["categories"] as String)
+                    self.userIDs.append(item["userId"] as String)
+                    
+                }
+                
+                self.tableView.reloadData()
+                
+            }
+            
+        }
+
+    }
+    
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -57,7 +99,7 @@ class ItemListTableViewController: UITableViewController{
             destinationVC.imagePic = UIImage(named: "chair.png")!
             destinationVC.nameOfGiver = "User 1"
             destinationVC.giverPic = UIImage(named: "displayPic.png")!
-            destinationVC.descriptionOfItem = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum,"
+            destinationVC.descriptionOfItem = "Contrary to popular belief, Lorem Ipsum is not simply random text."
             
         }
         
@@ -79,7 +121,8 @@ class ItemListTableViewController: UITableViewController{
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 25
+        
+        return objectIDs.count
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -90,11 +133,75 @@ class ItemListTableViewController: UITableViewController{
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as ItemListTableViewCell
         
-        cell.itemName.text = "Testing Name \(indexPath.row + 1)"
-        cell.itemImage.image = UIImage(named: "chair.png")
-        cell.itemCategory.text = "Category \(indexPath.row + 1)"
-        cell.userName.text = "User \(indexPath.row + 1)"
-        cell.profilePic.image = UIImage(named: "displayPic.png")
+        cell.itemName.text = itemsName[indexPath.row]
+        
+        cell.itemCategory.text = categories[indexPath.row]
+        
+        
+        itemsImage[indexPath.row].getDataInBackgroundWithBlock{
+            (imageData: NSData!, error: NSError!) -> Void in
+            
+            if error == nil {
+                
+                let image = UIImage(data: imageData)
+                cell.itemImage.image = image
+                
+            } else {
+                
+                println(error)
+                
+            }
+            
+            
+        }
+
+        
+        var userQuery = PFQuery(className: "_User")
+        userQuery.whereKey("objectId", equalTo: userIDs[indexPath.row])
+        userQuery.findObjectsInBackgroundWithBlock {
+            (userObjects: [AnyObject]!, error: NSError!) -> Void in
+            
+            if error == nil {
+                
+                for user in userObjects {
+                    
+                    cell.userName.text = user["name"] as? String
+                    
+                    if user["profilePic"] != nil {
+                        
+                        let temp = user["profilePic"] as PFFile
+                        temp.getDataInBackgroundWithBlock{
+                            (imageData: NSData!, error: NSError!) -> Void in
+                            
+                            if error == nil {
+                                
+                                let image = UIImage(data: imageData)
+                                cell.profilePic.image = image
+                                
+                            } else {
+                                
+                                println(error)
+                                
+                            }
+                            
+                            
+                        }
+
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+                
+            }
+            
+        }
+        
+
+        
+        cell.profilePic.image = UIImage(named: "profilePlaceholder")
         
         return cell
     }
