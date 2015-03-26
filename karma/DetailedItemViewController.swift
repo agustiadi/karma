@@ -51,7 +51,7 @@ class DetailedItemViewController: UIViewController{
         profilePic.clipsToBounds = true
         
         itemImage.userInteractionEnabled = true
-        //itemImage.image = itemImages[0]
+        itemImage.image = itemImages[0]
         
         // Adding Swipe Gesture Recognizer
         var swipeLeft = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
@@ -93,6 +93,7 @@ class DetailedItemViewController: UIViewController{
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.setToolbarHidden(true, animated: true)
+
         
     }
     
@@ -120,7 +121,7 @@ class DetailedItemViewController: UIViewController{
                 
             }
             
-            //itemImage.image = itemImages[itemImageIndex]
+            itemImage.image = itemImages[itemImageIndex]
             imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
                 
         }
@@ -139,7 +140,7 @@ class DetailedItemViewController: UIViewController{
                 
             }
             
-            //itemImage.image = itemImages[itemImageIndex]
+            itemImage.image = itemImages[itemImageIndex]
             imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
 
         }
@@ -196,37 +197,46 @@ class DetailedItemViewController: UIViewController{
         itemImagesFile.removeAll(keepCapacity: true)
         
         var imageQuery = PFQuery(className: "Item")
-        imageQuery.getObjectInBackgroundWithId(objectID){
-            (object: PFObject!, error: NSError!) -> Void in
+        var object = imageQuery.getObjectWithId(objectID)
+        
+        self.itemImagesFile.append(object["image_1"] as PFFile)
+        self.itemImages.append(getUIImage(object["image_1"] as PFFile))
+                
+        if object["image_2"] != nil {
             
-            if error == nil {
-                
-                self.itemImagesFile.append(object["image_1"] as PFFile)
-                
-                if object["image_2"] != nil {
-                    
-                    self.itemImagesFile.append(object["image_2"] as PFFile)
-                }
-                
-                if object["image_3"] != nil {
-                    self.itemImagesFile.append(object["image_3"] as PFFile)
-                }
-                
-                if object["image_4"] != nil {
-                    
-                    self.itemImagesFile.append(object["image_4"] as PFFile)
-                }
-                
-                if object["image_5"] != nil {
-                    
-                    self.itemImagesFile.append(object["image_5"] as PFFile)
-                }
-                
-            } else {
-                println(error)
-            }
+            self.itemImagesFile.append(object["image_2"] as PFFile)
+            self.itemImages.append(getUIImage(object["image_2"] as PFFile))
+        
         }
-
+                
+        if object["image_3"] != nil {
+                
+            self.itemImagesFile.append(object["image_3"] as PFFile)
+            self.itemImages.append(getUIImage(object["image_3"] as PFFile))
+        }
+                
+        if object["image_4"] != nil {
+                    
+            self.itemImagesFile.append(object["image_4"] as PFFile)
+            self.itemImages.append(getUIImage(object["image_4"] as PFFile))
+        }
+                
+        if object["image_5"] != nil {
+                    
+            self.itemImagesFile.append(object["image_5"] as PFFile)
+            self.itemImages.append(getUIImage(object["image_5"] as PFFile))
+        }
+                
+    }
+    
+    func getUIImage(file: PFFile) -> UIImage {
+        
+        let temp = file as PFFile
+        let data = temp.getData()
+        let image = UIImage(data: data)
+        
+        return image!
+        
     }
     
     
@@ -241,5 +251,4 @@ class DetailedItemViewController: UIViewController{
         // Pass the selected object to the new view controller.
     }
     */
-
 }
