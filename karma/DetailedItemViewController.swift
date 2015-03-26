@@ -9,6 +9,7 @@
 import UIKit
 
 
+
 class DetailedItemViewController: UIViewController{
     
     //IBOutlets Connections
@@ -34,21 +35,23 @@ class DetailedItemViewController: UIViewController{
     var categoryOfItem = String()
     var descriptionOfItem = String()
     var itemImageIndex = 0
-    var itemImages = ["image1", "image2", "image3", "image4"]
+    var itemImagesFile = [PFFile]()
+    var itemImages = [UIImage]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let navBarHeight = navigationController?.navigationBar.frame.height
         
         getUserData(userID, name: giverNameLabel, profilePic: profilePic)
+        getItemImages(objectID)
         
         profilePic.layer.cornerRadius = 20
         profilePic.clipsToBounds = true
         
         itemImage.userInteractionEnabled = true
-        itemImage.image = UIImage(named: itemImages[0])
+        //itemImage.image = itemImages[0]
         
         // Adding Swipe Gesture Recognizer
         var swipeLeft = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
@@ -117,7 +120,7 @@ class DetailedItemViewController: UIViewController{
                 
             }
             
-            itemImage.image = UIImage(named: itemImages[itemImageIndex])
+            //itemImage.image = itemImages[itemImageIndex]
             imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
                 
         }
@@ -136,7 +139,7 @@ class DetailedItemViewController: UIViewController{
                 
             }
             
-            itemImage.image = UIImage(named: itemImages[itemImageIndex])
+            //itemImage.image = itemImages[itemImageIndex]
             imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
 
         }
@@ -179,6 +182,7 @@ class DetailedItemViewController: UIViewController{
                     }
                 }
             } else {
+                
                 profilePic.image = UIImage(named: "profilePlaceholder")!
                 
             }
@@ -186,11 +190,47 @@ class DetailedItemViewController: UIViewController{
         }
         
     }
-
-
-
-
     
+    func getItemImages(objectID: String) {
+        
+        itemImagesFile.removeAll(keepCapacity: true)
+        
+        var imageQuery = PFQuery(className: "Item")
+        imageQuery.getObjectInBackgroundWithId(objectID){
+            (object: PFObject!, error: NSError!) -> Void in
+            
+            if error == nil {
+                
+                self.itemImagesFile.append(object["image_1"] as PFFile)
+                
+                if object["image_2"] != nil {
+                    
+                    self.itemImagesFile.append(object["image_2"] as PFFile)
+                }
+                
+                if object["image_3"] != nil {
+                    self.itemImagesFile.append(object["image_3"] as PFFile)
+                }
+                
+                if object["image_4"] != nil {
+                    
+                    self.itemImagesFile.append(object["image_4"] as PFFile)
+                }
+                
+                if object["image_5"] != nil {
+                    
+                    self.itemImagesFile.append(object["image_5"] as PFFile)
+                }
+                
+            } else {
+                println(error)
+            }
+        }
+
+    }
+    
+    
+
 
     /*
     // MARK: - Navigation
