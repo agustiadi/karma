@@ -27,8 +27,8 @@ class DetailedItemViewController: UIViewController{
         println("Want It Button Pressed")
     }
     
-    var nameOfGiver = String()
-    var giverPic = UIImage()
+    var userID = String()
+    var objectID = String()
     var imagePic = UIImage()
     var nameOfItem = String()
     var categoryOfItem = String()
@@ -42,11 +42,10 @@ class DetailedItemViewController: UIViewController{
 
         let navBarHeight = navigationController?.navigationBar.frame.height
         
+        getUserData(userID, name: giverNameLabel, profilePic: profilePic)
+        
         profilePic.layer.cornerRadius = 20
         profilePic.clipsToBounds = true
-        profilePic.image = giverPic
-        
-        giverNameLabel.text = nameOfGiver
         
         itemImage.userInteractionEnabled = true
         itemImage.image = UIImage(named: itemImages[0])
@@ -144,6 +143,50 @@ class DetailedItemViewController: UIViewController{
         
     }
     
+    func getUserData(userID: String, name: UILabel, profilePic: UIImageView){
+        
+        var userQuery = PFQuery(className: "_User")
+        userQuery.whereKey("objectId", equalTo: userID)
+        userQuery.findObjectsInBackgroundWithBlock {
+            (userObjects: [AnyObject]!, error: NSError!) -> Void in
+            
+            if error == nil {
+                
+                for user in userObjects {
+                    
+                    name.text = user["name"] as? String
+                    
+                    if user["profilePic"] != nil {
+                        
+                        let temp = user["profilePic"] as PFFile
+                        temp.getDataInBackgroundWithBlock{
+                            (imageData: NSData!, error: NSError!) -> Void in
+                            
+                            if error == nil {
+                                
+                                let image = UIImage(data: imageData)
+                                profilePic.image = image
+                                
+                                
+                            } else {
+                                
+                                println(error)
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                }
+            } else {
+                profilePic.image = UIImage(named: "profilePlaceholder")!
+                
+            }
+            
+        }
+        
+    }
+
 
 
 

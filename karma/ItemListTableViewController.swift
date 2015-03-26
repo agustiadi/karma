@@ -13,6 +13,7 @@ class ItemListTableViewController: UITableViewController{
     var objectIDs = [String]()
     var itemsName = [String]()
     var itemsImage = [PFFile]()
+    var descriptions = [String]()
     var categories = [String]()
     var userIDs = [String]()
     var giverName = [String]()
@@ -63,6 +64,7 @@ class ItemListTableViewController: UITableViewController{
             self.objectIDs.removeAll(keepCapacity: true)
             self.itemsName.removeAll(keepCapacity: true)
             self.itemsImage.removeAll(keepCapacity: true)
+            self.descriptions.removeAll(keepCapacity: true)
             self.categories.removeAll(keepCapacity: true)
             self.userIDs.removeAll(keepCapacity: true)
             self.giverName.removeAll(keepCapacity: true)
@@ -76,6 +78,7 @@ class ItemListTableViewController: UITableViewController{
                     self.itemsName.append(item["itemName"] as String)
                     self.itemsImage.append(item["image_1"] as PFFile)
                     self.categories.append(item["categories"] as String)
+                    self.descriptions.append(item["itemDescription"] as String)
                     self.userIDs.append(item["userId"] as String)
                     
                 }
@@ -88,19 +91,65 @@ class ItemListTableViewController: UITableViewController{
 
     }
     
+    func getUserDataForCell(userID: String, name: UILabel, profilePic: UIImageView){
+        
+        var userQuery = PFQuery(className: "_User")
+        userQuery.whereKey("objectId", equalTo: userID)
+        userQuery.findObjectsInBackgroundWithBlock {
+            (userObjects: [AnyObject]!, error: NSError!) -> Void in
+            
+            if error == nil {
+                
+                for user in userObjects {
+                    
+                    name.text = user["name"] as? String
+                    
+                    if user["profilePic"] != nil {
+                        
+                        let temp = user["profilePic"] as PFFile
+                        temp.getDataInBackgroundWithBlock{
+                            (imageData: NSData!, error: NSError!) -> Void in
+                            
+                            if error == nil {
+                                
+                                let image = UIImage(data: imageData)
+                                profilePic.image = image
+                                
+                                
+                            } else {
+                                
+                                println(error)
+                                
+                            }
+                            
+                        }
+                            
+                    }
+                }
+            } else {
+                    profilePic.image = UIImage(named: "profilePlaceholder")!
+                
+            }
+                    
+        }
 
+    }
     
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "item" {
-            let destinationVC = segue.destinationViewController as DetailedItemViewController
-            destinationVC.nameOfItem = "Testing Name 1"
-            destinationVC.categoryOfItem = "Category 1"
-            destinationVC.imagePic = UIImage(named: "chair.png")!
-            destinationVC.nameOfGiver = "User 1"
-            destinationVC.giverPic = UIImage(named: "displayPic.png")!
-            destinationVC.descriptionOfItem = "Contrary to popular belief, Lorem Ipsum is not simply random text."
             
+            let destinationVC = segue.destinationViewController as DetailedItemViewController
+            let selectedRow = tableView.indexPathForSelectedRow()?.row
+            
+            destinationVC.nameOfItem = itemsName[selectedRow!]
+            destinationVC.categoryOfItem = categories[selectedRow!]
+            destinationVC.descriptionOfItem = descriptions[selectedRow!]
+            destinationVC.userID = userIDs[selectedRow!]
+            destinationVC.objectID = objectIDs[selectedRow!]
+            destinationVC.imagePic = UIImage(named: "chair.png")!
+        
         }
         
     }
@@ -137,7 +186,6 @@ class ItemListTableViewController: UITableViewController{
         
         cell.itemCategory.text = categories[indexPath.row]
         
-        
         itemsImage[indexPath.row].getDataInBackgroundWithBlock{
             (imageData: NSData!, error: NSError!) -> Void in
             
@@ -151,57 +199,9 @@ class ItemListTableViewController: UITableViewController{
                 println(error)
                 
             }
-            
-            
-        }
-
-        
-        var userQuery = PFQuery(className: "_User")
-        userQuery.whereKey("objectId", equalTo: userIDs[indexPath.row])
-        userQuery.findObjectsInBackgroundWithBlock {
-            (userObjects: [AnyObject]!, error: NSError!) -> Void in
-            
-            if error == nil {
-                
-                for user in userObjects {
-                    
-                    cell.userName.text = user["name"] as? String
-                    
-                    if user["profilePic"] != nil {
-                        
-                        let temp = user["profilePic"] as PFFile
-                        temp.getDataInBackgroundWithBlock{
-                            (imageData: NSData!, error: NSError!) -> Void in
-                            
-                            if error == nil {
-                                
-                                let image = UIImage(data: imageData)
-                                cell.profilePic.image = image
-                                
-                            } else {
-                                
-                                println(error)
-                                
-                            }
-                            
-                            
-                        }
-
-                        
-                    }
-                    
-                    
-                    
-                    
-                }
-                
-            }
-            
         }
         
-
-        
-        cell.profilePic.image = UIImage(named: "profilePlaceholder")
+        getUserDataForCell(userIDs[indexPath.row], name: cell.userName, profilePic: cell.profilePic)
         
         return cell
     }
