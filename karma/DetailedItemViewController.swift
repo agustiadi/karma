@@ -78,7 +78,6 @@ class DetailedItemViewController: UIViewController{
         descriptionLabel.numberOfLines = 0
         descriptionLabel.text = descriptionOfItem
         descriptionLabel.sizeToFit()
-        descriptionLabel.textAlignment = NSTextAlignment.Justified
                 
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: descriptionLabel.frame.maxY + 10)
         

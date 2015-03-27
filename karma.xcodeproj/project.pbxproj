@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A801A7AC1AC5992D00444B57 /* ThankyouMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A801A7AB1AC5992D00444B57 /* ThankyouMessageTableViewCell.swift */; };
 		A85F883D1AB7113D00064845 /* ListingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85F883C1AB7113D00064845 /* ListingItemViewController.swift */; };
 		A85F883F1AB7135B00064845 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85F883E1AB7135B00064845 /* UserProfileViewController.swift */; };
 		A85F88411AB7161000064845 /* DetailedItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85F88401AB7161000064845 /* DetailedItemViewController.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A801A7AB1AC5992D00444B57 /* ThankyouMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThankyouMessageTableViewCell.swift; sourceTree = "<group>"; };
 		A85F883C1AB7113D00064845 /* ListingItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingItemViewController.swift; sourceTree = "<group>"; };
 		A85F883E1AB7135B00064845 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		A85F88401AB7161000064845 /* DetailedItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedItemViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				A85F883C1AB7113D00064845 /* ListingItemViewController.swift */,
 				A85F88401AB7161000064845 /* DetailedItemViewController.swift */,
 				A85F883E1AB7135B00064845 /* UserProfileViewController.swift */,
+				A801A7AB1AC5992D00444B57 /* ThankyouMessageTableViewCell.swift */,
 				A8A9A4CB1AC1138E0026609C /* ChatViewController.swift */,
 				A8F928E91AB17BFB006AB6AB /* Images.xcassets */,
 				A8F928EB1AB17BFB006AB6AB /* LaunchScreen.xib */,
@@ -310,6 +313,7 @@
 				A8F3D7DA1AB6C30B00F98297 /* EmailSignupViewController.swift in Sources */,
 				A85F88411AB7161000064845 /* DetailedItemViewController.swift in Sources */,
 				A85F883F1AB7135B00064845 /* UserProfileViewController.swift in Sources */,
+				A801A7AC1AC5992D00444B57 /* ThankyouMessageTableViewCell.swift in Sources */,
 				A85F883D1AB7113D00064845 /* ListingItemViewController.swift in Sources */,
 				A8D04F021AB926A2005E8446 /* ItemListTableViewCell.swift in Sources */,
 				A8F3D7D81AB6C23800F98297 /* EmailLoginViewController.swift in Sources */,

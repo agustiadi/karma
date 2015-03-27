@@ -8,8 +8,9 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController {
+class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var profilePicView: UIImageView!
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var listingLabel: UILabel!
@@ -26,6 +27,9 @@ class UserProfileViewController: UIViewController {
     @IBOutlet var aboutDescription: UILabel!
     @IBOutlet var secondLineDivider: UILabel!
     @IBOutlet var thankYouLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
+    
+    let numberOfRows = 7
     
     let current_User = PFUser.currentUser()
     
@@ -62,6 +66,30 @@ class UserProfileViewController: UIViewController {
         karmaCircle.layer.cornerRadius = 30
         karmaCircle.clipsToBounds = true
         
+        aboutDescription.numberOfLines = 0
+        aboutDescription.text = "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc."
+        
+        aboutDescription.sizeToFit()
+        
+        secondLineDivider.center = CGPoint(x: self.view.frame.width/2, y: aboutDescription.frame.maxY + 10)
+        
+        thankYouLabel.center.y = secondLineDivider.frame.maxY + 20
+        
+        tableView.frame = CGRectMake(10, thankYouLabel.frame.maxY + 10, self.view.frame.width - 20, CGFloat(numberOfRows * 140))
+        tableView.scrollEnabled = false
+        
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: tableView.frame.maxY + 10)
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        scrollView.setContentOffset(CGPointZero, animated: true)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        
+        scrollView.setContentOffset(CGPointZero, animated: true)
     }
 
     
@@ -96,6 +124,30 @@ class UserProfileViewController: UIViewController {
         }
         
     }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return numberOfRows
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 140
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell: ThankyouMessageTableViewCell = tableView.dequeueReusableCellWithIdentifier("thankyouCell", forIndexPath: indexPath) as ThankyouMessageTableViewCell
+        
+        cell.receiverProfilePic.image = UIImage(named: "displayPic")
+        
+        cell.receiverName.text = "Dominique Liu"
+        cell.itemName.text = "S.Bensimon Chair"
+        
+        cell.thankyouMessage.text = "\"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum.\""
+
+        
+        return cell
+    }
+
     
 
 
