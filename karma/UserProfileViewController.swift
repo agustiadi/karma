@@ -10,8 +10,23 @@ import UIKit
 
 class UserProfileViewController: UIViewController {
     
-    var profilePicView = UIImageView()
-    var userProfilePic = UIImage()
+    @IBOutlet var profilePicView: UIImageView!
+    @IBOutlet var usernameLabel: UILabel!
+    @IBOutlet var listingLabel: UILabel!
+    @IBOutlet var gaveLabel: UILabel!
+    @IBOutlet var receivedLabel: UILabel!
+    @IBOutlet var listingNumber: UILabel!
+    @IBOutlet var gaveNumber: UILabel!
+    @IBOutlet var receivedNumber: UILabel!
+    @IBOutlet var karmaCircle: UILabel!
+    @IBOutlet var karmaLabel: UILabel!
+    @IBOutlet var karmaPoints: UILabel!
+    @IBOutlet var firstLineDivider: UILabel!
+    @IBOutlet var aboutLabel: UILabel!
+    @IBOutlet var aboutDescription: UILabel!
+    @IBOutlet var secondLineDivider: UILabel!
+    @IBOutlet var thankYouLabel: UILabel!
+    
     let current_User = PFUser.currentUser()
     
     @IBAction func logoutBtn(sender: AnyObject) {
@@ -35,22 +50,18 @@ class UserProfileViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        let scrollView = UIScrollView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        
-        profilePicView = UIImageView(frame: CGRectMake(15, 10, 50, 50))
-        profilePicView.layer.cornerRadius = 25
+
+    
+        profilePicView.layer.cornerRadius = 50
         profilePicView.clipsToBounds = true
         profilePicView.contentMode = UIViewContentMode.ScaleAspectFill
         profilePicView.image = UIImage(named: "profilePlaceholder")
-        
     
-        let usernameLabel = UILabel(frame: CGRectMake(80, 10, 200, 50))
         usernameLabel.text = current_User["name"] as? String
         
-        view.addSubview(scrollView)
-        scrollView.addSubview(profilePicView)
-        scrollView.addSubview(usernameLabel)
+        karmaCircle.layer.cornerRadius = 30
+        karmaCircle.clipsToBounds = true
+        
     }
 
     
@@ -74,7 +85,6 @@ class UserProfileViewController: UIViewController {
                     
                     let image = UIImage(data: imageData)
                     self.profilePicView.image = image
-                    self.userProfilePic = image!
                     
                 } else {
                     
@@ -86,6 +96,8 @@ class UserProfileViewController: UIViewController {
         }
         
     }
+    
+
 
     /*
     // MARK: - Navigation

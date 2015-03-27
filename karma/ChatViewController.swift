@@ -17,7 +17,7 @@ class ChatViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        println(vc.userProfilePic)
+        //println(vc.userProfilePic)
         
     }
     

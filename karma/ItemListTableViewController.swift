@@ -34,9 +34,13 @@ class ItemListTableViewController: UITableViewController{
         
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         refreshItemData()
 
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
     }
     
     
@@ -55,20 +59,20 @@ class ItemListTableViewController: UITableViewController{
     }
     
     func refreshItemData() {
+        
+        self.objectIDs.removeAll(keepCapacity: true)
+        self.itemsName.removeAll(keepCapacity: true)
+        self.itemsImage.removeAll(keepCapacity: true)
+        self.descriptions.removeAll(keepCapacity: true)
+        self.categories.removeAll(keepCapacity: true)
+        self.userIDs.removeAll(keepCapacity: true)
+        self.giverName.removeAll(keepCapacity: true)
+        self.userProfilePic.removeAll(keepCapacity: true)
     
         var itemQuery = PFQuery(className: "Item")
         itemQuery.addDescendingOrder("createdAt")
         itemQuery.findObjectsInBackgroundWithBlock {
             (itemObjects: [AnyObject]!, error: NSError!) -> Void in
-            
-            self.objectIDs.removeAll(keepCapacity: true)
-            self.itemsName.removeAll(keepCapacity: true)
-            self.itemsImage.removeAll(keepCapacity: true)
-            self.descriptions.removeAll(keepCapacity: true)
-            self.categories.removeAll(keepCapacity: true)
-            self.userIDs.removeAll(keepCapacity: true)
-            self.giverName.removeAll(keepCapacity: true)
-            self.userProfilePic.removeAll(keepCapacity: true)
             
             if error == nil {
                 
@@ -148,8 +152,6 @@ class ItemListTableViewController: UITableViewController{
             destinationVC.descriptionOfItem = descriptions[selectedRow!]
             destinationVC.userID = userIDs[selectedRow!]
             destinationVC.objectID = objectIDs[selectedRow!]
-            destinationVC.imagePic = UIImage(named: "chair.png")!
-        
         }
         
     }
@@ -182,10 +184,6 @@ class ItemListTableViewController: UITableViewController{
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as ItemListTableViewCell
         
-        cell.itemName.text = itemsName[indexPath.row]
-        
-        cell.itemCategory.text = categories[indexPath.row]
-        
         itemsImage[indexPath.row].getDataInBackgroundWithBlock{
             (imageData: NSData!, error: NSError!) -> Void in
             
@@ -200,8 +198,14 @@ class ItemListTableViewController: UITableViewController{
                 
             }
         }
+
+        
+        cell.itemName.text = itemsName[indexPath.row]
+        
+        cell.itemCategory.text = categories[indexPath.row]
         
         getUserDataForCell(userIDs[indexPath.row], name: cell.userName, profilePic: cell.profilePic)
+        
         
         return cell
     }
