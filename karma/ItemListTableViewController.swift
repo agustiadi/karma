@@ -16,6 +16,10 @@ class ItemListTableViewController: UITableViewController{
     var descriptions = [String]()
     var categories = [String]()
     var userIDs = [String]()
+    var userName = [String]()
+    var userImageFile = [PFFile]()
+    
+    let placeholderFile = PFFile(data: UIImagePNGRepresentation(UIImage(named: "profilePlaceholder")))
     
     //Toolbar Buttons
     
@@ -34,12 +38,8 @@ class ItemListTableViewController: UITableViewController{
         super.viewDidLoad()
         
         refreshItemData()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
         
     }
-    
     
     override func viewWillAppear(animated: Bool) {
         
@@ -56,21 +56,22 @@ class ItemListTableViewController: UITableViewController{
     }
     
     func refreshItemData() {
-        
-        self.objectIDs.removeAll(keepCapacity: true)
-        self.itemsName.removeAll(keepCapacity: true)
-        self.itemsImage.removeAll(keepCapacity: true)
-        self.descriptions.removeAll(keepCapacity: true)
-        self.categories.removeAll(keepCapacity: true)
-        self.userIDs.removeAll(keepCapacity: true)
 
         var itemQuery = PFQuery(className: "Item")
         itemQuery.addDescendingOrder("createdAt")
-
         itemQuery.findObjectsInBackgroundWithBlock {
             (itemObjects: [AnyObject]!, error: NSError!) -> Void in
             
             if error == nil {
+                
+                self.objectIDs.removeAll(keepCapacity: true)
+                self.itemsName.removeAll(keepCapacity: true)
+                self.itemsImage.removeAll(keepCapacity: true)
+                self.descriptions.removeAll(keepCapacity: true)
+                self.categories.removeAll(keepCapacity: true)
+                self.userIDs.removeAll(keepCapacity: true)
+                self.userName.removeAll(keepCapacity: true)
+                self.userImageFile.removeAll(keepCapacity: true)
                 
                 for item in itemObjects {
                     
@@ -80,55 +81,29 @@ class ItemListTableViewController: UITableViewController{
                     self.descriptions.append(item["itemDescription"] as String)
                     self.categories.append(item["categories"] as String)
                     self.itemsImage.append(item["image_1"] as PFFile)
-                   
-                }
+                    
+                    var userQuery = PFUser.query()
+                    let objectID = item["userId"] as String
+                    let selectedUser = userQuery.getObjectWithId(objectID) as PFUser
+                    self.userName.append(selectedUser["name"] as String)
+                    
+                    if selectedUser["profilePic"] != nil {
                         
+                        self.userImageFile.append(selectedUser["profilePic"] as PFFile)
+                        
+                    } else {
+                        
+                        self.userImageFile.append(self.placeholderFile as PFFile)
+                    }
+                    
+                }
+                
                 self.tableView.reloadData()
             }
         }
-
-    }
-    
-    
-    func getUserDataForCell(userID: String, name: UILabel, profilePic: UIImageView){
         
-        var userQuery = PFQuery(className: "_User")
-        userQuery.getObjectInBackgroundWithId(userID){
-            (object: PFObject!, error: NSError!) -> Void in
-            
-            if error == nil {
-                
-                    name.text = object["name"] as? String
-                    
-                    if object["profilePic"] != nil {
-                        
-                        let temp = object["profilePic"] as PFFile
-                        temp.getDataInBackgroundWithBlock{
-                            (imageData: NSData!, error: NSError!) -> Void in
-                            
-                            if error == nil {
-                                
-                                let image = UIImage(data: imageData)
-                                profilePic.image = image
-                                
-                            } else {
-                                
-                                println(error)
-                                
-                            }
-                            
-                        }
-                        
-                    }
-            }
-            
-            else {
-                
-                profilePic.image = UIImage(named: "profilePlaceholder")!
-                
-            }
-            
-        }
+        
+
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -175,9 +150,6 @@ class ItemListTableViewController: UITableViewController{
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as ItemListTableViewCell
         
-        
-        getUserDataForCell(userIDs[indexPath.row], name: cell.userName, profilePic: cell.profilePic)
-        
         cell.itemName.text = itemsName[indexPath.row]
         cell.itemCategory.text = categories[indexPath.row]
         
@@ -195,9 +167,24 @@ class ItemListTableViewController: UITableViewController{
                 
             }
         }
+
+        cell.userName.text = userName[indexPath.row]
         
+        let temp = userImageFile[indexPath.row] as PFFile
+        temp.getDataInBackgroundWithBlock{
+            (imageData: NSData!, error: NSError!) -> Void in
+            if error == nil {
+                let image = UIImage(data: imageData)
+                cell.profilePic.image = image
+
+            } else {
+                println(error)
+            }
+        }
+
         return cell
     }
+    
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("item", sender: self)

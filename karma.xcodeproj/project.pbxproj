@@ -258,6 +258,7 @@
 				TargetAttributes = {
 					A8F928DC1AB17BFB006AB6AB = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = HUEVCN9LX6;
 					};
 					A8F928F11AB17BFB006AB6AB = {
 						CreatedOnToolsVersion = 6.2;
@@ -443,6 +444,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/karma",
@@ -461,6 +463,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/karma",
