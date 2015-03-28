@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "karma/ItemListTableViewController.swift"
-            timestampString = "449143752.248488"
+            timestampString = "449246072.1367"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "ItemListTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -32,22 +32,6 @@
             startingLineNumber = "15"
             endingLineNumber = "15"
             landmarkName = "DetailedItemViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "karma/ItemListTableViewController.swift"
-            timestampString = "449077775.703664"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "ItemListTableViewController"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>

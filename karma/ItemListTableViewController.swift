@@ -16,8 +16,6 @@ class ItemListTableViewController: UITableViewController{
     var descriptions = [String]()
     var categories = [String]()
     var userIDs = [String]()
-    var giverName = [String]()
-    var userProfilePic = [PFFile]()
     
     //Toolbar Buttons
     
@@ -36,7 +34,6 @@ class ItemListTableViewController: UITableViewController{
         super.viewDidLoad()
         
         refreshItemData()
-
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -66,11 +63,10 @@ class ItemListTableViewController: UITableViewController{
         self.descriptions.removeAll(keepCapacity: true)
         self.categories.removeAll(keepCapacity: true)
         self.userIDs.removeAll(keepCapacity: true)
-        self.giverName.removeAll(keepCapacity: true)
-        self.userProfilePic.removeAll(keepCapacity: true)
-    
+
         var itemQuery = PFQuery(className: "Item")
         itemQuery.addDescendingOrder("createdAt")
+
         itemQuery.findObjectsInBackgroundWithBlock {
             (itemObjects: [AnyObject]!, error: NSError!) -> Void in
             
@@ -79,38 +75,34 @@ class ItemListTableViewController: UITableViewController{
                 for item in itemObjects {
                     
                     self.objectIDs.append(item.objectId as String)
-                    self.itemsName.append(item["itemName"] as String)
-                    self.itemsImage.append(item["image_1"] as PFFile)
-                    self.categories.append(item["categories"] as String)
-                    self.descriptions.append(item["itemDescription"] as String)
                     self.userIDs.append(item["userId"] as String)
-                    
+                    self.itemsName.append(item["itemName"] as String)
+                    self.descriptions.append(item["itemDescription"] as String)
+                    self.categories.append(item["categories"] as String)
+                    self.itemsImage.append(item["image_1"] as PFFile)
+                   
                 }
-                
+                        
                 self.tableView.reloadData()
-                
             }
-            
         }
 
     }
     
+    
     func getUserDataForCell(userID: String, name: UILabel, profilePic: UIImageView){
         
         var userQuery = PFQuery(className: "_User")
-        userQuery.whereKey("objectId", equalTo: userID)
-        userQuery.findObjectsInBackgroundWithBlock {
-            (userObjects: [AnyObject]!, error: NSError!) -> Void in
+        userQuery.getObjectInBackgroundWithId(userID){
+            (object: PFObject!, error: NSError!) -> Void in
             
             if error == nil {
                 
-                for user in userObjects {
+                    name.text = object["name"] as? String
                     
-                    name.text = user["name"] as? String
-                    
-                    if user["profilePic"] != nil {
+                    if object["profilePic"] != nil {
                         
-                        let temp = user["profilePic"] as PFFile
+                        let temp = object["profilePic"] as PFFile
                         temp.getDataInBackgroundWithBlock{
                             (imageData: NSData!, error: NSError!) -> Void in
                             
@@ -119,7 +111,6 @@ class ItemListTableViewController: UITableViewController{
                                 let image = UIImage(data: imageData)
                                 profilePic.image = image
                                 
-                                
                             } else {
                                 
                                 println(error)
@@ -127,18 +118,18 @@ class ItemListTableViewController: UITableViewController{
                             }
                             
                         }
-                            
+                        
                     }
-                }
-            } else {
-                    profilePic.image = UIImage(named: "profilePlaceholder")!
+            }
+            
+            else {
+                
+                profilePic.image = UIImage(named: "profilePlaceholder")!
                 
             }
-                    
+            
         }
-
     }
-    
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -184,6 +175,12 @@ class ItemListTableViewController: UITableViewController{
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as ItemListTableViewCell
         
+        
+        getUserDataForCell(userIDs[indexPath.row], name: cell.userName, profilePic: cell.profilePic)
+        
+        cell.itemName.text = itemsName[indexPath.row]
+        cell.itemCategory.text = categories[indexPath.row]
+        
         itemsImage[indexPath.row].getDataInBackgroundWithBlock{
             (imageData: NSData!, error: NSError!) -> Void in
             
@@ -198,14 +195,6 @@ class ItemListTableViewController: UITableViewController{
                 
             }
         }
-
-        
-        cell.itemName.text = itemsName[indexPath.row]
-        
-        cell.itemCategory.text = categories[indexPath.row]
-        
-        getUserDataForCell(userIDs[indexPath.row], name: cell.userName, profilePic: cell.profilePic)
-        
         
         return cell
     }
