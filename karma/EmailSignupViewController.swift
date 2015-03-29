@@ -9,6 +9,10 @@
 import UIKit
 
 class EmailSignupViewController: UIViewController {
+    
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    var processingView = UIView()
 
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
@@ -17,10 +21,21 @@ class EmailSignupViewController: UIViewController {
     
     @IBAction func signupBtn(sender: AnyObject) {
         
+        processingView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+        processingView.backgroundColor = UIColor.blackColor()
+        processingView.alpha = 0.8
+        self.view.addSubview(processingView)
+        
+        startActivityIndicator()
+        
         if nameField.text == "" || emailField.text == "" || passwordField.text == ""{
+            self.stopActivityIndicator()
+            self.processingView.removeFromSuperview()
             displayAlert("Missing Input", message: "You need to give input for all three fields")
-        } else if countElements(passwordField.text) < 8 {
-            displayAlert("Password Length", message: "Please note that your password needs to consist of at least 8 characters")
+        } else if countElements(passwordField.text) < 5 {
+            self.stopActivityIndicator()
+            self.processingView.removeFromSuperview()
+            displayAlert("Password Length", message: "Please note that your password needs to consist of at least 5 characters")
         } else {
             var user = PFUser()
             user["name"] = nameField.text
@@ -31,11 +46,16 @@ class EmailSignupViewController: UIViewController {
                 (succeeded: Bool!, signupError: NSError!) -> Void in
                 if signupError == nil {
                     self.performSegueWithIdentifier("userSignedUpViaEmail", sender: self)
+                    self.stopActivityIndicator()
                 } else {
                     if let errorString = signupError.userInfo?["error"] as? NSString{
+                        self.stopActivityIndicator()
+                        self.processingView.removeFromSuperview()
                         self.displayAlert("Error in Form", message: errorString)
                         
                     } else {
+                        self.stopActivityIndicator()
+                        self.processingView.removeFromSuperview()
                         self.displayAlert("Error", message: "Some unidentified error. Please try again!")
                     }
                     
@@ -55,6 +75,10 @@ class EmailSignupViewController: UIViewController {
         
 
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.processingView.removeFromSuperview()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -72,6 +96,26 @@ class EmailSignupViewController: UIViewController {
         
         self.view.backgroundColor = UIColor(red: 175.0/255.0, green: 171.0/255.0, blue: 158.0/255.0, alpha: 1.0)
     }
+    
+    func startActivityIndicator() {
+        
+        //Spinner Activity Indicator. Do not forget to initialize it and put a stop activity when its done.
+        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+        activityIndicator.center = CGPoint(x: self.processingView.frame.width/2, y: self.processingView.frame.height/2)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        self.processingView.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+    }
+    
+    func stopActivityIndicator(){
+        
+        self.activityIndicator.stopAnimating()
+        UIApplication.sharedApplication().endIgnoringInteractionEvents()
+        
+    }
+
     
     /*
     // MARK: - Navigation

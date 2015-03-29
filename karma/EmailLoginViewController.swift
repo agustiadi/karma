@@ -9,6 +9,10 @@
 import UIKit
 
 class EmailLoginViewController: UIViewController {
+    
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    var processingView = UIView()
 
     @IBOutlet weak var emailField: UITextField!
     
@@ -16,13 +20,23 @@ class EmailLoginViewController: UIViewController {
     
     @IBAction func loginBtn(sender: AnyObject) {
         
+        processingView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+        processingView.backgroundColor = UIColor.blackColor()
+        processingView.alpha = 0.8
+        self.view.addSubview(processingView)
+        
+        startActivityIndicator()
+        
         PFUser.logInWithUsernameInBackground(emailField.text, password:passwordField.text) {
             (user: PFUser!, error: NSError!) -> Void in
             if user != nil {
                 println("Login successful")
                 self.performSegueWithIdentifier("userLoggedInViaEmail", sender: self)
+                self.stopActivityIndicator()
                 
             } else {
+                self.stopActivityIndicator()
+                self.processingView.removeFromSuperview()
                 self.displayAlert("Log In Error", message: "Please make sure you input the right username and password")
             }
         }
@@ -37,6 +51,10 @@ class EmailLoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.processingView.removeFromSuperview()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,6 +73,26 @@ class EmailLoginViewController: UIViewController {
         
         self.view.backgroundColor = UIColor(red: 175.0/255.0, green: 171.0/255.0, blue: 158.0/255.0, alpha: 1.0)
     }
+    
+    func startActivityIndicator() {
+        
+        //Spinner Activity Indicator. Do not forget to initialize it and put a stop activity when its done.
+        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+        activityIndicator.center = CGPoint(x: self.processingView.frame.width/2, y: self.processingView.frame.height/2)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        self.processingView.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+    }
+    
+    func stopActivityIndicator(){
+        
+        self.activityIndicator.stopAnimating()
+        UIApplication.sharedApplication().endIgnoringInteractionEvents()
+        
+    }
+
 
     /*
     // MARK: - Navigation

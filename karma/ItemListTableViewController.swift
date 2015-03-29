@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ItemListTableViewController: UITableViewController{
+class ItemListTableViewController: UITableViewController {
     
     var objectIDs = [String]()
     var itemsName = [String]()
@@ -20,6 +20,10 @@ class ItemListTableViewController: UITableViewController{
     var userImageFile = [PFFile]()
     
     let placeholderFile = PFFile(data: UIImagePNGRepresentation(UIImage(named: "profilePlaceholder")))
+    
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    var processingView = UIView()
     
     //Toolbar Buttons
     
@@ -33,10 +37,37 @@ class ItemListTableViewController: UITableViewController{
         self.performSegueWithIdentifier("userProfile", sender: self)
         
     }
+    
+    func startActivityIndicator() {
         
+        //Spinner Activity Indicator. Do not forget to initialize it and put a stop activity when its done.
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
+        activityIndicator.center = CGPoint(x: self.processingView.frame.width/2, y: self.processingView.frame.height/2)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        self.processingView.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+    }
+    
+    func stopActivityIndicator(){
+        
+        self.processingView.removeFromSuperview()
+        self.activityIndicator.stopAnimating()
+        UIApplication.sharedApplication().endIgnoringInteractionEvents()
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        processingView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+        processingView.backgroundColor = UIColor.whiteColor()
+        self.view.addSubview(processingView)
+        
+        startActivityIndicator()
+
         refreshItemData()
         
     }
@@ -81,6 +112,7 @@ class ItemListTableViewController: UITableViewController{
                     self.descriptions.append(item["itemDescription"] as String)
                     self.categories.append(item["categories"] as String)
                     self.itemsImage.append(item["image_1"] as PFFile)
+                
                     
                     var userQuery = PFUser.query()
                     let objectID = item["userId"] as String
@@ -95,15 +127,15 @@ class ItemListTableViewController: UITableViewController{
                         
                         self.userImageFile.append(self.placeholderFile as PFFile)
                     }
-                    
+
                 }
                 
-                self.tableView.reloadData()
+                 self.tableView.reloadData()
+                 self.stopActivityIndicator()
+
             }
         }
-        
-        
-
+    
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -167,8 +199,8 @@ class ItemListTableViewController: UITableViewController{
                 
             }
         }
-
-        cell.userName.text = userName[indexPath.row]
+        
+        cell.userName.text = userName[indexPath.row] as String
         
         let temp = userImageFile[indexPath.row] as PFFile
         temp.getDataInBackgroundWithBlock{
