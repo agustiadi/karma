@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "karma/ItemListTableViewController.swift"
-            timestampString = "449420787.37393"
+            timestampString = "449421850.669175"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "ItemListTableViewController"
             landmarkType = "3">
          </BreakpointContent>

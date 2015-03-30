@@ -9,11 +9,39 @@
 import UIKit
 
 class ListingItemViewController: UIViewController {
-
+    
+    let submitBtn = UIBarButtonItem()
+    let closeBtn = UIBarButtonItem()
+    
+    func submit (sender: AnyObject) {
+        
+        
+    }
+    
+    func close (sender: AnyObject) {
+        
+        tabBarController?.selectedIndex = 0
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        submitBtn.title = "Submit"
+        submitBtn.action = "submit:"
+        submitBtn.target = self
+        
+        closeBtn.title = "Cancel"
+        closeBtn.action = "close:"
+        closeBtn.target = self
+
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        tabBarController?.navigationItem.setLeftBarButtonItems(nil, animated: false)
+        tabBarController?.tabBar.hidden = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,8 +50,15 @@ class ListingItemViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated:true)
-        navigationController?.setToolbarHidden(true, animated: true)
+        
+        tabBarController?.navigationItem.title = "Give an Item"
+        
+        tabBarController?.navigationItem.setRightBarButtonItem(submitBtn, animated: false)
+        tabBarController?.navigationItem.setLeftBarButtonItem(closeBtn, animated: false)
+        
+        tabBarController?.tabBar.hidden = true
+
+        
     }
     
 

@@ -62,7 +62,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         logoutBtn.action = "logout:"
         logoutBtn.target = self
 
-    
         profilePicView.layer.cornerRadius = 50
         profilePicView.clipsToBounds = true
         profilePicView.contentMode = UIViewContentMode.ScaleAspectFill
@@ -108,11 +107,11 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillAppear(animated: Bool) {
         
-        navigationController?.setNavigationBarHidden(false, animated:true)
+        //navigationController?.setNavigationBarHidden(false, animated:true)
         tabBarController?.navigationItem.setHidesBackButton(true, animated: false)
         tabBarController?.navigationItem.title = "User Profile"
-        
         tabBarController?.navigationItem.setRightBarButtonItem(logoutBtn, animated: false)
+
         
         self.automaticallyAdjustsScrollViewInsets = true
         
