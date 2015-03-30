@@ -42,11 +42,13 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @IBAction func browseBtn(sender: AnyObject) {
-        self.performSegueWithIdentifier("browseListing", sender: self)
+        self.presentViewController(ItemListTableViewController(), animated: false, completion: nil)
+        //navigationController?.popToViewController(ItemListTableViewController(), animated: false)
+        
     }
     
     @IBAction func giveBtn(sender: AnyObject) {
-        self.performSegueWithIdentifier("listItem2", sender: self)
+        self.presentViewController(ListingItemViewController(), animated: false, completion: nil)
     }
     
     

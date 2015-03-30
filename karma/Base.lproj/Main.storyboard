@@ -378,7 +378,6 @@ get, but from what we give.”</string>
                         <barButtonItem image="browseIconYellow" id="Pm0-H1-2Tr">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="browseBtn:" destination="V0F-mV-YAg" id="jFH-Ba-kWx"/>
                                 <segue destination="Luu-L6-la9" kind="push" identifier="browseListing" id="eLd-Sm-QBu"/>
                             </connections>
                         </barButtonItem>
@@ -386,8 +385,7 @@ get, but from what we give.”</string>
                         <barButtonItem image="cameraIconWhite" id="1CT-bH-13L">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="giveBtn:" destination="V0F-mV-YAg" id="OF5-zn-wtm"/>
-                                <segue destination="BT2-HG-OZ9" kind="push" identifier="listItem2" id="q05-wd-a7m"/>
+                                <action selector="giveBtn:" destination="V0F-mV-YAg" id="kHp-jB-M2W"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Krq-rU-nkI"/>
@@ -436,7 +434,7 @@ get, but from what we give.”</string>
             <objects>
                 <viewController id="qaz-h0-WeY" customClass="ChatViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p5Y-it-DAV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -742,7 +740,6 @@ get, but from what we give.”</string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="q05-wd-a7m"/>
-        <segue reference="Uhn-Pd-w9p"/>
+        <segue reference="eLd-Sm-QBu"/>
     </inferredMetricsTieBreakers>
 </document>
