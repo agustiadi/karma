@@ -25,6 +25,7 @@ class ItemListTableViewController: UITableViewController {
     
     var processingView = UIView()
     
+    
     //Toolbar Buttons
     
     @IBAction func listItemToolBarBtn(sender: AnyObject) {
@@ -40,10 +41,12 @@ class ItemListTableViewController: UITableViewController {
     
     func startActivityIndicator() {
         
+        let navH = navigationController?.navigationBar.frame.height
+        
         //Spinner Activity Indicator. Do not forget to initialize it and put a stop activity when its done.
         
         activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
-        activityIndicator.center = CGPoint(x: self.processingView.frame.width/2, y: self.processingView.frame.height/2)
+        activityIndicator.center = CGPoint(x: self.processingView.frame.width/2, y: self.processingView.frame.height/2 - navH!)
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         self.processingView.addSubview(activityIndicator)
@@ -68,6 +71,18 @@ class ItemListTableViewController: UITableViewController {
         
         startActivityIndicator()
 
+        refreshItemData()
+        
+        //Refresher Controller Set-Up
+        refreshControl = UIRefreshControl()
+        refreshControl!.attributedTitle = NSAttributedString(string: "Refreshing Your Karma")
+        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl!)
+        
+    }
+    
+    func refresh(sender: AnyObject){
+        
         refreshItemData()
         
     }
@@ -141,6 +156,8 @@ class ItemListTableViewController: UITableViewController {
 
             }
         }
+        
+         self.refreshControl?.endRefreshing()
     
         
     }
