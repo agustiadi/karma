@@ -43,6 +43,9 @@ class DetailedItemViewController: UIViewController{
         super.viewDidLoad()
         
         let navBarHeight = navigationController?.navigationBar.frame.height
+        let maxY = navigationController?.navigationBar.frame.maxY
+        
+        self.view.frame = CGRectMake(0, maxY!, self.view.frame.width, self.view.frame.height)
         
         getUserData(userID, name: giverNameLabel, profilePic: profilePic)
         getItemImages(objectID)
@@ -91,9 +94,7 @@ class DetailedItemViewController: UIViewController{
     override func viewWillAppear(animated: Bool) {
         
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.setToolbarHidden(true, animated: true)
 
-        
     }
     
     override func viewDidDisappear(animated: Bool) {

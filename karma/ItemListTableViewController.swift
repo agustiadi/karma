@@ -76,17 +76,16 @@ class ItemListTableViewController: UITableViewController {
         
         //Navigation Bar Set-Up
         navigationController?.setNavigationBarHidden(false, animated:true)
-        self.navigationItem.setHidesBackButton(true, animated: false)
-        
-        let backBtn = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
-        navigationController?.navigationBar.topItem?.backBarButtonItem = backBtn
+        tabBarController?.navigationItem.setHidesBackButton(true, animated: false)
+        tabBarController?.navigationItem.title = "Karma"
 
-        //Toolbar Set-Up
-        navigationController?.setToolbarHidden(false, animated: true)
-        
+    
+        self.automaticallyAdjustsScrollViewInsets = true
     }
     
+    
     func refreshItemData() {
+        
 
         var itemQuery = PFQuery(className: "Item")
         itemQuery.addDescendingOrder("createdAt")
@@ -106,17 +105,19 @@ class ItemListTableViewController: UITableViewController {
                 
                 for item in itemObjects {
                     
+                    let userObject = item["userID"] as PFObject
+                    
                     self.objectIDs.append(item.objectId as String)
-                    self.userIDs.append(item["userId"] as String)
+                    self.userIDs.append(userObject.objectId as String)
                     self.itemsName.append(item["itemName"] as String)
                     self.descriptions.append(item["itemDescription"] as String)
                     self.categories.append(item["categories"] as String)
                     self.itemsImage.append(item["image_1"] as PFFile)
-                
+
                     
                     var userQuery = PFUser.query()
-                    let objectID = item["userId"] as String
-                    let selectedUser = userQuery.getObjectWithId(objectID) as PFUser
+                    let selectedUser = userQuery.getObjectWithId(userObject.objectId as String)
+                    
                     self.userName.append(selectedUser["name"] as String)
                     
                     if selectedUser["profilePic"] != nil {
@@ -126,16 +127,21 @@ class ItemListTableViewController: UITableViewController {
                     } else {
                         
                         self.userImageFile.append(self.placeholderFile as PFFile)
+                    
                     }
-
+                    
                 }
                 
-                 self.tableView.reloadData()
-                 self.stopActivityIndicator()
+                self.tableView.reloadData()
+                
+                self.stopActivityIndicator()
+                
+                
 
             }
         }
     
+        
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -10,6 +10,7 @@ import UIKit
 
 class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet var allView: UIView!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var profilePicView: UIImageView!
     @IBOutlet var usernameLabel: UILabel!
@@ -33,7 +34,9 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     let current_User = PFUser.currentUser()
     
-    @IBAction func logoutBtn(sender: AnyObject) {
+    let logoutBtn = UIBarButtonItem()
+    
+    func logout(sender: AnyObject) {
         
         PFUser.logOut()
         println("Logout Successful")
@@ -42,20 +45,22 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @IBAction func browseBtn(sender: AnyObject) {
-        self.presentViewController(ItemListTableViewController(), animated: false, completion: nil)
-        //navigationController?.popToViewController(ItemListTableViewController(), animated: false)
-        
+        self.performSegueWithIdentifier("browseListing", sender: self)
     }
     
     @IBAction func giveBtn(sender: AnyObject) {
-        self.presentViewController(ListingItemViewController(), animated: false, completion: nil)
+        self.performSegueWithIdentifier("listItem2", sender: self)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the vieww
+        
+        logoutBtn.title = "Logout"
+        logoutBtn.action = "logout:"
+        logoutBtn.target = self
 
     
         profilePicView.layer.cornerRadius = 50
@@ -87,6 +92,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidAppear(animated: Bool) {
         
         scrollView.setContentOffset(CGPointZero, animated: true)
+        
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -103,9 +109,14 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(animated: Bool) {
         
         navigationController?.setNavigationBarHidden(false, animated:true)
-        navigationController?.setToolbarHidden(false, animated: true)
+        tabBarController?.navigationItem.setHidesBackButton(true, animated: false)
+        tabBarController?.navigationItem.title = "User Profile"
         
+        tabBarController?.navigationItem.setRightBarButtonItem(logoutBtn, animated: false)
         
+        self.automaticallyAdjustsScrollViewInsets = true
+        
+
         if current_User["profilePic"] != nil {
             
             current_User["profilePic"].getDataInBackgroundWithBlock({

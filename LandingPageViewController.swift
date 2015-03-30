@@ -24,7 +24,6 @@ class LandingPageViewController: UIViewController{
     override func viewWillAppear(animated: Bool) {
         
         navigationController?.setNavigationBarHidden(true, animated:true)
-        navigationController?.setToolbarHidden(true, animated: true)
         
         self.view.backgroundColor = UIColor(red: 127.0/255.0, green: 132.0/255.0, blue: 118.0/255.0, alpha: 1.0)
         

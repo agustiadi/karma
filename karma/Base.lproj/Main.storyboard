@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="MFK-Sv-SUa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3aw-QR-Cow">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
@@ -9,7 +9,7 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="LandingPageViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PMN-xi-VAd">
@@ -69,24 +69,25 @@ get, but from what we give.”</string>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="nx7-AQ-IrM"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <segue destination="tT6-XC-oB1" kind="push" identifier="emailLogin" id="gHT-xn-tWU"/>
                         <segue destination="hgd-2G-Jfj" kind="push" identifier="emailSignup" id="Ew8-XP-E5d"/>
-                        <segue destination="Luu-L6-la9" kind="push" identifier="fbLoggedIn" id="LgN-ka-Iws"/>
+                        <segue destination="aTB-qb-6JH" kind="push" identifier="fbLoggedIn" id="LgN-ka-Iws"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1762.5" y="462.5"/>
+            <point key="canvasLocation" x="2264.5" y="478.5"/>
         </scene>
         <!--Email Signup View Controller-->
         <scene sceneID="WPA-wp-VgS">
             <objects>
                 <viewController id="hgd-2G-Jfj" customClass="EmailSignupViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cxp-0L-Qna">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up with Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MIw-Nw-48E">
@@ -138,24 +139,26 @@ get, but from what we give.”</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="MgM-VU-LGn"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="emailField" destination="ps1-CT-Shs" id="Aes-yj-bgq"/>
                         <outlet property="nameField" destination="JDC-1t-C2i" id="fXo-tS-qgg"/>
                         <outlet property="passwordField" destination="463-WX-CR1" id="PcC-fY-8No"/>
-                        <segue destination="Luu-L6-la9" kind="push" identifier="userSignedUpViaEmail" id="Uhn-Pd-w9p"/>
+                        <segue destination="aTB-qb-6JH" kind="push" identifier="userSignedUpViaEmail" id="Uhn-Pd-w9p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e1s-0K-RSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1424.5" y="1259.5"/>
         </scene>
-        <!--Listing Item-->
+        <!--Give-->
         <scene sceneID="Uue-iy-OPw">
             <objects>
                 <viewController id="BT2-HG-OZ9" customClass="ListingItemViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gZJ-2f-Eza">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Photo and Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g2y-ME-FFQ">
@@ -168,9 +171,7 @@ get, but from what we give.”</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Listing Item" id="RNH-0s-emY">
-                        <barButtonItem key="rightBarButtonItem" title="Submit" id="YXv-I0-NBI"/>
-                    </navigationItem>
+                    <tabBarItem key="tabBarItem" title="Give" image="cameraIconWhite" id="Wp7-01-G1P"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -179,21 +180,14 @@ get, but from what we give.”</string>
             </objects>
             <point key="canvasLocation" x="1827.5" y="1259.5"/>
         </scene>
-        <!--User Profile-->
+        <!--Me-->
         <scene sceneID="QRy-CL-zzs">
             <objects>
                 <viewController id="V0F-mV-YAg" customClass="UserProfileViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aiL-Lk-6FX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="gb0-vB-QPW">
-                                <rect key="frame" x="0.0" y="559" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <barButtonItem title="Item" id="LxW-qX-meb"/>
-                                </items>
-                            </toolbar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="udH-EO-XKT">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -373,40 +367,16 @@ get, but from what we give.”</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="TQF-kU-i6g"/>
-                        <barButtonItem image="browseIconYellow" id="Pm0-H1-2Tr">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <segue destination="Luu-L6-la9" kind="push" identifier="browseListing" id="eLd-Sm-QBu"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="w6b-j4-xfM"/>
-                        <barButtonItem image="cameraIconWhite" id="1CT-bH-13L">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="giveBtn:" destination="V0F-mV-YAg" id="kHp-jB-M2W"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Krq-rU-nkI"/>
-                        <barButtonItem image="profileIconYellow" id="CS2-rq-5yp">
-                            <color key="tintColor" red="0.91764705879999997" green="0.72156862749999995" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="eti-Xq-N9X"/>
-                    </toolbarItems>
-                    <navigationItem key="navigationItem" title="User Profile" id="0yW-5w-FjM">
-                        <barButtonItem key="rightBarButtonItem" title="Logout" id="XzW-ub-nq4">
-                            <connections>
-                                <action selector="logoutBtn:" destination="V0F-mV-YAg" id="Wv2-G6-MSG"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <tabBarItem key="tabBarItem" title="Me" image="profileIconYellow" id="fVe-JS-0eX"/>
+                    <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="aboutDescription" destination="Ot6-6w-7bL" id="z3z-ok-eGB"/>
                         <outlet property="aboutLabel" destination="zq0-0B-8uQ" id="ATy-SP-dAt"/>
+                        <outlet property="allView" destination="aiL-Lk-6FX" id="ila-dl-v3r"/>
                         <outlet property="firstLineDivider" destination="pKY-dI-1ml" id="bck-Je-Q5F"/>
                         <outlet property="gaveLabel" destination="2Ys-K9-WCf" id="GVu-e7-yyz"/>
                         <outlet property="gaveNumber" destination="qH5-FL-dfv" id="cf3-G4-mG8"/>
@@ -434,7 +404,7 @@ get, but from what we give.”</string>
             <objects>
                 <viewController id="qaz-h0-WeY" customClass="ChatViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p5Y-it-DAV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -450,7 +420,7 @@ get, but from what we give.”</string>
             <objects>
                 <viewController id="tT6-XC-oB1" customClass="EmailLoginViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wj1-ue-0FE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="agus@test.com" borderStyle="roundedRect" placeholder="email" textAlignment="center" minimumFontSize="17" id="3aa-1n-ZsQ">
@@ -496,23 +466,25 @@ get, but from what we give.”</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="bmf-Qf-nl4"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="emailField" destination="3aa-1n-ZsQ" id="3Cq-DY-tbB"/>
                         <outlet property="passwordField" destination="dQP-qa-kB3" id="fRU-Ck-I92"/>
-                        <segue destination="Luu-L6-la9" kind="push" identifier="userLoggedInViaEmail" id="B11-pF-GtJ"/>
+                        <segue destination="aTB-qb-6JH" kind="push" identifier="userLoggedInViaEmail" id="B11-pF-GtJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zKD-Ev-wlQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1005.5" y="1259.5"/>
         </scene>
-        <!--Karma-->
+        <!--Browse-->
         <scene sceneID="IDW-s8-LJM">
             <objects>
                 <tableViewController id="Luu-L6-la9" customClass="ItemListTableViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="229" sectionHeaderHeight="22" sectionFooterHeight="22" id="pyE-5z-5OM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="pyE-5z-5OM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -566,42 +538,18 @@ get, but from what we give.”</string>
                             <outlet property="delegate" destination="Luu-L6-la9" id="rXD-43-dd6"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="DDb-vQ-KZ0"/>
-                        <barButtonItem image="browseIconYellow" id="7ss-yi-nYk">
-                            <color key="tintColor" red="0.91764705882352937" green="0.72156862745098038" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="kMZ-sO-MkS"/>
-                        <barButtonItem image="cameraIconWhite" id="aeA-zW-bCc">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="listItemToolBarBtn:" destination="Luu-L6-la9" id="Lx9-4c-hTa"/>
-                                <segue destination="BT2-HG-OZ9" kind="push" identifier="listItem" id="nWu-lX-Jow"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="OIQ-MF-bmw">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                        <barButtonItem image="profileIconWhite" id="spZ-Ds-dhI">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="userProfileToolBarBtn:" destination="Luu-L6-la9" id="o6I-cK-pE2"/>
-                                <segue destination="V0F-mV-YAg" kind="push" identifier="userProfile" id="bZl-gw-Eeo"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="r2A-E9-eNd"/>
-                    </toolbarItems>
-                    <navigationItem key="navigationItem" title="Karma" id="f1a-Ne-VM4"/>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <tabBarItem key="tabBarItem" title="Browse" image="browseIconWhite" id="q5d-vO-PX8"/>
+                    <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
                         <segue destination="ejA-4i-wsO" kind="push" identifier="item" id="zj1-Os-Fpt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4a6-qH-rjY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2314.4000000000001" y="478.54000000000002"/>
+            <point key="canvasLocation" x="3293.5" y="477.5"/>
         </scene>
         <!--Item's Detail-->
         <scene sceneID="mG1-rg-sGo">
@@ -696,31 +644,54 @@ get, but from what we give.”</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="seR-JM-qHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2781.5" y="478.5"/>
+            <point key="canvasLocation" x="4432.5" y="478.5"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="o5c-AO-KqN">
+            <objects>
+                <tabBarController id="aTB-qb-6JH" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="xaB-Or-cps"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="PoO-79-bwJ">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Luu-L6-la9" kind="relationship" relationship="viewControllers" id="jhR-X9-bt1"/>
+                        <segue destination="BT2-HG-OZ9" kind="relationship" relationship="viewControllers" id="uTv-RR-FaD"/>
+                        <segue destination="V0F-mV-YAg" kind="relationship" relationship="viewControllers" id="Wu3-6A-tbV"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hSg-Tl-tZL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2817.5" y="477.5"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="V2t-WG-rG1">
+        <scene sceneID="nQQ-oY-FZN">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="MFK-Sv-SUa" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="3aw-QR-Cow" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="NHw-Ad-4bE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="8qD-iI-AlL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="aM3-KZ-hwX">
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="jae-YH-OeY">
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="8ts-Gb-XvZ"/>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="CfQ-pG-7za"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cwc-Tf-niH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J4H-iR-9g8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1336.5" y="462.5"/>
+            <point key="canvasLocation" x="1810.5" y="477.5"/>
         </scene>
     </scenes>
     <resources>
@@ -728,9 +699,8 @@ get, but from what we give.”</string>
         <image name="Facebook Login" width="240" height="45"/>
         <image name="Login" width="240" height="45"/>
         <image name="Sign Up" width="240" height="45"/>
-        <image name="browseIconYellow" width="38" height="29"/>
+        <image name="browseIconWhite" width="38" height="29"/>
         <image name="cameraIconWhite" width="38" height="30"/>
-        <image name="profileIconWhite" width="33" height="35"/>
         <image name="profileIconYellow" width="33" height="35"/>
         <image name="sendIconYellow" width="22" height="22"/>
     </resources>
@@ -740,6 +710,6 @@ get, but from what we give.”</string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eLd-Sm-QBu"/>
+        <segue reference="LgN-ka-Iws"/>
     </inferredMetricsTieBreakers>
 </document>
