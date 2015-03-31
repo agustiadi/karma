@@ -368,7 +368,7 @@ get, but from what we give.”</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" tag="3" title="Me" image="profileIconYellow" id="fVe-JS-0eX"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="Me" image="profileIconWhite" id="fVe-JS-0eX"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
@@ -701,7 +701,7 @@ get, but from what we give.”</string>
         <image name="Sign Up" width="240" height="45"/>
         <image name="browseIconWhite" width="38" height="29"/>
         <image name="cameraIconWhite" width="38" height="30"/>
-        <image name="profileIconYellow" width="33" height="35"/>
+        <image name="profileIconWhite" width="33" height="35"/>
         <image name="sendIconYellow" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

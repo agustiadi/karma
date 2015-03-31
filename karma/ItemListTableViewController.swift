@@ -73,6 +73,13 @@ class ItemListTableViewController: UITableViewController {
 
         refreshItemData()
         
+        refresherControl()
+    
+        
+    }
+    
+    func refresherControl() {
+        
         //Refresher Controller Set-Up
         refreshControl = UIRefreshControl()
         refreshControl!.attributedTitle = NSAttributedString(string: "Refreshing Your Karma")
@@ -84,6 +91,8 @@ class ItemListTableViewController: UITableViewController {
     func refresh(sender: AnyObject){
         
         refreshItemData()
+        
+        refresherControl()
         
     }
     
@@ -102,7 +111,6 @@ class ItemListTableViewController: UITableViewController {
     
     func refreshItemData() {
         
-
         var itemQuery = PFQuery(className: "Item")
         itemQuery.addDescendingOrder("createdAt")
         itemQuery.findObjectsInBackgroundWithBlock {
@@ -130,21 +138,6 @@ class ItemListTableViewController: UITableViewController {
                     self.categories.append(item["categories"] as String)
                     self.itemsImage.append(item["image_1"] as PFFile)
                     
-                    var userQuery = PFUser.query()
-                    let selectedUser = userQuery.getObjectWithId(userObject.objectId as String)
-                    
-                    self.userName.append(selectedUser["name"] as String)
-                    
-                    if selectedUser["profilePic"] != nil {
-                        
-                        self.userImageFile.append(selectedUser["profilePic"] as PFFile)
-                        
-                    } else {
-                        
-                        self.userImageFile.append(self.placeholderFile as PFFile)
-                    
-                    }
-                    
                 }
                 
                 self.tableView.reloadData()
@@ -158,6 +151,19 @@ class ItemListTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "item" {
+            
+            let row = tableView.indexPathForSelectedRow()?.row
+            nameOfItem = self.itemsName[row!]
+            categoryOfItem = self.categories[row!]
+            descriptionOfItem = self.descriptions[row!]
+            giverID = self.userIDs[row!]
+            objectID = self.objectIDs[row!]
+        }
     }
 
     // MARK: - Table view data source
@@ -200,34 +206,61 @@ class ItemListTableViewController: UITableViewController {
                 
             }
         }
-        
-        cell.userName.text = userName[indexPath.row] as String
-        
-        let temp = userImageFile[indexPath.row] as PFFile
-        temp.getDataInBackgroundWithBlock{
-            (imageData: NSData!, error: NSError!) -> Void in
-            if error == nil {
-                let image = UIImage(data: imageData)
-                cell.profilePic.image = image
 
-            } else {
-                println(error)
-            }
-        }
+        
+        var userQuery = PFQuery(className: "_User")
+        userQuery.whereKey("objectId", equalTo: userIDs[indexPath.row])
+        userQuery.findObjectsInBackgroundWithBlock({
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            
+            let selectedUser = objects[0] as PFUser
+            let selectedUserName = selectedUser["name"] as String
+            let selectedUserImageFile = selectedUser["profilePic"] as PFFile
+            
+            cell.userName.text = selectedUserName
+            
+            selectedUserImageFile.getDataInBackgroundWithBlock({
+                (imageData: NSData!, error: NSError!) -> Void in
+                    if error == nil {
+                        
+                        let image = UIImage(data: imageData)
+                        cell.profilePic.image = image
+                
+                    } else {
+                        println(error)
+                    }
+
+            })
+            
+        })
+        
+        
+        
+        
+        
+//        cell.userName.text = userName[indexPath.row] as String
+//        
+//        let temp = userImageFile[indexPath.row] as PFFile
+//        temp.getDataInBackgroundWithBlock{
+//            (imageData: NSData!, error: NSError!) -> Void in
+//            if error == nil {
+//                let image = UIImage(data: imageData)
+//                cell.profilePic.image = image
+//
+//            } else {
+//                println(error)
+//            }
+//        }
 
         return cell
     }
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("item", sender: self)
-        
-        nameOfItem = self.itemsName[indexPath.row]
-        categoryOfItem = self.categories[indexPath.row]
-        descriptionOfItem = self.descriptions[indexPath.row]
-        giverID = self.userIDs[indexPath.row]
-        objectID = self.objectIDs[indexPath.row]
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        self.performSegueWithIdentifier("item", sender: self)
+
     }
 
     /*
