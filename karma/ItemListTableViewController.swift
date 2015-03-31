@@ -18,6 +18,7 @@ class ItemListTableViewController: UITableViewController {
     var userIDs = [String]()
     var userName = [String]()
     var userImageFile = [PFFile]()
+    var itemObject = [PFObject]()
     
     let placeholderFile = PFFile(data: UIImagePNGRepresentation(UIImage(named: "profilePlaceholder")))
     
@@ -126,8 +127,11 @@ class ItemListTableViewController: UITableViewController {
                 self.userIDs.removeAll(keepCapacity: true)
                 self.userName.removeAll(keepCapacity: true)
                 self.userImageFile.removeAll(keepCapacity: true)
+                self.itemObject.removeAll(keepCapacity: true)
                 
                 for item in itemObjects {
+                    
+                    self.itemObject.append(item as PFObject)
                     
                     let userObject = item["userID"] as PFObject
                     
@@ -162,7 +166,7 @@ class ItemListTableViewController: UITableViewController {
             categoryOfItem = self.categories[row!]
             descriptionOfItem = self.descriptions[row!]
             giverID = self.userIDs[row!]
-            objectID = self.objectIDs[row!]
+            objectID = self.itemObject[row!] as PFObject
         }
     }
 

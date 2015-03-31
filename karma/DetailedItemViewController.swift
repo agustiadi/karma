@@ -12,7 +12,7 @@ var nameOfItem = String()
 var categoryOfItem = String()
 var descriptionOfItem = String()
 var giverID = String()
-var objectID = String()
+var objectID = NSObject()
 
 class DetailedItemViewController: UIViewController{
     
@@ -31,19 +31,18 @@ class DetailedItemViewController: UIViewController{
         performSegueWithIdentifier("wantIt", sender: self)
         println("Want It Button Pressed")
     }
-    
 
     var imagePic = UIImage()
     var itemImageIndex = 0
     var itemImagesFile = [PFFile]()
     var itemImages = [UIImage]()
-    
-    
+   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getUserData(giverID, name: giverNameLabel, profilePic: profilePic)
-        getItemImages(objectID)
+        getItemImages(objectID as PFObject)
         
         profilePic.layer.cornerRadius = 20
         profilePic.clipsToBounds = true
@@ -187,43 +186,23 @@ class DetailedItemViewController: UIViewController{
         
     }
     
-    func getItemImages(objectID: String) {
+    func getItemImages(objectID: PFObject) {
         
-        itemImagesFile.removeAll(keepCapacity: true)
+        self.itemImagesFile.removeAll(keepCapacity: true)
         
-        var imageQuery = PFQuery(className: "Item")
-        var object = imageQuery.getObjectWithId(objectID)
+        var imageQuery = PFQuery(className: "ItemImages")
+        imageQuery.whereKey("itemID", equalTo: objectID)
+        var objects = imageQuery.findObjects()
         
-        self.itemImagesFile.append(object["image_1"] as PFFile)
-        self.itemImages.append(getUIImage(object["image_1"] as PFFile))
-                
-        if object["image_2"] != nil {
+        for object in objects {
             
-            self.itemImagesFile.append(object["image_2"] as PFFile)
-            self.itemImages.append(getUIImage(object["image_2"] as PFFile))
-        
+            self.itemImagesFile.append(object["image"] as PFFile)
+            self.itemImages.append(getUIImage(object["image"] as PFFile))
+            
         }
-                
-        if object["image_3"] != nil {
-                
-            self.itemImagesFile.append(object["image_3"] as PFFile)
-            self.itemImages.append(getUIImage(object["image_3"] as PFFile))
-        }
-                
-        if object["image_4"] != nil {
-                    
-            self.itemImagesFile.append(object["image_4"] as PFFile)
-            self.itemImages.append(getUIImage(object["image_4"] as PFFile))
-        }
-                
-        if object["image_5"] != nil {
-                    
-            self.itemImagesFile.append(object["image_5"] as PFFile)
-            self.itemImages.append(getUIImage(object["image_5"] as PFFile))
-        }
-                
+
     }
-    
+
     func getUIImage(file: PFFile) -> UIImage {
         
         let temp = file as PFFile
@@ -231,8 +210,9 @@ class DetailedItemViewController: UIViewController{
         let image = UIImage(data: data)
         
         return image!
-        
     }
+
+    
     
     
 
