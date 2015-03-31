@@ -14,15 +14,13 @@ var descriptionOfItem = String()
 var giverID = String()
 var objectID = NSObject()
 
-class DetailedItemViewController: UIViewController{
+class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     //IBOutlets Connections
-    
+    @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var profilePic: UIImageView!
     @IBOutlet var giverNameLabel: UILabel!
-    @IBOutlet var itemImage: UIImageView!
-    @IBOutlet var imageLabel: UILabel!
     @IBOutlet var itemNameLabel: UILabel!
     @IBOutlet var categoryLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
@@ -47,25 +45,23 @@ class DetailedItemViewController: UIViewController{
         profilePic.layer.cornerRadius = 20
         profilePic.clipsToBounds = true
         
-        itemImage.userInteractionEnabled = true
-        itemImage.image = itemImages[0]
         
-        // Adding Swipe Gesture Recognizer
-        var swipeLeft = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
-        itemImage.addGestureRecognizer(swipeLeft)
+//        // Adding Swipe Gesture Recognizer
+//        var swipeLeft = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+//        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
+//        collectionView.addGestureRecognizer(swipeLeft)
+//        
+//        var swipeRight = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+//        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+//        collectionView.addGestureRecognizer(swipeRight)
         
-        var swipeRight = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
-        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
-        itemImage.addGestureRecognizer(swipeRight)
-        
-        //Add Image Index Indicator Label
-        imageLabel.backgroundColor = UIColor.blackColor()
-        imageLabel.alpha = 0.35
-        imageLabel.textColor = UIColor.whiteColor()
-        imageLabel.text = "1 of \(itemImages.count)"
-        imageLabel.textAlignment = NSTextAlignment.Center
-        imageLabel.font = UIFont(name: "Helvetica Neue", size: 10)
+//        //Add Image Index Indicator Label
+//        imageLabel.backgroundColor = UIColor.blackColor()
+//        imageLabel.alpha = 0.35
+//        imageLabel.textColor = UIColor.whiteColor()
+//        imageLabel.text = "1 of \(itemImages.count)"
+//        imageLabel.textAlignment = NSTextAlignment.Center
+//        imageLabel.font = UIFont(name: "Helvetica Neue", size: 10)
         
         itemNameLabel.text = nameOfItem
         
@@ -88,6 +84,8 @@ class DetailedItemViewController: UIViewController{
     override func viewWillAppear(animated: Bool) {
         
         navigationController?.setNavigationBarHidden(false, animated: true)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.scrollEnabled = true
 
     }
     
@@ -97,50 +95,55 @@ class DetailedItemViewController: UIViewController{
     }
 
     
-    func respondToSwipeGesture(gesture: UIGestureRecognizer){
-        
-        let swipeGesture = gesture as? UISwipeGestureRecognizer
-        
-        if swipeGesture?.direction == UISwipeGestureRecognizerDirection.Left {
-            
-            println("swipeLeft")
-            
-            if itemImageIndex == itemImages.count - 1  {
-                
-                itemImageIndex = 0
-                
-            } else {
-                
-                itemImageIndex++
-                
-            }
-            
-            itemImage.image = itemImages[itemImageIndex]
-            imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
-                
-        }
-                
-        else if swipeGesture?.direction == UISwipeGestureRecognizerDirection.Right{
-            
-            println("swipeRight")
-            
-            if itemImageIndex == 0 {
-                
-                itemImageIndex = itemImages.count - 1
-                
-            } else {
-                
-                itemImageIndex--
-                
-            }
-            
-            itemImage.image = itemImages[itemImageIndex]
-            imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
 
-        }
-        
-    }
     
+    
+
+    
+//    func respondToSwipeGesture(gesture: UIGestureRecognizer){
+//        
+//        let swipeGesture = gesture as? UISwipeGestureRecognizer
+//        
+//        if swipeGesture?.direction == UISwipeGestureRecognizerDirection.Left {
+//            
+//            println("swipeLeft")
+//            
+//            if itemImageIndex == itemImages.count - 1  {
+//                
+//                itemImageIndex = 0
+//                
+//            } else {
+//                
+//                itemImageIndex++
+//                
+//            }
+//            
+//            itemImage.image = itemImages[itemImageIndex]
+//            imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
+//                
+//        }
+//                
+//        else if swipeGesture?.direction == UISwipeGestureRecognizerDirection.Right{
+//            
+//            println("swipeRight")
+//            
+//            if itemImageIndex == 0 {
+//                
+//                itemImageIndex = itemImages.count - 1
+//                
+//            } else {
+//                
+//                itemImageIndex--
+//                
+//            }
+//            
+//            itemImage.image = itemImages[itemImageIndex]
+//            imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
+//
+//        }
+//        
+//    }
+
     func getUserData(userID: String, name: UILabel, profilePic: UIImageView){
         
         var userQuery = PFQuery(className: "_User")
@@ -192,30 +195,67 @@ class DetailedItemViewController: UIViewController{
         
         var imageQuery = PFQuery(className: "ItemImages")
         imageQuery.whereKey("itemID", equalTo: objectID)
-        var objects = imageQuery.findObjects()
-        
-        for object in objects {
+        imageQuery.findObjectsInBackgroundWithBlock {
+            (imageObjects: [AnyObject]!, error: NSError!) -> Void in
             
-            self.itemImagesFile.append(object["image"] as PFFile)
-            self.itemImages.append(getUIImage(object["image"] as PFFile))
+            if error == nil {
+                
+                for imageObject in imageObjects {
+                    
+                    self.itemImagesFile.append(imageObject["image"] as PFFile)
+                    
+                }
+                
+                self.collectionView.reloadData()
+                
+            }
             
         }
 
     }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return itemImagesFile.count
+    }
+    
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("itemImage", forIndexPath: indexPath) as ItemImagesCollectionViewCell
+        
+        cell.backgroundColor = UIColor.whiteColor()
+        
+        let itemImageFile = itemImagesFile[indexPath.row] as PFFile
+        itemImageFile.getDataInBackgroundWithBlock({
+            (imageData: NSData!, error: NSError!) -> Void in
+            
+            if error == nil {
+                
+                let image = UIImage(data: imageData)
+                cell.itemImageView.image = image
+                
+            } else {
+                
+                println(error)
+                
+            }
 
-    func getUIImage(file: PFFile) -> UIImage {
+            
+        })
         
-        let temp = file as PFFile
-        let data = temp.getData()
-        let image = UIImage(data: data)
+        //Add Image Index Indicator Label
+        cell.indicatorLabel.backgroundColor = UIColor.blackColor()
+        cell.indicatorLabel.alpha = 0.85
+        cell.indicatorLabel.textColor = UIColor.whiteColor()
+        cell.indicatorLabel.text = "\(indexPath.row + 1) of \(itemImagesFile.count)"
+        cell.indicatorLabel.textAlignment = NSTextAlignment.Center
+        cell.indicatorLabel.font = UIFont(name: "Helvetica Neue", size: 10)
+
         
-        return image!
+        return cell
     }
 
-    
-    
-    
-
+}
 
     /*
     // MARK: - Navigation
@@ -226,4 +266,4 @@ class DetailedItemViewController: UIViewController{
         // Pass the selected object to the new view controller.
     }
     */
-}
+

@@ -42,13 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "karma/DetailedItemViewController.swift"
-            timestampString = "449478931.823517"
+            timestampString = "449499099.365261"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
-            landmarkName = "DetailedItemViewController"
-            landmarkType = "3">
+            startingLineNumber = "269"
+            endingLineNumber = "269">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
