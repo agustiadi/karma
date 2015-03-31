@@ -129,7 +129,6 @@ class ItemListTableViewController: UITableViewController {
                     self.descriptions.append(item["itemDescription"] as String)
                     self.categories.append(item["categories"] as String)
                     self.itemsImage.append(item["image_1"] as PFFile)
-
                     
                     var userQuery = PFUser.query()
                     let selectedUser = userQuery.getObjectWithId(userObject.objectId as String)
@@ -149,35 +148,13 @@ class ItemListTableViewController: UITableViewController {
                 }
                 
                 self.tableView.reloadData()
-                
                 self.stopActivityIndicator()
-                
-                
-
             }
-        }
-        
-         self.refreshControl?.endRefreshing()
     
-        
-    }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "item" {
-            
-            let destinationVC = segue.destinationViewController as DetailedItemViewController
-            let selectedRow = tableView.indexPathForSelectedRow()?.row
-            
-            destinationVC.nameOfItem = itemsName[selectedRow!]
-            destinationVC.categoryOfItem = categories[selectedRow!]
-            destinationVC.descriptionOfItem = descriptions[selectedRow!]
-            destinationVC.userID = userIDs[selectedRow!]
-            destinationVC.objectID = objectIDs[selectedRow!]
+            self.refreshControl?.endRefreshing()
         }
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -244,6 +221,13 @@ class ItemListTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("item", sender: self)
+        
+        nameOfItem = self.itemsName[indexPath.row]
+        categoryOfItem = self.categories[indexPath.row]
+        descriptionOfItem = self.descriptions[indexPath.row]
+        giverID = self.userIDs[indexPath.row]
+        objectID = self.objectIDs[indexPath.row]
+    
     }
 
     /*

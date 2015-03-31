@@ -8,7 +8,11 @@
 
 import UIKit
 
-
+var nameOfItem = String()
+var categoryOfItem = String()
+var descriptionOfItem = String()
+var giverID = String()
+var objectID = String()
 
 class DetailedItemViewController: UIViewController{
     
@@ -28,12 +32,8 @@ class DetailedItemViewController: UIViewController{
         println("Want It Button Pressed")
     }
     
-    var userID = String()
-    var objectID = String()
+
     var imagePic = UIImage()
-    var nameOfItem = String()
-    var categoryOfItem = String()
-    var descriptionOfItem = String()
     var itemImageIndex = 0
     var itemImagesFile = [PFFile]()
     var itemImages = [UIImage]()
@@ -42,12 +42,7 @@ class DetailedItemViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let navBarHeight = navigationController?.navigationBar.frame.height
-        let maxY = navigationController?.navigationBar.frame.maxY
-        
-        self.view.frame = CGRectMake(0, maxY!, self.view.frame.width, self.view.frame.height)
-        
-        getUserData(userID, name: giverNameLabel, profilePic: profilePic)
+        getUserData(giverID, name: giverNameLabel, profilePic: profilePic)
         getItemImages(objectID)
         
         profilePic.layer.cornerRadius = 20
