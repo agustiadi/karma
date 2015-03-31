@@ -12,7 +12,7 @@ var nameOfItem = String()
 var categoryOfItem = String()
 var descriptionOfItem = String()
 var giverID = String()
-var objectID = NSObject()
+var objectID = String()
 
 class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
@@ -40,7 +40,7 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
         super.viewDidLoad()
         
         getUserData(giverID, name: giverNameLabel, profilePic: profilePic)
-        getItemImages(objectID as PFObject)
+        getItemImages(objectID)
         
         profilePic.layer.cornerRadius = 20
         profilePic.clipsToBounds = true
@@ -123,21 +123,34 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
         
     }
     
-    func getItemImages(objectID: PFObject) {
+    func getItemImages(objectID: String) {
         
         self.itemImagesFile.removeAll(keepCapacity: true)
         
-        var imageQuery = PFQuery(className: "ItemImages")
-        imageQuery.whereKey("itemID", equalTo: objectID)
+        var imageQuery = PFQuery(className: "Item")
+        imageQuery.whereKey("objectId", equalTo: objectID)
         imageQuery.findObjectsInBackgroundWithBlock {
             (imageObjects: [AnyObject]!, error: NSError!) -> Void in
             
             if error == nil {
                 
-                for imageObject in imageObjects {
-                    
-                    self.itemImagesFile.append(imageObject["image"] as PFFile)
-                    
+                let selectedItem = imageObjects[0] as PFObject
+                self.itemImagesFile.append(selectedItem["image_1"] as PFFile)
+                
+                if selectedItem["image_2"] != nil {
+                    self.itemImagesFile.append(selectedItem["image_2"] as PFFile)
+                }
+                
+                if selectedItem["image_3"] != nil {
+                    self.itemImagesFile.append(selectedItem["image_3"] as PFFile)
+                }
+                
+                if selectedItem["image_4"] != nil {
+                    self.itemImagesFile.append(selectedItem["image_4"] as PFFile)
+                }
+                
+                if selectedItem["image_5"] != nil {
+                    self.itemImagesFile.append(selectedItem["image_5"] as PFFile)
                 }
                 
                 self.collectionView.reloadData()

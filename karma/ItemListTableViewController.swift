@@ -18,7 +18,7 @@ class ItemListTableViewController: UITableViewController {
     var userIDs = [String]()
     var userName = [String]()
     var userImageFile = [PFFile]()
-    var itemObject = [PFObject]()
+
     
     let placeholderFile = PFFile(data: UIImagePNGRepresentation(UIImage(named: "profilePlaceholder")))
     
@@ -96,6 +96,11 @@ class ItemListTableViewController: UITableViewController {
         
     }
     
+    override func viewDidAppear(animated: Bool) {
+        
+        refresherControl()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         
         //Navigation Bar Set-Up
@@ -116,24 +121,21 @@ class ItemListTableViewController: UITableViewController {
         itemQuery.findObjectsInBackgroundWithBlock {
             (itemObjects: [AnyObject]!, error: NSError!) -> Void in
             
+            self.objectIDs.removeAll(keepCapacity: true)
+            self.itemsName.removeAll(keepCapacity: true)
+            self.itemsImage.removeAll(keepCapacity: true)
+            self.descriptions.removeAll(keepCapacity: true)
+            self.categories.removeAll(keepCapacity: true)
+            self.userIDs.removeAll(keepCapacity: true)
+            self.userName.removeAll(keepCapacity: true)
+            self.userImageFile.removeAll(keepCapacity: true)
+            
             if error == nil {
                 
-                self.objectIDs.removeAll(keepCapacity: true)
-                self.itemsName.removeAll(keepCapacity: true)
-                self.itemsImage.removeAll(keepCapacity: true)
-                self.descriptions.removeAll(keepCapacity: true)
-                self.categories.removeAll(keepCapacity: true)
-                self.userIDs.removeAll(keepCapacity: true)
-                self.userName.removeAll(keepCapacity: true)
-                self.userImageFile.removeAll(keepCapacity: true)
-                self.itemObject.removeAll(keepCapacity: true)
-                
                 for item in itemObjects {
-                    
-                    self.itemObject.append(item as PFObject)
+
                     
                     let userObject = item["userID"] as PFObject
-                    
                     self.objectIDs.append(item.objectId as String)
                     self.userIDs.append(userObject.objectId as String)
                     self.itemsName.append(item["itemName"] as String)
@@ -142,13 +144,13 @@ class ItemListTableViewController: UITableViewController {
                     self.itemsImage.append(item["image_1"] as PFFile)
                     
                 }
-                
+            
                 self.tableView.reloadData()
                 self.stopActivityIndicator()
             }
-    
-            self.refreshControl?.endRefreshing()
         }
+    
+        self.refreshControl?.endRefreshing()
     }
     
     override func didReceiveMemoryWarning() {
@@ -165,7 +167,7 @@ class ItemListTableViewController: UITableViewController {
             categoryOfItem = self.categories[row!]
             descriptionOfItem = self.descriptions[row!]
             giverID = self.userIDs[row!]
-            objectID = self.itemObject[row!] as PFObject
+            objectID = self.objectIDs[row!]
         }
     }
 
@@ -184,6 +186,11 @@ class ItemListTableViewController: UITableViewController {
         return objectIDs.count
     }
     
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 300
+    }
+    
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 300
     }
@@ -192,9 +199,6 @@ class ItemListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as ItemListTableViewCell
-        
-        cell.itemName.text = itemsName[indexPath.row]
-        cell.itemCategory.text = categories[indexPath.row]
         
         itemsImage[indexPath.row].getDataInBackgroundWithBlock{
             (imageData: NSData!, error: NSError!) -> Void in
@@ -207,10 +211,11 @@ class ItemListTableViewController: UITableViewController {
             } else {
                 
                 println(error)
-                
             }
         }
-
+        
+        cell.itemName.text = itemsName[indexPath.row]
+        cell.itemCategory.text = categories[indexPath.row]
         
         var userQuery = PFQuery(className: "_User")
         userQuery.whereKey("objectId", equalTo: userIDs[indexPath.row])
@@ -237,7 +242,8 @@ class ItemListTableViewController: UITableViewController {
             })
             
         })
-
+        
+        
         return cell
     }
     
