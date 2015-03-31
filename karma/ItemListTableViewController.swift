@@ -96,12 +96,6 @@ class ItemListTableViewController: UITableViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-        
-        refresherControl()
-
-    }
-    
     override func viewWillAppear(animated: Bool) {
         
         //Navigation Bar Set-Up

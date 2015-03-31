@@ -45,24 +45,6 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
         profilePic.layer.cornerRadius = 20
         profilePic.clipsToBounds = true
         
-        
-//        // Adding Swipe Gesture Recognizer
-//        var swipeLeft = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
-//        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
-//        collectionView.addGestureRecognizer(swipeLeft)
-//        
-//        var swipeRight = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
-//        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
-//        collectionView.addGestureRecognizer(swipeRight)
-        
-//        //Add Image Index Indicator Label
-//        imageLabel.backgroundColor = UIColor.blackColor()
-//        imageLabel.alpha = 0.35
-//        imageLabel.textColor = UIColor.whiteColor()
-//        imageLabel.text = "1 of \(itemImages.count)"
-//        imageLabel.textAlignment = NSTextAlignment.Center
-//        imageLabel.font = UIFont(name: "Helvetica Neue", size: 10)
-        
         itemNameLabel.text = nameOfItem
         
         categoryLabel.text = categoryOfItem
@@ -94,55 +76,7 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
         scrollView.setContentOffset(CGPointZero, animated: true)
     }
 
-    
 
-    
-    
-
-    
-//    func respondToSwipeGesture(gesture: UIGestureRecognizer){
-//        
-//        let swipeGesture = gesture as? UISwipeGestureRecognizer
-//        
-//        if swipeGesture?.direction == UISwipeGestureRecognizerDirection.Left {
-//            
-//            println("swipeLeft")
-//            
-//            if itemImageIndex == itemImages.count - 1  {
-//                
-//                itemImageIndex = 0
-//                
-//            } else {
-//                
-//                itemImageIndex++
-//                
-//            }
-//            
-//            itemImage.image = itemImages[itemImageIndex]
-//            imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
-//                
-//        }
-//                
-//        else if swipeGesture?.direction == UISwipeGestureRecognizerDirection.Right{
-//            
-//            println("swipeRight")
-//            
-//            if itemImageIndex == 0 {
-//                
-//                itemImageIndex = itemImages.count - 1
-//                
-//            } else {
-//                
-//                itemImageIndex--
-//                
-//            }
-//            
-//            itemImage.image = itemImages[itemImageIndex]
-//            imageLabel.text = "\(itemImageIndex + 1) of \(itemImages.count)"
-//
-//        }
-//        
-//    }
 
     func getUserData(userID: String, name: UILabel, profilePic: UIImageView){
         
@@ -213,6 +147,7 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
         }
 
     }
+    
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return itemImagesFile.count
