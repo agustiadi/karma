@@ -71,13 +71,12 @@ class ItemListTableViewController: UITableViewController {
         self.view.addSubview(processingView)
         
         startActivityIndicator()
-
+        
         refreshItemData()
-        
-        refresherControl()
-    
-        
+
     }
+    
+   
     
     func refresherControl() {
         
@@ -89,12 +88,18 @@ class ItemListTableViewController: UITableViewController {
         
     }
     
-    func refresh(sender: AnyObject){
+    func refresh(send: AnyObject){
+        
+        startActivityIndicator()
         
         refreshItemData()
         
-        refresherControl()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         
+        refresherControl()
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -191,6 +196,7 @@ class ItemListTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as ItemListTableViewCell
         
         cell.itemName.text = itemsName[indexPath.row]
@@ -237,24 +243,6 @@ class ItemListTableViewController: UITableViewController {
             })
             
         })
-        
-        
-        
-        
-        
-//        cell.userName.text = userName[indexPath.row] as String
-//        
-//        let temp = userImageFile[indexPath.row] as PFFile
-//        temp.getDataInBackgroundWithBlock{
-//            (imageData: NSData!, error: NSError!) -> Void in
-//            if error == nil {
-//                let image = UIImage(data: imageData)
-//                cell.profilePic.image = image
-//
-//            } else {
-//                println(error)
-//            }
-//        }
 
         return cell
     }
