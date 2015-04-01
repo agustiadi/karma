@@ -40,6 +40,7 @@ class ListingItemViewController: UIViewController {
     
     override func viewDidDisappear(animated: Bool) {
         tabBarController?.navigationItem.setLeftBarButtonItems(nil, animated: false)
+        tabBarController?.tabBar.translucent = false
         tabBarController?.tabBar.hidden = false
         
     }
