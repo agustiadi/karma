@@ -108,9 +108,6 @@ class ItemListTableViewController: UITableViewController {
         tabBarController?.navigationItem.setHidesBackButton(true, animated: false)
         tabBarController?.navigationItem.title = "Karma"
         tabBarController?.navigationItem.setRightBarButtonItem(nil, animated: false)
-
-    
-        self.automaticallyAdjustsScrollViewInsets = true
     }
     
     

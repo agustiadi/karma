@@ -90,13 +90,13 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidAppear(animated: Bool) {
         
-        scrollView.setContentOffset(CGPointZero, animated: true)
+        //scrollView.setContentOffset(CGPointZero, animated: true)
         
     }
     
     override func viewDidDisappear(animated: Bool) {
         
-        scrollView.setContentOffset(CGPointZero, animated: true)
+        //scrollView.setContentOffset(CGPointZero, animated: true)
     }
 
     
@@ -111,7 +111,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         tabBarController?.navigationItem.setHidesBackButton(true, animated: false)
         tabBarController?.navigationItem.title = "User Profile"
         tabBarController?.navigationItem.setRightBarButtonItem(logoutBtn, animated: false)
-
         
         self.automaticallyAdjustsScrollViewInsets = true
         

@@ -30,9 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         
-        //Toolbar Set-Up
+        //Tab Bar Set-Up
         UITabBar.appearance().barTintColor = UIColor(red: 175.0/255.0, green: 171.0/255.0, blue: 158.0/255.0, alpha: 1.0)
         UITabBar.appearance().tintColor = UIColor(red: 244.0/255.0, green: 196.0/255.0, blue: 111.0/255.0, alpha: 1.0)
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor(red: 244.0/255.0, green: 196.0/255.0, blue: 111.0/255.0, alpha: 1.0)], forState: UIControlState.Selected)
 
         return true
     }

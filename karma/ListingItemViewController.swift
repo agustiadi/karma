@@ -15,7 +15,6 @@ class ListingItemViewController: UIViewController {
     
     func submit (sender: AnyObject) {
         
-        
     }
     
     func close (sender: AnyObject) {
@@ -42,6 +41,7 @@ class ListingItemViewController: UIViewController {
     override func viewDidDisappear(animated: Bool) {
         tabBarController?.navigationItem.setLeftBarButtonItems(nil, animated: false)
         tabBarController?.tabBar.hidden = false
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,12 +52,9 @@ class ListingItemViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         
         tabBarController?.navigationItem.title = "Give an Item"
-        
         tabBarController?.navigationItem.setRightBarButtonItem(submitBtn, animated: false)
         tabBarController?.navigationItem.setLeftBarButtonItem(closeBtn, animated: false)
-        
         tabBarController?.tabBar.hidden = true
-
         
     }
     
