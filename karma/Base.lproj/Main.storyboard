@@ -59,11 +59,16 @@ get, but from what we give.”</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Karma" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qXh-1l-Rvz">
-                                <rect key="frame" x="130" y="52" width="134" height="36"/>
+                                <rect key="frame" x="149" y="65" width="148" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="46"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" id="JeY-4w-4yZ">
+                                <rect key="frame" x="65" y="58" width="101" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -728,6 +733,7 @@ get, but from what we give.”</string>
         <image name="Email Login" width="240" height="45"/>
         <image name="Facebook Login" width="240" height="45"/>
         <image name="Login" width="240" height="45"/>
+        <image name="Logo" width="150" height="139"/>
         <image name="Sign Up" width="240" height="45"/>
         <image name="browseIconWhite" width="38" height="29"/>
         <image name="cameraIconWhite" width="38" height="30"/>
