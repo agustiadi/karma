@@ -94,7 +94,7 @@ class EmailSignupViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         
-        self.view.backgroundColor = UIColor(red: 175.0/255.0, green: 171.0/255.0, blue: 158.0/255.0, alpha: 1.0)
+        self.view.backgroundColor = UIColor(red: 127.0/255.0, green: 132.0/255.0, blue: 118.0/255.0, alpha: 1.0)
     }
     
     func startActivityIndicator() {
