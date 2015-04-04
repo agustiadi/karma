@@ -51,6 +51,13 @@ class EmailLoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        // Add padding to text input
+        let paddingViewEmail = UIView(frame: CGRectMake(0,0,10, self.emailField.frame.height))
+        emailField.leftView = paddingViewEmail
+        emailField.leftViewMode = UITextFieldViewMode.Always
+        let paddingViewPassword = UIView(frame: CGRectMake(0,0,10, self.passwordField.frame.height))
+        passwordField.leftView = paddingViewPassword
+        passwordField.leftViewMode = UITextFieldViewMode.Always
     }
     
     override func viewWillDisappear(animated: Bool) {

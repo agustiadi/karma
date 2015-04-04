@@ -9,6 +9,7 @@
 import UIKit
 
 class EmailSignupViewController: UIViewController {
+
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -72,7 +73,16 @@ class EmailSignupViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        // Add padding to text input
+        let paddingViewName = UIView(frame: CGRectMake(0,0,10, self.nameField.frame.height))
+        nameField.leftView = paddingViewName
+        nameField.leftViewMode = UITextFieldViewMode.Always
+        let paddingViewEmail = UIView(frame: CGRectMake(0,0,10, self.emailField.frame.height))
+        emailField.leftView = paddingViewEmail
+        emailField.leftViewMode = UITextFieldViewMode.Always
+        let paddingViewPassword = UIView(frame: CGRectMake(0,0,10, self.passwordField.frame.height))
+        passwordField.leftView = paddingViewPassword
+        passwordField.leftViewMode = UITextFieldViewMode.Always
 
     }
     
@@ -128,3 +138,5 @@ class EmailSignupViewController: UIViewController {
     */
 
 }
+
+
