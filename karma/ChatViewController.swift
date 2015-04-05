@@ -9,22 +9,31 @@
 import UIKit
 
 class ChatViewController: UIViewController {
+
     
-    let vc = UserProfileViewController()
+    @IBOutlet var resultScrollView: UIScrollView!
+    @IBOutlet var frameMessageView: UIView!
+    @IBOutlet var lineLabel: UILabel!
+    @IBOutlet var messageTextView: UITextView!
+    @IBOutlet var sendButton: UIButton!
+    
+    var scrollViewOriginalY: CGFloat = 0
+    var frameMessageOriginalY: CGFloat = 0
+    
+    let placeholderLabel = UILabel(frame: CGRectMake(5, 8, 200, 20))
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
-        //println(vc.userProfilePic)
-        
+               
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
     /*
     // MARK: - Navigation
