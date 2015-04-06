@@ -10,16 +10,14 @@ import UIKit
 
 class ChatWindowViewController: UIViewController {
     
-    var itemID = "URkd2R5OLu"
+    var itemID = String()
     
     var currentUser = PFUser.currentUser()
     var currentUserID = PFUser.currentUser().objectId
     var currentUsername = PFUser.currentUser().username
     var currentUserProfilPic = UIImage(named: "profilePlaceholder")
     
-    var otherUserID = "5h26UD6IVu"
-    var otherUserProfilePic = UIImage(named: "profilePlaceholder")
-    var otherUsername = "Joel Tan"
+    var otherUserID = String()
     
     @IBOutlet var resultScrollView: UIScrollView!
     @IBOutlet var frameMessageView: UIView!
@@ -38,8 +36,8 @@ class ChatWindowViewController: UIViewController {
     var frameX: CGFloat = 32.0
     var frameY: CGFloat = 21.0
     
-    var imageX: CGFloat = 3.0
-    var imageY: CGFloat = 3.0
+    var imageX: CGFloat = 10.0
+    var imageY: CGFloat = 10.0
     
     
     var senderArray = [String]()
@@ -68,7 +66,7 @@ class ChatWindowViewController: UIViewController {
         scrollViewOriginalY = self.resultScrollView.frame.origin.y
         frameMessageOriginalY = self.frameMessageView.frame.origin.y
         
-        self.title = otherUsername
+        //self.title = otherUsername
         
         placeholderLabel.text = "Type a message ..."
         placeholderLabel.backgroundColor = UIColor.clearColor()
@@ -77,25 +75,25 @@ class ChatWindowViewController: UIViewController {
         
         
         //Setting of Profile Pic for Current User
-//        if currentUser["profilePic"] != nil {
-//            
-//            currentUser["profilePic"].getDataInBackgroundWithBlock({
-//                (imageData: NSData!, error: NSError!) -> Void in
-//                
-//                if error == nil {
-//                    
-//                    let image = UIImage(data: imageData)
-//                    //self.profilePicView.image = image
-//                    
-//                } else {
-//                    
-//                    println(error)
-//                    
-//                }
-//            })
-//            
-//            
-//        }
+        if currentUser["profilePic"] != nil {
+            
+            currentUser["profilePic"].getDataInBackgroundWithBlock({
+                (imageData: NSData!, error: NSError!) -> Void in
+                
+                if error == nil {
+                    
+                    let image = UIImage(data: imageData)
+                    //self.profilePicView.image = image
+                    
+                } else {
+                    
+                    println(error)
+                    
+                }
+            })
+            
+            
+        }
         
         refreshResult()
 
@@ -109,14 +107,14 @@ class ChatWindowViewController: UIViewController {
         let unitW = theWidth/37.5  //10 per unit
         let unitH = theHeight/66.7 //10 per unit
         
-        messageX = 37.0
+        messageX = 55.0
         messageY = 26.0
         
-        frameX = 32.0
+        frameX = 50.0
         frameY = 21.0
         
-        imageX = 3.0
-        imageY = 3.0
+        imageX = 10.0
+        imageY = 10.0
         
         messageArray.removeAll(keepCapacity: false)
         senderArray.removeAll(keepCapacity: false)
@@ -155,7 +153,7 @@ class ChatWindowViewController: UIViewController {
                     if self.senderArray[i] == self.currentUserID {
                         
                         var messageLabel = UILabel()
-                        messageLabel.frame = CGRectMake(0, 0, self.resultScrollView.frame.width - (unitW * 9.4), CGFloat.max)
+                        messageLabel.frame = CGRectMake(0, 0, self.resultScrollView.frame.width - (unitW * 12), CGFloat.max)
                         messageLabel.backgroundColor = UIColor.clearColor()
                         messageLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
                         messageLabel.textAlignment = NSTextAlignment.Left
@@ -181,7 +179,7 @@ class ChatWindowViewController: UIViewController {
                         self.frameY += frameLabel.frame.height + 20
                         
                         var image = UIImageView()
-                        image.image = UIImage(named: "displayPic")
+                        image.image = self.currentUserProfilPic
                         image.frame.size = CGSizeMake(34, 34)
                         image.frame.origin.x = (self.resultScrollView.frame.width - self.imageX) - image.frame.width
                         image.frame.origin.y = self.imageY
@@ -197,7 +195,7 @@ class ChatWindowViewController: UIViewController {
                     } else {
                         
                         var messageLabel = UILabel()
-                        messageLabel.frame = CGRectMake(0, 0, self.resultScrollView.frame.width - (unitW * 9.4), CGFloat.max)
+                        messageLabel.frame = CGRectMake(0, 0, self.resultScrollView.frame.width - (unitW * 12), CGFloat.max)
                         messageLabel.backgroundColor = UIColor.clearColor()
                         messageLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
                         messageLabel.textAlignment = NSTextAlignment.Left
@@ -221,7 +219,7 @@ class ChatWindowViewController: UIViewController {
                         self.frameY += frameLabel.frame.height + 20
                         
                         var image = UIImageView()
-                        image.image = UIImage(named: "profilePlaceholder")
+                        self.getOtherUserData(self.otherUserID, profilePic: image)
                         image.frame = CGRectMake(self.imageX, self.imageY, 34, 34)
                         image.layer.zPosition = 30
                         image.layer.cornerRadius = image.frame.width/2
@@ -249,6 +247,55 @@ class ChatWindowViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func getOtherUserData(userID: String, profilePic: UIImageView){
+        
+        var userQuery = PFQuery(className: "_User")
+        userQuery.whereKey("objectId", equalTo: userID)
+        userQuery.findObjectsInBackgroundWithBlock {
+            (userObjects: [AnyObject]!, error: NSError!) -> Void in
+            
+            if error == nil {
+                
+                for user in userObjects {
+                    
+                    self.title = user["name"] as? String
+                    
+                    if user["profilePic"] != nil {
+                        
+                        let temp = user["profilePic"] as PFFile
+                        temp.getDataInBackgroundWithBlock{
+                            (imageData: NSData!, error: NSError!) -> Void in
+                            
+                            if error == nil {
+                                
+                                let image = UIImage(data: imageData)
+                                profilePic.image = image
+                                
+                                
+                            } else {
+                                
+                                println(error)
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                }
+            } else {
+                
+                profilePic.image = UIImage(named: "profilePlaceholder")!
+                
+            }
+            
+        }
+        
+    }
+    
+
+
+
     
 
     /*

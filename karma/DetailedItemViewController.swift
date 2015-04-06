@@ -189,6 +189,18 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
         
         return cell
     }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "wantIt" {
+            
+            let destinationVC = segue.destinationViewController as ChatWindowViewController
+            destinationVC.itemID = objectID
+            destinationVC.otherUserID = giverID
+            
+        }
+    }
 
 }
 
