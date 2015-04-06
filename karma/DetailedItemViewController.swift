@@ -13,6 +13,8 @@ var categoryOfItem = String()
 var descriptionOfItem = String()
 var giverID = String()
 var objectID = String()
+var giverImage = UIImage()
+var giverName = String()
 
 class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
@@ -89,6 +91,7 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
                 for user in userObjects {
                     
                     name.text = user["name"] as? String
+                    giverName = user["name"] as String
                     
                     if user["profilePic"] != nil {
                         
@@ -100,6 +103,7 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
                                 
                                 let image = UIImage(data: imageData)
                                 profilePic.image = image
+                                giverImage = image!
                                 
                                 
                             } else {
@@ -115,6 +119,7 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
             } else {
                 
                 profilePic.image = UIImage(named: "profilePlaceholder")!
+                giverImage = UIImage(named: "profilePlaceholder")!
                 
             }
             
@@ -200,6 +205,32 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
             let destinationVC = segue.destinationViewController as ChatWindowViewController
             destinationVC.itemID = objectID
             destinationVC.otherUserID = giverID
+            destinationVC.otherUserProfilePic = giverImage
+            destinationVC.otherUsername = giverName
+            
+            let current_User = PFUser.currentUser()
+            
+            if current_User["profilePic"] != nil {
+                
+                current_User["profilePic"].getDataInBackgroundWithBlock({
+                    (imageData: NSData!, error: NSError!) -> Void in
+                    
+                    if error == nil {
+                        
+                        let image = UIImage(data: imageData)
+                        destinationVC.currentUserProfilPic = image!
+                        
+                    } else {
+                        
+                        println(error)
+                        
+                    }
+                })
+                
+            } else {
+                destinationVC.currentUserProfilPic = UIImage(named: "profilePlaceholder")!
+            }
+            
             
         }
     }

@@ -15,9 +15,11 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
     var currentUser = PFUser.currentUser()
     var currentUserID = PFUser.currentUser().objectId
     var currentUsername = PFUser.currentUser().username
-    var currentUserProfilPic = UIImage(named: "profilePlaceholder")
+    var currentUserProfilPic = UIImage()
     
     var otherUserID = String()
+    var otherUsername = String()
+    var otherUserProfilePic = UIImage()
     
     @IBOutlet var resultScrollView: UIScrollView!
     @IBOutlet var frameMessageView: UIView!
@@ -42,13 +44,15 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
     
     var senderArray = [String]()
     var messageArray = [String]()
+    
+    var timer = NSTimer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-//        var timer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
         
         let theWidth = view.frame.width
         let theHeight = view.frame.height
@@ -68,7 +72,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
         scrollViewOriginalY = self.resultScrollView.frame.origin.y
         frameMessageOriginalY = self.frameMessageView.frame.origin.y
         
-        //self.title = otherUsername
+        self.title = otherUsername
         
         placeholderLabel.text = "Type a message ..."
         placeholderLabel.backgroundColor = UIColor.clearColor()
@@ -143,6 +147,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
             
             
         }
+
 
     }
     
@@ -266,7 +271,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
                         self.frameY += frameLabel.frame.height + 20
                         
                         var image = UIImageView()
-                        self.getOtherUserData(self.otherUserID, profilePic: image)
+                        image.image = self.otherUserProfilePic
                         image.frame = CGRectMake(self.imageX, self.imageY, 34, 34)
                         image.layer.zPosition = 30
                         image.layer.cornerRadius = image.frame.width/2
@@ -295,51 +300,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
         // Dispose of any resources that can be recreated.
     }
     
-    func getOtherUserData(userID: String, profilePic: UIImageView){
         
-        var userQuery = PFQuery(className: "_User")
-        userQuery.whereKey("objectId", equalTo: userID)
-        userQuery.findObjectsInBackgroundWithBlock {
-            (userObjects: [AnyObject]!, error: NSError!) -> Void in
-            
-            if error == nil {
-                
-                for user in userObjects {
-                    
-                    self.title = user["name"] as? String
-                    
-                    if user["profilePic"] != nil {
-                        
-                        let temp = user["profilePic"] as PFFile
-                        temp.getDataInBackgroundWithBlock{
-                            (imageData: NSData!, error: NSError!) -> Void in
-                            
-                            if error == nil {
-                                
-                                let image = UIImage(data: imageData)
-                                profilePic.image = image
-                                
-                                
-                            } else {
-                                
-                                println(error)
-                                
-                            }
-                            
-                        }
-                        
-                    }
-                }
-            } else {
-                
-                profilePic.image = UIImage(named: "profilePlaceholder")!
-                
-            }
-            
-        }
-        
-    }
-    
     func keyboardWasShown(notification: NSNotification){
         
         let dict: NSDictionary = notification.userInfo!
@@ -406,7 +367,12 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
             })
         }
         
-        self.view.endEditing(true)
+        //self.view.endEditing(true)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        
+        timer.invalidate()
     }
     
 
