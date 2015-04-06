@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatWindowViewController: UIViewController {
+class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFieldDelegate {
     
     var itemID = String()
     
@@ -48,6 +48,8 @@ class ChatWindowViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+//        var timer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
+        
         let theWidth = view.frame.width
         let theHeight = view.frame.height
         let navBarY = navigationController?.navigationBar.frame.maxY
@@ -73,6 +75,53 @@ class ChatWindowViewController: UIViewController {
         placeholderLabel.textColor = UIColor.lightGrayColor()
         messageTextView.addSubview(placeholderLabel)
         
+        let tapScrollViewGesture = UITapGestureRecognizer(target: self, action: "didTapScrollView")
+        tapScrollViewGesture.numberOfTapsRequired = 1
+        resultScrollView.addGestureRecognizer(tapScrollViewGesture)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        
+        refreshResult()
+
+    }
+    
+    func refresh() {
+        
+        refreshResult()
+    }
+    
+    func didTapScrollView() {
+        
+        self.view.endEditing(true)
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        
+        
+        if messageTextView.hasText() == false {
+            
+            self.placeholderLabel.hidden = false
+            
+        } else {
+            
+            self.placeholderLabel.hidden = true
+        }
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        
+        if messageTextView.hasText() == false {
+            
+            self.placeholderLabel.hidden = false
+        }
+    }
+
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        navigationController?.navigationBar.backItem?.title = ""
         
         //Setting of Profile Pic for Current User
         if currentUser["profilePic"] != nil {
@@ -94,8 +143,6 @@ class ChatWindowViewController: UIViewController {
             
             
         }
-        
-        refreshResult()
 
     }
     
@@ -293,9 +340,74 @@ class ChatWindowViewController: UIViewController {
         
     }
     
+    func keyboardWasShown(notification: NSNotification){
+        
+        let dict: NSDictionary = notification.userInfo!
+        let s: NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+        let rect: CGRect = s.CGRectValue()
+        
+        UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
+            
+            self.resultScrollView.frame.origin.y = self.scrollViewOriginalY - rect.height
+            self.frameMessageView.frame.origin.y = self.frameMessageOriginalY - rect.height
+            
+            var bottomOffset: CGPoint = CGPointMake(0, self.resultScrollView.contentSize.height - self.resultScrollView.bounds.size.height)
+            self.resultScrollView.setContentOffset(bottomOffset, animated: false)
+            
+            }, completion: {
+                (finished: Bool) in
+        })
+    }
+    
+    
+    func keyboardWillHide(notification: NSNotification){
+        
+        let dict: NSDictionary = notification.userInfo!
+        let s: NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+        let rect: CGRect = s.CGRectValue()
+        
+        UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
+            
+            self.resultScrollView.frame.origin.y = self.scrollViewOriginalY
+            self.frameMessageView.frame.origin.y = self.frameMessageOriginalY
+            
+            var bottomOffset: CGPoint = CGPointMake(0, self.resultScrollView.contentSize.height - self.resultScrollView.bounds.size.height)
+            self.resultScrollView.setContentOffset(bottomOffset, animated: false)
+            
+            }, completion: {
+                (finished: Bool) in
+        })
+        
+        
+    }
 
-
-
+    @IBAction func sendButtonPressed(sender: AnyObject) {
+        
+        if messageTextView.text == "" {
+            println("no text")
+        } else {
+            
+            var messageDBTable = PFObject(className: "Message")
+            messageDBTable["itemID"] = itemID
+            messageDBTable["sender"] = PFUser.currentUser().objectId
+            messageDBTable["receiver"] = otherUserID
+            messageDBTable["message"] = messageTextView.text
+            messageDBTable.saveInBackgroundWithBlock({
+                (success: Bool!, error: NSError!) -> Void in
+                
+                if success == true {
+                    println("message sent")
+                    self.messageTextView.text = ""
+                    self.placeholderLabel.hidden = false
+                    self.refreshResult()
+                } else {
+                    println(error)
+                }
+            })
+        }
+        
+        self.view.endEditing(true)
+    }
     
 
     /*

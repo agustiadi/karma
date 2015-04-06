@@ -109,6 +109,12 @@ class ItemListTableViewController: UITableViewController {
         tabBarController?.navigationItem.title = "Karma"
         tabBarController?.navigationItem.setRightBarButtonItem(nil, animated: false)
     }
+
+    override func viewDidDisappear(animated: Bool) {
+        
+        //navigationController?.navigationBar.backItem?.title = ""
+
+    }
     
     
     func refreshItemData() {

@@ -63,10 +63,12 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
     override func viewWillAppear(animated: Bool) {
         
         navigationController?.setNavigationBarHidden(false, animated: true)
+
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.scrollEnabled = true
 
     }
+    
     
     override func viewDidAppear(animated: Bool) {
         

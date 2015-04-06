@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "karma/ItemListTableViewController.swift"
-            timestampString = "449590791.433606"
+            timestampString = "450026300.290283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
             landmarkName = "ItemListTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "karma/DetailedItemViewController.swift"
-            timestampString = "450012607.564784"
+            timestampString = "450026391.206291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "281"
-            endingLineNumber = "281">
+            startingLineNumber = "283"
+            endingLineNumber = "283">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "karma/ItemListTableViewController.swift"
-            timestampString = "449590791.433606"
+            timestampString = "450026300.290283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "karma/ItemListTableViewController.swift"
-            timestampString = "449590791.433606"
+            timestampString = "450026300.290283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "refreshItemData()"
             landmarkType = "5">
          </BreakpointContent>
@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "karma/DetailedItemViewController.swift"
-            timestampString = "450012607.564784"
+            timestampString = "450026391.206291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216">
+            startingLineNumber = "218"
+            endingLineNumber = "218">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

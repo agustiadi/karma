@@ -608,7 +608,7 @@
             </objects>
             <point key="canvasLocation" x="3293.5" y="477.5"/>
         </scene>
-        <!--Item's Detail-->
+        <!--Detailed Item View Controller-->
         <scene sceneID="mG1-rg-sGo">
             <objects>
                 <viewController id="ejA-4i-wsO" customClass="DetailedItemViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
@@ -713,7 +713,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Item's Detail" id="urq-R0-n8e"/>
+                    <navigationItem key="navigationItem" id="urq-R0-n8e"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -742,6 +742,9 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="OeK-c7-bgx">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="549"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="hVK-hI-Yh9" id="xvX-Dy-0Dz"/>
+                                </connections>
                             </scrollView>
                             <view contentMode="scaleToFill" id="WyM-1c-0ux">
                                 <rect key="frame" x="0.0" y="548" width="375" height="55"/>
@@ -761,6 +764,9 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="hVK-hI-Yh9" id="iPB-co-Q2H"/>
+                                        </connections>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Nkj-JK-qpc">
                                         <rect key="frame" x="327" y="15" width="40" height="28"/>
@@ -768,6 +774,9 @@
                                         <state key="normal" image="sendIconYellow">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="sendButtonPressed:" destination="hVK-hI-Yh9" eventType="touchUpInside" id="k14-yc-bc6"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -781,7 +790,7 @@
                         <outlet property="lineLabel" destination="sTf-B9-s4F" id="ou0-ir-hZs"/>
                         <outlet property="messageTextView" destination="WKw-tb-QdR" id="eWx-Xd-CfN"/>
                         <outlet property="resultScrollView" destination="OeK-c7-bgx" id="Lrl-f7-jKH"/>
-                        <outlet property="sendButton" destination="Nkj-JK-qpc" id="3T8-L2-wlp"/>
+                        <outlet property="sendButton" destination="Nkj-JK-qpc" id="ELs-tU-4tL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0rH-m3-q2M" userLabel="First Responder" sceneMemberID="firstResponder"/>
