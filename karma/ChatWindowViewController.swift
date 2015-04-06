@@ -35,6 +35,13 @@ class ChatWindowViewController: UIViewController {
     var messageX: CGFloat = 37.0
     var messageY: CGFloat = 26.0
     
+    var frameX: CGFloat = 32.0
+    var frameY: CGFloat = 21.0
+    
+    var imageX: CGFloat = 3.0
+    var imageY: CGFloat = 3.0
+    
+    
     var senderArray = [String]()
     var messageArray = [String]()
 
@@ -51,7 +58,7 @@ class ChatWindowViewController: UIViewController {
         let unitH = theHeight/66.7 //10 per unit
 
         resultScrollView.frame = CGRectMake(0, 0, theWidth, theHeight - (navBarY! + 50))
-        resultScrollView.backgroundColor = UIColor.yellowColor()
+        resultScrollView.backgroundColor = UIColor.whiteColor()
         resultScrollView.layer.zPosition = 20
         frameMessageView.frame = CGRectMake(0, resultScrollView.frame.maxY, theWidth, 50)
         lineLabel.frame = CGRectMake(0, 0, theWidth, 1)
@@ -70,25 +77,25 @@ class ChatWindowViewController: UIViewController {
         
         
         //Setting of Profile Pic for Current User
-        if currentUser["profilePic"] != nil {
-            
-            currentUser["profilePic"].getDataInBackgroundWithBlock({
-                (imageData: NSData!, error: NSError!) -> Void in
-                
-                if error == nil {
-                    
-                    let image = UIImage(data: imageData)
-                    //self.profilePicView.image = image
-                    
-                } else {
-                    
-                    println(error)
-                    
-                }
-            })
-            
-            
-        }
+//        if currentUser["profilePic"] != nil {
+//            
+//            currentUser["profilePic"].getDataInBackgroundWithBlock({
+//                (imageData: NSData!, error: NSError!) -> Void in
+//                
+//                if error == nil {
+//                    
+//                    let image = UIImage(data: imageData)
+//                    //self.profilePicView.image = image
+//                    
+//                } else {
+//                    
+//                    println(error)
+//                    
+//                }
+//            })
+//            
+//            
+//        }
         
         refreshResult()
 
@@ -104,6 +111,12 @@ class ChatWindowViewController: UIViewController {
         
         messageX = 37.0
         messageY = 26.0
+        
+        frameX = 32.0
+        frameY = 21.0
+        
+        imageX = 3.0
+        imageY = 3.0
         
         messageArray.removeAll(keepCapacity: false)
         senderArray.removeAll(keepCapacity: false)
@@ -128,6 +141,100 @@ class ChatWindowViewController: UIViewController {
                     
                     self.senderArray.append(object.objectForKey("sender") as String)
                     self.messageArray.append(object.objectForKey("message") as String)
+                    
+                }
+                
+                for subView in self.resultScrollView.subviews {
+                    
+                    subView.removeFromSuperview()
+                    
+                }
+                
+                for var i = 0; i <= self.messageArray.count - 1; i++ {
+                    
+                    if self.senderArray[i] == self.currentUserID {
+                        
+                        var messageLabel = UILabel()
+                        messageLabel.frame = CGRectMake(0, 0, self.resultScrollView.frame.width - (unitW * 9.4), CGFloat.max)
+                        messageLabel.backgroundColor = UIColor.clearColor()
+                        messageLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+                        messageLabel.textAlignment = NSTextAlignment.Left
+                        messageLabel.numberOfLines = 0
+                        messageLabel.font = UIFont(name: "Helvetica Neuse", size: 17)
+                        messageLabel.textColor = UIColor.whiteColor()
+                        messageLabel.text = self.messageArray[i]
+                        messageLabel.sizeToFit()
+                        messageLabel.layer.zPosition = 20
+                        messageLabel.frame.origin.x = (self.resultScrollView.frame.width - self.messageX) - messageLabel.frame.width
+                        messageLabel.frame.origin.y = self.messageY
+                        self.resultScrollView.addSubview(messageLabel)
+                        self.messageY += messageLabel.frame.height + 30
+                        
+                        var frameLabel = UILabel()
+                        frameLabel.frame.size = CGSizeMake(messageLabel.frame.width + 10, messageLabel.frame.height + 10)
+                        frameLabel.frame.origin.x = (self.resultScrollView.frame.width - self.frameX) - frameLabel.frame.width
+                        frameLabel.frame.origin.y = self.frameY
+                        frameLabel.backgroundColor = UIColor(red: 121.0/255.0, green: 203.0/255.0, blue: 140.0/255.0, alpha: 1)
+                        frameLabel.layer.cornerRadius = 10
+                        frameLabel.clipsToBounds = true
+                        self.resultScrollView.addSubview(frameLabel)
+                        self.frameY += frameLabel.frame.height + 20
+                        
+                        var image = UIImageView()
+                        image.image = UIImage(named: "displayPic")
+                        image.frame.size = CGSizeMake(34, 34)
+                        image.frame.origin.x = (self.resultScrollView.frame.width - self.imageX) - image.frame.width
+                        image.frame.origin.y = self.imageY
+                        image.layer.zPosition = 30
+                        image.layer.cornerRadius = image.frame.width/2
+                        image.clipsToBounds = true
+                        self.resultScrollView.addSubview(image)
+                        self.imageY += frameLabel.frame.height + 20
+                        
+                        self.resultScrollView.contentSize = CGSizeMake(theWidth, self.messageY)
+                        
+                        
+                    } else {
+                        
+                        var messageLabel = UILabel()
+                        messageLabel.frame = CGRectMake(0, 0, self.resultScrollView.frame.width - (unitW * 9.4), CGFloat.max)
+                        messageLabel.backgroundColor = UIColor.clearColor()
+                        messageLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+                        messageLabel.textAlignment = NSTextAlignment.Left
+                        messageLabel.numberOfLines = 0
+                        messageLabel.font = UIFont(name: "Helvetica Neuse", size: 17)
+                        messageLabel.textColor = UIColor(red: 58.0/255.0, green: 66.0/255.0, blue: 70.0/255.0, alpha: 1)
+                        messageLabel.text = self.messageArray[i]
+                        messageLabel.sizeToFit()
+                        messageLabel.layer.zPosition = 20
+                        messageLabel.frame.origin.x = self.messageX
+                        messageLabel.frame.origin.y = self.messageY
+                        self.resultScrollView.addSubview(messageLabel)
+                        self.messageY += messageLabel.frame.height + 30
+                        
+                        var frameLabel = UILabel()
+                        frameLabel.frame = CGRectMake(self.frameX, self.frameY, messageLabel.frame.width + 10, messageLabel.frame.height + 10)
+                        frameLabel.backgroundColor = UIColor(red: 225.0/255.0, green: 219.0/255.0, blue: 198.0/255.0, alpha: 1)
+                        frameLabel.layer.cornerRadius = 10
+                        frameLabel.clipsToBounds = true
+                        self.resultScrollView.addSubview(frameLabel)
+                        self.frameY += frameLabel.frame.height + 20
+                        
+                        var image = UIImageView()
+                        image.image = UIImage(named: "profilePlaceholder")
+                        image.frame = CGRectMake(self.imageX, self.imageY, 34, 34)
+                        image.layer.zPosition = 30
+                        image.layer.cornerRadius = image.frame.width/2
+                        image.clipsToBounds = true
+                        self.resultScrollView.addSubview(image)
+                        self.imageY += frameLabel.frame.height + 20
+                        
+                        self.resultScrollView.contentSize = CGSizeMake(theWidth, self.messageY)
+                        
+                    }
+                    
+                    var bottomOffset: CGPoint = CGPointMake(0, self.resultScrollView.contentSize.height - self.resultScrollView.bounds.size.height)
+                    self.resultScrollView.setContentOffset(bottomOffset, animated: false)
                     
                 }
 
