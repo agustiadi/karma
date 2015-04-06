@@ -52,7 +52,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
 
         // Do any additional setup after loading the view.
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(25, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
         
         let theWidth = view.frame.width
         let theHeight = view.frame.height
