@@ -54,8 +54,6 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
 
         // Do any additional setup after loading the view.
         
-        canPressSendButton = true
-        
         timer = NSTimer.scheduledTimerWithTimeInterval(25, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
         
         let theWidth = view.frame.width

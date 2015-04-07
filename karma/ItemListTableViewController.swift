@@ -18,6 +18,8 @@ class ItemListTableViewController: UITableViewController {
     var userIDs = [String]()
     var userName = [String]()
     var userImageFile = [PFFile]()
+    
+    var inboxBarButtonItem = UIBarButtonItem()
 
     
     let placeholderFile = PFFile(data: UIImagePNGRepresentation(UIImage(named: "profilePlaceholder")))
@@ -66,6 +68,10 @@ class ItemListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        inboxBarButtonItem.image = UIImage(named: "chatIconWhite")
+        inboxBarButtonItem.target = self
+        inboxBarButtonItem.action = "inboxButtonPressed:"
+        
         processingView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
         processingView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(processingView)
@@ -74,6 +80,11 @@ class ItemListTableViewController: UITableViewController {
         
         refreshItemData()
 
+    }
+    
+    func inboxButtonPressed(sender: UIBarButtonItem) {
+        
+        performSegueWithIdentifier("chatInbox", sender: self)
     }
     
    
@@ -105,9 +116,11 @@ class ItemListTableViewController: UITableViewController {
         
         //Navigation Bar Set-Up
         navigationController?.setNavigationBarHidden(false, animated:true)
+        
         tabBarController?.navigationItem.setHidesBackButton(true, animated: false)
         tabBarController?.navigationItem.title = "Karma"
-        tabBarController?.navigationItem.setRightBarButtonItem(nil, animated: false)
+        tabBarController?.navigationItem.setRightBarButtonItem(inboxBarButtonItem, animated: false)
+        
     }
 
     override func viewDidDisappear(animated: Bool) {
