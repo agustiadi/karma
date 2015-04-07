@@ -18,6 +18,7 @@
 		A85F883F1AB7135B00064845 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85F883E1AB7135B00064845 /* UserProfileViewController.swift */; };
 		A85F88411AB7161000064845 /* DetailedItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85F88401AB7161000064845 /* DetailedItemViewController.swift */; };
 		A8820D231AD3C0AC0033E0AC /* ChatInboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8820D221AD3C0AC0033E0AC /* ChatInboxTableViewController.swift */; };
+		A8820D251AD3DE870033E0AC /* ChatInboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8820D241AD3DE870033E0AC /* ChatInboxTableViewCell.swift */; };
 		A8D04F021AB926A2005E8446 /* ItemListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D04F011AB926A2005E8446 /* ItemListTableViewCell.swift */; };
 		A8F3D7D81AB6C23800F98297 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F3D7D71AB6C23800F98297 /* EmailLoginViewController.swift */; };
 		A8F3D7DA1AB6C30B00F98297 /* EmailSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F3D7D91AB6C30B00F98297 /* EmailSignupViewController.swift */; };
@@ -67,6 +68,7 @@
 		A85F883E1AB7135B00064845 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		A85F88401AB7161000064845 /* DetailedItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedItemViewController.swift; sourceTree = "<group>"; };
 		A8820D221AD3C0AC0033E0AC /* ChatInboxTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInboxTableViewController.swift; sourceTree = "<group>"; };
+		A8820D241AD3DE870033E0AC /* ChatInboxTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInboxTableViewCell.swift; sourceTree = "<group>"; };
 		A8D04F011AB926A2005E8446 /* ItemListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListTableViewCell.swift; sourceTree = "<group>"; };
 		A8F3D7D71AB6C23800F98297 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
 		A8F3D7D91AB6C30B00F98297 /* EmailSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSignupViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				A85F883E1AB7135B00064845 /* UserProfileViewController.swift */,
 				A801A7AB1AC5992D00444B57 /* ThankyouMessageTableViewCell.swift */,
 				A8820D221AD3C0AC0033E0AC /* ChatInboxTableViewController.swift */,
+				A8820D241AD3DE870033E0AC /* ChatInboxTableViewCell.swift */,
 				A85D03E31AD19586005C4B59 /* ChatWindowViewController.swift */,
 				A8F928E91AB17BFB006AB6AB /* Images.xcassets */,
 				A8F928EB1AB17BFB006AB6AB /* LaunchScreen.xib */,
@@ -356,6 +359,7 @@
 				A85F883F1AB7135B00064845 /* UserProfileViewController.swift in Sources */,
 				A801A7AC1AC5992D00444B57 /* ThankyouMessageTableViewCell.swift in Sources */,
 				A85F883D1AB7113D00064845 /* ListingItemViewController.swift in Sources */,
+				A8820D251AD3DE870033E0AC /* ChatInboxTableViewCell.swift in Sources */,
 				A8820D231AD3C0AC0033E0AC /* ChatInboxTableViewController.swift in Sources */,
 				A8D04F021AB926A2005E8446 /* ItemListTableViewCell.swift in Sources */,
 				A8F3D7D81AB6C23800F98297 /* EmailLoginViewController.swift in Sources */,

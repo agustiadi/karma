@@ -9,9 +9,40 @@
 import UIKit
 
 class ChatInboxTableViewController: UITableViewController {
+    
+    var profileArray = [PFFile]()
+    var userNameArray = [String]()
+    var latestMessageArray = [String]()
+    var unreadLabelArray = [Int]()
+    var itemNameArray = [String]()
+    var dateAndTimeArray = [String]()
+    
+    let currentUser = PFUser.currentUser()
+    let currentUserID = PFUser.currentUser().objectId
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var query1 = PFQuery(className: "Message")
+        query1.whereKey("sender", equalTo: currentUserID)
+        
+        var query2 = PFQuery(className: "Message")
+        query2.whereKey("receiver", equalTo: currentUserID)
+        
+        var query = PFQuery.orQueryWithSubqueries([query1, query2])
+        query.addDescendingOrder("createdAt")
+        query.findObjectsInBackgroundWithBlock({
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            
+            if error == nil {
+                
+                for object in objects {
+                    println(object)
+                }
+                
+            }
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,9 +64,9 @@ class ChatInboxTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("chatCell", forIndexPath: indexPath) as UITableViewCell
-
-        cell.textLabel?.text = "Testing Chat Cell"
+        let cell: ChatInboxTableViewCell = tableView.dequeueReusableCellWithIdentifier("chatCell", forIndexPath: indexPath) as ChatInboxTableViewCell
+        
+        cell.profilePic.image = UIImage(named: "displayPic")
         
         return cell
     }
