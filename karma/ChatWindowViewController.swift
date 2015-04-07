@@ -17,6 +17,8 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
     var currentUsername = PFUser.currentUser().username
     var currentUserProfilPic = UIImage()
     
+    var canPressSendButton = true
+    
     var otherUserID = String()
     var otherUsername = String()
     var otherUserProfilePic = UIImage()
@@ -51,6 +53,8 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        canPressSendButton = true
         
         timer = NSTimer.scheduledTimerWithTimeInterval(25, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
         
@@ -147,7 +151,8 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
             
             
         }
-
+        
+        refreshResult()
 
     }
     
@@ -344,30 +349,39 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
 
     @IBAction func sendButtonPressed(sender: AnyObject) {
         
-        if messageTextView.text == "" {
-            println("no text")
-        } else {
+        if canPressSendButton {
             
-            var messageDBTable = PFObject(className: "Message")
-            messageDBTable["itemID"] = itemID
-            messageDBTable["sender"] = PFUser.currentUser().objectId
-            messageDBTable["receiver"] = otherUserID
-            messageDBTable["message"] = messageTextView.text
-            messageDBTable.saveInBackgroundWithBlock({
-                (success: Bool!, error: NSError!) -> Void in
+            if messageTextView.text == "" {
+
+                canPressSendButton = true
                 
-                if success == true {
-                    println("message sent")
-                    self.messageTextView.text = ""
-                    self.placeholderLabel.hidden = false
-                    self.refreshResult()
-                } else {
-                    println(error)
-                }
-            })
+            } else {
+                
+                canPressSendButton = false
+                
+                var messageDBTable = PFObject(className: "Message")
+                messageDBTable["itemID"] = itemID
+                messageDBTable["sender"] = PFUser.currentUser().objectId
+                messageDBTable["receiver"] = otherUserID
+                messageDBTable["message"] = messageTextView.text
+                messageDBTable.saveInBackgroundWithBlock({
+                    (success: Bool!, error: NSError!) -> Void in
+                    
+                    if success == true {
+                        println("message sent")
+                        self.messageTextView.text = ""
+                        self.placeholderLabel.hidden = false
+                        self.canPressSendButton = true
+                        self.refreshResult()
+                    } else {
+                        println(error)
+                    }
+                })
+            }
+            
         }
-        
-        //self.view.endEditing(true)
+
+
     }
     
     override func viewDidDisappear(animated: Bool) {
