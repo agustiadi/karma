@@ -724,6 +724,7 @@
                         <outlet property="itemNameLabel" destination="lYX-Ff-cRv" id="8bM-qa-7AY"/>
                         <outlet property="profilePic" destination="ZhD-KZ-CYd" id="5ua-6B-bg1"/>
                         <outlet property="scrollView" destination="SUm-yv-YxD" id="VhY-gd-dhd"/>
+                        <outlet property="wantItBtnLabel" destination="doX-VC-C6S" id="NFB-dl-pq5"/>
                         <segue destination="hVK-hI-Yh9" kind="push" identifier="wantIt" id="iQX-Lz-cik"/>
                     </connections>
                 </viewController>
@@ -755,7 +756,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="WKw-tb-QdR">

@@ -26,6 +26,7 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
     @IBOutlet var itemNameLabel: UILabel!
     @IBOutlet var categoryLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var wantItBtnLabel: UIButton!
     
     @IBAction func wantItBtn(sender: AnyObject) {
         performSegueWithIdentifier("wantIt", sender: self)
@@ -52,8 +53,17 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
         descriptionLabel.numberOfLines = 0
         descriptionLabel.text = descriptionOfItem
         descriptionLabel.sizeToFit()
-                
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: descriptionLabel.frame.maxY + 10)
+        
+        wantItBtnLabel.layer.zPosition = 20
+        
+        scrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: descriptionLabel.frame.maxY + wantItBtnLabel.frame.height + 70)
+        
+        if giverID == PFUser.currentUser().objectId {
+            
+            wantItBtnLabel.removeFromSuperview()
+            
+        }
         
     }
     
