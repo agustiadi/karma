@@ -878,7 +878,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="o5c-AO-KqN">
             <objects>
-                <tabBarController id="aTB-qb-6JH" sceneMemberID="viewController">
+                <tabBarController id="aTB-qb-6JH" customClass="TabBarController" customModule="karma" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="xaB-Or-cps"/>
@@ -930,9 +930,9 @@
         <image name="Sign Up" width="241" height="45"/>
         <image name="Text Input" width="241" height="45"/>
         <image name="backIconWhite" width="22" height="22"/>
-        <image name="browseIconWhite" width="38" height="29"/>
-        <image name="cameraIconWhite" width="38" height="30"/>
-        <image name="profileIconWhite" width="33" height="35"/>
+        <image name="browseIconWhite" width="30" height="23"/>
+        <image name="cameraIconWhite" width="30" height="24"/>
+        <image name="profileIconWhite" width="28" height="30"/>
         <image name="sendIconYellow" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

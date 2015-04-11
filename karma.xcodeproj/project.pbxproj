@@ -11,6 +11,7 @@
 		5D5B62291ACFD642002F980A /* Champagne & Limousines Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D5B62251ACFD60D002F980A /* Champagne & Limousines Bold.ttf */; };
 		5D5B622A1ACFD642002F980A /* Champagne & Limousines Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D5B62261ACFD60D002F980A /* Champagne & Limousines Italic.ttf */; };
 		5D5B622B1ACFD642002F980A /* Champagne & Limousines.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D5B62271ACFD60D002F980A /* Champagne & Limousines.ttf */; };
+		5DBEA94E1AD935ED005016A1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBEA94D1AD935ED005016A1 /* TabBarController.swift */; };
 		A801A7AC1AC5992D00444B57 /* ThankyouMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A801A7AB1AC5992D00444B57 /* ThankyouMessageTableViewCell.swift */; };
 		A847A9E21ACAAA5B00BC6228 /* ItemImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A847A9E11ACAAA5B00BC6228 /* ItemImagesCollectionViewCell.swift */; };
 		A85D03E41AD19586005C4B59 /* ChatWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85D03E31AD19586005C4B59 /* ChatWindowViewController.swift */; };
@@ -61,6 +62,7 @@
 		5D5B62251ACFD60D002F980A /* Champagne & Limousines Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines Bold.ttf"; sourceTree = "<group>"; };
 		5D5B62261ACFD60D002F980A /* Champagne & Limousines Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines Italic.ttf"; sourceTree = "<group>"; };
 		5D5B62271ACFD60D002F980A /* Champagne & Limousines.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines.ttf"; sourceTree = "<group>"; };
+		5DBEA94D1AD935ED005016A1 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A801A7AB1AC5992D00444B57 /* ThankyouMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThankyouMessageTableViewCell.swift; sourceTree = "<group>"; };
 		A847A9E11ACAAA5B00BC6228 /* ItemImagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		A85D03E31AD19586005C4B59 /* ChatWindowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatWindowViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				A8820D221AD3C0AC0033E0AC /* ChatInboxTableViewController.swift */,
 				A8820D241AD3DE870033E0AC /* ChatInboxTableViewCell.swift */,
 				A85D03E31AD19586005C4B59 /* ChatWindowViewController.swift */,
+				5DBEA94D1AD935ED005016A1 /* TabBarController.swift */,
 				A8F928E91AB17BFB006AB6AB /* Images.xcassets */,
 				A8F928EB1AB17BFB006AB6AB /* LaunchScreen.xib */,
 				A8F928E01AB17BFB006AB6AB /* Supporting Files */,
@@ -354,6 +357,7 @@
 				A8F929291AB2CB69006AB6AB /* LandingPageViewController.swift in Sources */,
 				A847A9E21ACAAA5B00BC6228 /* ItemImagesCollectionViewCell.swift in Sources */,
 				A8F3D7DA1AB6C30B00F98297 /* EmailSignupViewController.swift in Sources */,
+				5DBEA94E1AD935ED005016A1 /* TabBarController.swift in Sources */,
 				A85D03E41AD19586005C4B59 /* ChatWindowViewController.swift in Sources */,
 				A85F88411AB7161000064845 /* DetailedItemViewController.swift in Sources */,
 				A85F883F1AB7135B00064845 /* UserProfileViewController.swift in Sources */,
