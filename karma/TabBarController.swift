@@ -33,13 +33,13 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // render image as original (change icon to white when unselected)
         for item in self.tabBar.items as [UITabBarItem] {
             if let image = item.image {
                 item.image = image.imageWithColor(UIColor.whiteColor()).imageWithRenderingMode(.AlwaysOriginal)
             }
         }
-        
-        
 
         // Do any additional setup after loading the view.
     }
