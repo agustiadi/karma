@@ -54,7 +54,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
 
         // Do any additional setup after loading the view.
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(25, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
         
         let theWidth = view.frame.width
         let theHeight = view.frame.height
@@ -89,7 +89,6 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         
-        refreshResult()
 
     }
     
@@ -129,6 +128,13 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
         
         navigationController?.navigationBar.backItem?.title = ""
         
+        
+        for subView in resultScrollView.subviews {
+            
+            subView.removeFromSuperview()
+            
+        }
+        
         //Setting of Profile Pic for Current User
         if currentUser["profilePic"] != nil {
             
@@ -155,7 +161,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
     }
     
     func refreshResult() {
-        
+
         let theWidth = view.frame.width
         let theHeight = view.frame.height
         
@@ -202,6 +208,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
                     subView.removeFromSuperview()
                     
                 }
+
                 
                 for var i = 0; i <= self.messageArray.count - 1; i++ {
                     
@@ -293,8 +300,45 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
 
             }
             
+            if self.resultScrollView.subviews.count/3 == 1 {
+                
+                let innerP1 = NSPredicate(format: "itemID = %@ AND user1 = %@ AND user2 = %@", self.itemID, self.currentUserID, self.otherUserID)
+                var innerQ1 = PFQuery(className: "Inbox", predicate: innerP1)
+                
+                let innerP2 = NSPredicate(format: "itemID = %@ AND user1 = %@ AND user2 = %@", self.itemID, self.otherUserID, self.currentUserID)
+                var innerQ2 = PFQuery(className: "Inbox", predicate: innerP2)
+
+                var query = PFQuery.orQueryWithSubqueries([innerQ1, innerQ2])
+                query.findObjectsInBackgroundWithBlock({
+                    (objects: [AnyObject]!, error: NSError!) -> Void in
+                    
+                    if objects.count == 0 {
+                        
+                        var inboxDBTable = PFObject(className: "Inbox")
+                        inboxDBTable["itemID"] = self.itemID
+                        inboxDBTable["user1"] = PFUser.currentUser().objectId
+                        inboxDBTable["user2"] = self.otherUserID
+                        inboxDBTable.saveInBackgroundWithBlock({
+                            (success: Bool!, error: NSError!) -> Void in
+                            
+                            if success == true {
+                                println("This conversation is saved")
+                            }
+                            
+                            else {
+                                println(error)
+                            }
+                            
+                        })
+
+                        
+                    }
+                    
+                })
+            }
+            
         })
-    
+        
     }
     
 
@@ -385,6 +429,12 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
     override func viewDidDisappear(animated: Bool) {
         
         timer.invalidate()
+        
+        for subView in resultScrollView.subviews {
+            
+            subView.removeFromSuperview()
+            
+        }
     }
     
 
