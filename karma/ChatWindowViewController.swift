@@ -310,7 +310,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
         let s: NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
         let rect: CGRect = s.CGRectValue()
         
-        UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
+        UIView.animateWithDuration(0.01, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
             
             self.resultScrollView.frame.origin.y = self.scrollViewOriginalY - rect.height
             self.frameMessageView.frame.origin.y = self.frameMessageOriginalY - rect.height
@@ -330,7 +330,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
         let s: NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
         let rect: CGRect = s.CGRectValue()
         
-        UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
+        UIView.animateWithDuration(0.01, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
             
             self.resultScrollView.frame.origin.y = self.scrollViewOriginalY
             self.frameMessageView.frame.origin.y = self.frameMessageOriginalY
