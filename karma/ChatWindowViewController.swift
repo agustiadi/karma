@@ -435,6 +435,48 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
             subView.removeFromSuperview()
             
         }
+        
+        let innerP1 = NSPredicate(format: "itemID = %@ AND user1 = %@ AND user2 = %@", self.itemID, self.currentUserID, self.otherUserID)
+        var innerQ1 = PFQuery(className: "Inbox", predicate: innerP1)
+        
+        let innerP2 = NSPredicate(format: "itemID = %@ AND user1 = %@ AND user2 = %@", self.itemID, self.otherUserID, self.currentUserID)
+        var innerQ2 = PFQuery(className: "Inbox", predicate: innerP2)
+        
+        var query = PFQuery.orQueryWithSubqueries([innerQ1, innerQ2])
+        query.findObjectsInBackgroundWithBlock({
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            
+            if objects.count != 0 {
+                
+                let inboxItem = objects[0] as PFObject
+                
+                if inboxItem["user1"] as String == PFUser.currentUser().objectId {
+                    
+                    inboxItem["user1LastSeen"] = NSDate()
+                    
+                } else {
+                    
+                    inboxItem["user2LastSeen"] = NSDate()
+                    
+                }
+                
+                inboxItem.saveInBackgroundWithBlock({
+                    (success: Bool!, error: NSError!) -> Void in
+                    
+                    if success == true {
+                        
+                        println("User Last Seen Data Has Been Updated")
+                        
+                    } else {
+                        
+                        println(error)
+                    }
+                    
+                })
+                
+            }
+            
+        })
     }
     
 
