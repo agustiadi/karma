@@ -33,7 +33,7 @@ class EmailSignupViewController: UIViewController {
             self.stopActivityIndicator()
             self.processingView.removeFromSuperview()
             displayAlert("Missing Input", message: "You need to give input for all three fields")
-        } else if countElements(passwordField.text) < 5 {
+        } else if count(passwordField.text) < 5 {
             self.stopActivityIndicator()
             self.processingView.removeFromSuperview()
             displayAlert("Password Length", message: "Please note that your password needs to consist of at least 5 characters")
@@ -44,7 +44,7 @@ class EmailSignupViewController: UIViewController {
             user.email = emailField.text
             user.password = passwordField.text
             user.signUpInBackgroundWithBlock {
-                (succeeded: Bool!, signupError: NSError!) -> Void in
+                (succeeded: Bool, signupError: NSError!) -> Void in
                 if signupError == nil {
                     self.performSegueWithIdentifier("userSignedUpViaEmail", sender: self)
                     self.stopActivityIndicator()
@@ -52,7 +52,7 @@ class EmailSignupViewController: UIViewController {
                     if let errorString = signupError.userInfo?["error"] as? NSString{
                         self.stopActivityIndicator()
                         self.processingView.removeFromSuperview()
-                        self.displayAlert("Error in Form", message: errorString)
+                        self.displayAlert("Error in Form", message: errorString as String)
                         
                     } else {
                         self.stopActivityIndicator()

@@ -198,8 +198,8 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
                 
                 for object in objects {
                     
-                    self.senderArray.append(object.objectForKey("sender") as String)
-                    self.messageArray.append(object.objectForKey("message") as String)
+                    self.senderArray.append(object.objectForKey("sender") as! String)
+                    self.messageArray.append(object.objectForKey("message") as! String)
                     
                 }
                 
@@ -319,7 +319,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
                         inboxDBTable["user1"] = PFUser.currentUser().objectId
                         inboxDBTable["user2"] = self.otherUserID
                         inboxDBTable.saveInBackgroundWithBlock({
-                            (success: Bool!, error: NSError!) -> Void in
+                            (success: Bool, error: NSError!) -> Void in
                             
                             if success == true {
                                 println("This conversation is saved")
@@ -351,7 +351,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
     func keyboardWasShown(notification: NSNotification){
         
         let dict: NSDictionary = notification.userInfo!
-        let s: NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+        let s: NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
         let rect: CGRect = s.CGRectValue()
         
         UIView.animateWithDuration(0.01, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
@@ -371,7 +371,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
     func keyboardWillHide(notification: NSNotification){
         
         let dict: NSDictionary = notification.userInfo!
-        let s: NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+        let s: NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
         let rect: CGRect = s.CGRectValue()
         
         UIView.animateWithDuration(0.01, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
@@ -407,7 +407,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
                 messageDBTable["receiver"] = otherUserID
                 messageDBTable["message"] = messageTextView.text
                 messageDBTable.saveInBackgroundWithBlock({
-                    (success: Bool!, error: NSError!) -> Void in
+                    (success: Bool, error: NSError!) -> Void in
                     
                     if success == true {
                         println("message sent")
@@ -448,9 +448,9 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
             
             if objects.count != 0 {
                 
-                let inboxItem = objects[0] as PFObject
+                let inboxItem = objects[0] as! PFObject
                 
-                if inboxItem["user1"] as String == PFUser.currentUser().objectId {
+                if inboxItem["user1"] as! String == PFUser.currentUser().objectId {
                     
                     inboxItem["user1LastSeen"] = NSDate()
                     
@@ -461,7 +461,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
                 }
                 
                 inboxItem.saveInBackgroundWithBlock({
-                    (success: Bool!, error: NSError!) -> Void in
+                    (success: Bool, error: NSError!) -> Void in
                     
                     if success == true {
                         

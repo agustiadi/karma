@@ -151,13 +151,13 @@ class ItemListTableViewController: UITableViewController {
                 for item in itemObjects {
 
                     
-                    let userObject = item["userID"] as PFObject
-                    self.objectIDs.append(item.objectId as String)
-                    self.userIDs.append(userObject.objectId as String)
-                    self.itemsName.append(item["itemName"] as String)
-                    self.descriptions.append(item["itemDescription"] as String)
-                    self.categories.append(item["categories"] as String)
-                    self.itemsImage.append(item["image_1"] as PFFile)
+                    let userObject = item["userID"] as! PFObject
+                    self.objectIDs.append(item.objectId)
+                    self.userIDs.append(userObject.objectId)
+                    self.itemsName.append(item["itemName"] as! String)
+                    self.descriptions.append(item["itemDescription"] as! String)
+                    self.categories.append(item["categories"] as! String)
+                    self.itemsImage.append(item["image_1"] as! PFFile)
                     
                 }
             
@@ -214,7 +214,7 @@ class ItemListTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as ItemListTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as! ItemListTableViewCell
         
         itemsImage[indexPath.row].getDataInBackgroundWithBlock{
             (imageData: NSData!, error: NSError!) -> Void in
@@ -238,9 +238,9 @@ class ItemListTableViewController: UITableViewController {
         userQuery.findObjectsInBackgroundWithBlock({
             (objects: [AnyObject]!, error: NSError!) -> Void in
             
-            let selectedUser = objects[0] as PFUser
-            let selectedUserName = selectedUser["name"] as String
-            let selectedUserImageFile = selectedUser["profilePic"] as PFFile
+            let selectedUser = objects[0] as! PFUser
+            let selectedUserName = selectedUser["name"] as! String
+            let selectedUserImageFile = selectedUser["profilePic"] as! PFFile
             
             cell.userName.text = selectedUserName
             

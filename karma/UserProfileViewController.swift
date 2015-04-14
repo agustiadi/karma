@@ -146,7 +146,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell: ThankyouMessageTableViewCell = tableView.dequeueReusableCellWithIdentifier("thankyouCell", forIndexPath: indexPath) as ThankyouMessageTableViewCell
+        let cell: ThankyouMessageTableViewCell = tableView.dequeueReusableCellWithIdentifier("thankyouCell", forIndexPath: indexPath) as! ThankyouMessageTableViewCell
         
         cell.receiverProfilePic.image = UIImage(named: "displayPic")
         

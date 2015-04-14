@@ -101,11 +101,11 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
                 for user in userObjects {
                     
                     name.text = user["name"] as? String
-                    giverName = user["name"] as String
+                    giverName = user["name"] as! String
                     
                     if user["profilePic"] != nil {
                         
-                        let temp = user["profilePic"] as PFFile
+                        let temp = user["profilePic"] as! PFFile
                         temp.getDataInBackgroundWithBlock{
                             (imageData: NSData!, error: NSError!) -> Void in
                             
@@ -148,12 +148,12 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
             
             if error == nil {
                 
-                let selectedItem = imageObjects[0] as PFObject
+                let selectedItem = imageObjects[0] as! PFObject
                 
                 for image in ["image_1", "image_2", "image_3", "image_4", "image_5"] {
                     
                     if selectedItem["\(image)"] != nil {
-                        self.itemImagesFile.append(selectedItem["\(image)"] as PFFile)
+                        self.itemImagesFile.append(selectedItem["\(image)"] as! PFFile)
                     }
                     
                 }
@@ -173,7 +173,7 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("itemImage", forIndexPath: indexPath) as ItemImagesCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("itemImage", forIndexPath: indexPath) as! ItemImagesCollectionViewCell
         
         cell.backgroundColor = UIColor.whiteColor()
         
@@ -212,7 +212,7 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
         
         if segue.identifier == "wantIt" {
             
-            let destinationVC = segue.destinationViewController as ChatWindowViewController
+            let destinationVC = segue.destinationViewController as! ChatWindowViewController
             destinationVC.itemID = objectID
             destinationVC.otherUserID = giverID
             destinationVC.otherUserProfilePic = giverImage

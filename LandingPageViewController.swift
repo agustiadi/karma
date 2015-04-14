@@ -47,7 +47,7 @@ class LandingPageViewController: UIViewController{
         
         startActivityIndicator()
         
-            PFFacebookUtils.logInWithPermissions(permissions, { (user: PFUser!, error: NSError!) -> Void in
+            PFFacebookUtils.logInWithPermissions(permissions, block: { (user: PFUser!, error: NSError!) -> Void in
                 if let user = user {
                     if user.isNew {
                         println("User signed up and logged in through Facebook!")
@@ -86,7 +86,7 @@ class LandingPageViewController: UIViewController{
         //Get User's Full Name from FB
         
         FBRequestConnection.startWithGraphPath("me?fields=email,name,id", completionHandler: {(connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
-            if (result? != nil) {
+            if (result != nil) {
                 NSLog("error = \(error)")
             
                 current_user["name"] = result.name

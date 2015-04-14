@@ -49,8 +49,8 @@ class ChatInboxTableViewController: UITableViewController {
                     
                     for object in objects {
                         
-                        let user1ID = object["user1"] as String
-                        let user2ID = object["user2"] as String
+                        let user1ID = object["user1"] as! String
+                        let user2ID = object["user2"] as! String
                         
                         if user1ID == self.currentUserID {
                             
@@ -59,9 +59,9 @@ class ChatInboxTableViewController: UITableViewController {
                             userQuery.findObjectsInBackgroundWithBlock({
                                 (objects: [AnyObject]!, error: NSError!) -> Void in
                                 
-                                let object = objects[0] as PFObject
+                                let object = objects[0] as! PFObject
                                 
-                                self.userNameArray.append(object["name"] as String)
+                                self.userNameArray.append(object["name"] as! String)
                                 
                                 if object["profilePic"] == nil {
                                     
@@ -69,7 +69,7 @@ class ChatInboxTableViewController: UITableViewController {
                                     
                                 } else {
                                     
-                                    self.profileArray.append(object["profilePic"] as PFFile)
+                                    self.profileArray.append(object["profilePic"] as! PFFile)
                                     
                                     
                                 }
@@ -88,9 +88,9 @@ class ChatInboxTableViewController: UITableViewController {
                             userQuery.findObjectsInBackgroundWithBlock({
                                 (objects: [AnyObject]!, error: NSError!) -> Void in
                                 
-                                let object = objects[0] as PFObject
+                                let object = objects[0] as! PFObject
                                 
-                                self.userNameArray.append(object["name"] as String)
+                                self.userNameArray.append(object["name"] as! String)
                                 
                                 if object["profilePic"] == nil {
                                     
@@ -98,7 +98,7 @@ class ChatInboxTableViewController: UITableViewController {
                                     
                                 } else {
                                     
-                                    self.profileArray.append(object["profilePic"] as PFFile)
+                                    self.profileArray.append(object["profilePic"] as! PFFile)
                                     
                                 }
                                 
@@ -139,17 +139,17 @@ class ChatInboxTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: ChatInboxTableViewCell = tableView.dequeueReusableCellWithIdentifier("chatCell", forIndexPath: indexPath) as ChatInboxTableViewCell
+        let cell: ChatInboxTableViewCell = tableView.dequeueReusableCellWithIdentifier("chatCell", forIndexPath: indexPath) as! ChatInboxTableViewCell
             
             let profileFile: AnyObject = self.profileArray[indexPath.row] as AnyObject
                 
-            if profileFile as NSObject == false {
+            if profileFile as! NSObject == false {
                 
                 cell.profilePic.image = self.placeholderImage
             
             } else {
                 
-                (profileFile as PFFile).getDataInBackgroundWithBlock({
+                (profileFile as! PFFile).getDataInBackgroundWithBlock({
                     (imageData: NSData!, error: NSError!) -> Void in
                     
                     if error == nil {
