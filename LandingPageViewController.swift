@@ -47,7 +47,7 @@ class LandingPageViewController: UIViewController{
         
         startActivityIndicator()
         
-            PFFacebookUtils.logInWithPermissions(permissions, block: { (user: PFUser!, error: NSError!) -> Void in
+        PFFacebookUtils.logInWithPermissions(permissions, block: { (user: PFUser!, error: NSError!) -> Void in
                 if let user = user {
                     if user.isNew {
                         println("User signed up and logged in through Facebook!")
