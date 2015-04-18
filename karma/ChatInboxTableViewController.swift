@@ -22,7 +22,6 @@ class ChatInboxTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     
         let predicate = NSPredicate(format: "user1 = %@ OR user2 = %@", currentUserID, currentUserID)
         var query = PFQuery(className: "Inbox", predicate: predicate)
@@ -71,6 +70,12 @@ class ChatInboxTableViewController: UITableViewController {
             }
             
         })
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        self.tableView.reloadData()
         
     }
 
@@ -177,8 +182,92 @@ class ChatInboxTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        performSegueWithIdentifier("inboxCellPressed", sender: self)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        
+        if segue.identifier == "inboxCellPressed" {
+            
+            let row = tableView.indexPathForSelectedRow()?.row
+            let destinationVC = segue.destinationViewController as! ChatWindowViewController
+            destinationVC.itemID = self.itemIDArray[row!]
+            destinationVC.otherUserID = self.userIDArray[row!]
+            
+            let current_User = PFUser.currentUser()
+            
+            if current_User["profilePic"] != nil {
+                
+                current_User["profilePic"].getDataInBackgroundWithBlock({
+                    (imageData: NSData!, error: NSError!) -> Void in
+                    
+                    if error == nil {
+                        
+                        let image = UIImage(data: imageData)
+                        destinationVC.currentUserProfilPic = image!
+                        
+                    } else {
+                        
+                        println(error)
+                        
+                    }
+                })
+                
+            } else {
+                destinationVC.currentUserProfilPic = UIImage(named: "profilePlaceholder")!
+            }
+            
+            var userQuery = PFQuery(className: "_User")
+            userQuery.whereKey("objectId", equalTo: self.userIDArray[row!])
+            userQuery.findObjectsInBackgroundWithBlock ({
+                (objects: [AnyObject]!, error: NSError!) -> Void in
+                
+                let object = objects[0] as! PFObject
+                
+                destinationVC.otherUsername = object["name"] as! String
+                
+                if object["profilePic"] == nil {
+                    
+                    destinationVC.otherUserProfilePic = self.placeholderImage!
+                    
+                } else {
+                    
+                    let profileFile: AnyObject = object["profilePic"] as! PFFile
+                    
+                    (profileFile as! PFFile).getDataInBackgroundWithBlock({
+                        (imageData: NSData!, error: NSError!) -> Void in
+                        
+                        if error == nil {
+                            
+                            let image = UIImage(data: imageData)
+                            destinationVC.otherUserProfilePic = image!
+                            
+                        } else {
+                            
+                            println(error)
+                            
+                        }
+                        
+                    })
+                    
+                }
+                
+            })
 
+            
+
+            
+    
+            
+        }
+        
+    }
+    
+    
+    
     
 }
-
-

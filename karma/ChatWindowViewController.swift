@@ -122,37 +122,18 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
             self.placeholderLabel.hidden = false
         }
     }
-
     
+
     override func viewDidAppear(animated: Bool) {
         
         navigationController?.navigationBar.backItem?.title = ""
+        
+        self.title = otherUsername
         
         
         for subView in resultScrollView.subviews {
             
             subView.removeFromSuperview()
-            
-        }
-        
-        //Setting of Profile Pic for Current User
-        if currentUser["profilePic"] != nil {
-            
-            currentUser["profilePic"].getDataInBackgroundWithBlock({
-                (imageData: NSData!, error: NSError!) -> Void in
-                
-                if error == nil {
-                    
-                    let image = UIImage(data: imageData)
-                    //self.profilePicView.image = image
-                    
-                } else {
-                    
-                    println(error)
-                    
-                }
-            })
-            
             
         }
         

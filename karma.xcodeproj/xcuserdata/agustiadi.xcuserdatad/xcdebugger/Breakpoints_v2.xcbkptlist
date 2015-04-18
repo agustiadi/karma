@@ -102,11 +102,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "karma/ChatInboxTableViewController.swift"
-            timestampString = "451064354.97401"
+            timestampString = "451069705.151031"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -150,11 +150,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "karma/ChatWindowViewController.swift"
-            timestampString = "450888596.099909"
+            timestampString = "451070017.873455"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "refreshResult()"
             landmarkType = "5">
          </BreakpointContent>
@@ -166,11 +166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "karma/ChatInboxTableViewController.swift"
-            timestampString = "451064354.97401"
+            timestampString = "451069705.151031"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>

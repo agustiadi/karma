@@ -690,6 +690,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Inbox" id="RWC-RJ-agB"/>
+                    <connections>
+                        <segue destination="hVK-hI-Yh9" kind="push" identifier="inboxCellPressed" id="1Zg-gB-azE"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pch-xw-Bce" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -824,7 +827,7 @@
             <objects>
                 <viewController id="hVK-hI-Yh9" customClass="ChatWindowViewController" customModule="karma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J8V-9l-OY4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="OeK-c7-bgx">
@@ -953,5 +956,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="LgN-ka-Iws"/>
+        <segue reference="1Zg-gB-azE"/>
     </inferredMetricsTieBreakers>
 </document>
