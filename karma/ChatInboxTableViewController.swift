@@ -10,11 +10,10 @@ import UIKit
 
 class ChatInboxTableViewController: UITableViewController {
     
-    var profileArray = [AnyObject]()
-    var userNameArray = [String]()
+    var userIDArray = [String]()
+    var itemIDArray = [String]()
     var latestMessageArray = [String]()
     var unreadLabelArray = [Int]()
-    var itemNameArray = [String]()
     var dateAndTimeArray = [String]()
     
     let currentUser = PFUser.currentUser()
@@ -24,20 +23,19 @@ class ChatInboxTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        profileArray.removeAll(keepCapacity: false)
-        userNameArray.removeAll(keepCapacity: false)
-        latestMessageArray.removeAll(keepCapacity: false)
-        unreadLabelArray.removeAll(keepCapacity: false)
-        itemNameArray.removeAll(keepCapacity: false)
-        dateAndTimeArray.removeAll(keepCapacity: false)
+
     
         let predicate = NSPredicate(format: "user1 = %@ OR user2 = %@", currentUserID, currentUserID)
         var query = PFQuery(className: "Inbox", predicate: predicate)
         query.addDescendingOrder("updatedAt")
         query.findObjectsInBackgroundWithBlock({
-            
             (objects: [AnyObject]!, error: NSError!) -> Void in
+            
+            self.itemIDArray.removeAll(keepCapacity: false)
+            self.userIDArray.removeAll(keepCapacity: false)
+            self.latestMessageArray.removeAll(keepCapacity: false)
+            self.unreadLabelArray.removeAll(keepCapacity: false)
+            self.dateAndTimeArray.removeAll(keepCapacity: false)
             
             if error == nil {
                 
@@ -49,71 +47,29 @@ class ChatInboxTableViewController: UITableViewController {
                     
                     for object in objects {
                         
+                        self.itemIDArray.append(object["itemID"] as! String)
+                        
                         let user1ID = object["user1"] as! String
                         let user2ID = object["user2"] as! String
                         
                         if user1ID == self.currentUserID {
                             
-                            var userQuery = PFQuery(className: "_User")
-                            userQuery.whereKey("objectId", equalTo: user2ID)
-                            userQuery.findObjectsInBackgroundWithBlock({
-                                (objects: [AnyObject]!, error: NSError!) -> Void in
-                                
-                                let object = objects[0] as! PFObject
-                                
-                                self.userNameArray.append(object["name"] as! String)
-                                
-                                if object["profilePic"] == nil {
-                                    
-                                    self.profileArray.append(false as Bool)
-                                    
-                                } else {
-                                    
-                                    self.profileArray.append(object["profilePic"] as! PFFile)
-                                    
-                                    
-                                }
-                                
-                                
-                                self.tableView.reloadData()
-                            })
+                            self.userIDArray.append(user2ID)
+                            
                         }
-                        
-                        
                         
                         if user2ID == self.currentUserID {
                             
-                            var userQuery = PFQuery(className: "_User")
-                            userQuery.whereKey("objectId", equalTo: user1ID)
-                            userQuery.findObjectsInBackgroundWithBlock({
-                                (objects: [AnyObject]!, error: NSError!) -> Void in
-                                
-                                let object = objects[0] as! PFObject
-                                
-                                self.userNameArray.append(object["name"] as! String)
-                                
-                                if object["profilePic"] == nil {
-                                    
-                                    self.profileArray.append(false as Bool)
-                                    
-                                } else {
-                                    
-                                    self.profileArray.append(object["profilePic"] as! PFFile)
-                                    
-                                }
-                                
-                                self.tableView.reloadData()
-                                
-                            })
+                            self.userIDArray.append(user1ID)
+
                         }
                         
                     }
                     
                     self.tableView.reloadData()
-                    
+
                 }
-                
-                
+
             }
             
         })
@@ -124,6 +80,7 @@ class ChatInboxTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
     // MARK: - Table view data source
 
@@ -134,44 +91,65 @@ class ChatInboxTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return userNameArray.count
+        return itemIDArray.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: ChatInboxTableViewCell = tableView.dequeueReusableCellWithIdentifier("chatCell", forIndexPath: indexPath) as! ChatInboxTableViewCell
+        
+        var objectQuery = PFQuery(className: "Item")
+        objectQuery.whereKey("objectId", equalTo: self.itemIDArray[indexPath.row])
+        objectQuery.findObjectsInBackgroundWithBlock({
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+        
+            if error == nil {
+        
+                let object = objects[0] as! PFObject
+                cell.itemName.text = object["itemName"] as? String
+        
+            }
+                                    
+        })
+        
+        var userQuery = PFQuery(className: "_User")
+        userQuery.whereKey("objectId", equalTo: self.userIDArray[indexPath.row])
+        userQuery.findObjectsInBackgroundWithBlock ({
+            (objects: [AnyObject]!, error: NSError!) -> Void in
             
-            let profileFile: AnyObject = self.profileArray[indexPath.row] as AnyObject
-                
-            if profileFile as! NSObject == false {
+            let object = objects[0] as! PFObject
+            
+            cell.userName.text = object["name"] as? String
+            
+            if object["profilePic"] == nil {
                 
                 cell.profilePic.image = self.placeholderImage
             
+                
             } else {
+
+                let profileFile: AnyObject = object["profilePic"] as! PFFile
                 
                 (profileFile as! PFFile).getDataInBackgroundWithBlock({
                     (imageData: NSData!, error: NSError!) -> Void in
+                        
+                        if error == nil {
+                            
+                            let image = UIImage(data: imageData)
+                            cell.profilePic.image = image!
+                            
+                        } else {
+                            
+                            println(error)
+                            
+                        }
+                        
+                    })
                     
-                    if error == nil {
-                        
-                        let image = UIImage(data: imageData)
-                        cell.profilePic.image = image!
-                        
-                    } else {
-                        
-                        println(error)
-                        
-                    }
-                    
-                })
-                
+                }
             
-        
-            }
-            
+        })
 
-        cell.userName.text = self.userNameArray[indexPath.row] as String
-        
         return cell
     }
     
