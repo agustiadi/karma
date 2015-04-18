@@ -12,7 +12,6 @@ class ChatInboxTableViewController: UITableViewController {
     
     var userIDArray = [String]()
     var itemIDArray = [String]()
-    var latestMessageArray = [String]()
     var unreadLabelArray = [Int]()
     var dateAndTimeArray = [String]()
     
@@ -33,7 +32,6 @@ class ChatInboxTableViewController: UITableViewController {
             
             self.itemIDArray.removeAll(keepCapacity: false)
             self.userIDArray.removeAll(keepCapacity: false)
-            self.latestMessageArray.removeAll(keepCapacity: false)
             self.unreadLabelArray.removeAll(keepCapacity: false)
             self.dateAndTimeArray.removeAll(keepCapacity: false)
             
@@ -98,8 +96,11 @@ class ChatInboxTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: ChatInboxTableViewCell = tableView.dequeueReusableCellWithIdentifier("chatCell", forIndexPath: indexPath) as! ChatInboxTableViewCell
         
+        let item = self.itemIDArray[indexPath.row]
+        let user = self.userIDArray[indexPath.row]
+        
         var objectQuery = PFQuery(className: "Item")
-        objectQuery.whereKey("objectId", equalTo: self.itemIDArray[indexPath.row])
+        objectQuery.whereKey("objectId", equalTo: item)
         objectQuery.findObjectsInBackgroundWithBlock({
             (objects: [AnyObject]!, error: NSError!) -> Void in
         
@@ -113,7 +114,7 @@ class ChatInboxTableViewController: UITableViewController {
         })
         
         var userQuery = PFQuery(className: "_User")
-        userQuery.whereKey("objectId", equalTo: self.userIDArray[indexPath.row])
+        userQuery.whereKey("objectId", equalTo: user)
         userQuery.findObjectsInBackgroundWithBlock ({
             (objects: [AnyObject]!, error: NSError!) -> Void in
             
@@ -148,7 +149,30 @@ class ChatInboxTableViewController: UITableViewController {
                     
                 }
             
+            })
+        
+        let innerP1 = NSPredicate(format: "sender = %@ AND receiver = %@", currentUserID, user)
+        var innerQ1 = PFQuery(className: "Message", predicate: innerP1)
+        innerQ1.whereKey("itemID", equalTo: item)
+        
+        let innerP2 = NSPredicate(format: "sender = %@ AND receiver = %@", user, currentUserID)
+        var innerQ2 = PFQuery(className: "Message", predicate: innerP2)
+        innerQ2.whereKey("itemID", equalTo: item)
+
+        var query = PFQuery.orQueryWithSubqueries([innerQ1, innerQ2])
+        query.addDescendingOrder("createdAt")
+        query.findObjectsInBackgroundWithBlock({
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            
+            if error == nil {
+            
+                let object = objects[0] as! PFObject
+                cell.latestMessage.text = object["message"] as? String
+                
+            }
         })
+
+        
 
         return cell
     }
@@ -157,22 +181,4 @@ class ChatInboxTableViewController: UITableViewController {
     
 }
 
-//        var query1 = PFQuery(className: "Message")
-//        query1.whereKey("sender", equalTo: currentUserID)
-//
-//        var query2 = PFQuery(className: "Message")
-//        query2.whereKey("receiver", equalTo: currentUserID)
-//
-//        var query = PFQuery.orQueryWithSubqueries([query1, query2])
-//        query.addDescendingOrder("createdAt")
-//        query.findObjectsInBackgroundWithBlock({
-//            (objects: [AnyObject]!, error: NSError!) -> Void in
-//
-//            if error == nil {
-//
-//                for object in objects {
-//                    //println(object)
-//                }
-//
-//            }
-//        })
+
