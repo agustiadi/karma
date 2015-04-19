@@ -22,7 +22,6 @@ class ItemListTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        
         //Profile Picture UI Set-up
         profilePic.layer.cornerRadius = 20.0
         profilePic.clipsToBounds = true
