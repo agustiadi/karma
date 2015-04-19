@@ -30,7 +30,7 @@ class ChatInboxTableViewCell: UITableViewCell {
         unreadLabel.layer.cornerRadius = 15
         unreadLabel.clipsToBounds = true
         unreadLabel.textColor = UIColor.whiteColor()
-        unreadLabel.backgroundColor = UIColor.lightGrayColor()
+        unreadLabel.backgroundColor = UIColor.clearColor()
         
         itemName.textColor = UIColor.grayColor()
 

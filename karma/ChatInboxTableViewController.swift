@@ -101,6 +101,8 @@ class ChatInboxTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: ChatInboxTableViewCell = tableView.dequeueReusableCellWithIdentifier("chatCell", forIndexPath: indexPath) as! ChatInboxTableViewCell
         
+        var lastCheckDateAndTime = NSDate()
+        
         let item = self.itemIDArray[indexPath.row]
         let user = self.userIDArray[indexPath.row]
         
@@ -122,6 +124,7 @@ class ChatInboxTableViewController: UITableViewController {
         userQuery.whereKey("objectId", equalTo: user)
         userQuery.findObjectsInBackgroundWithBlock ({
             (objects: [AnyObject]!, error: NSError!) -> Void in
+            
             
             let object = objects[0] as! PFObject
             
@@ -154,42 +157,105 @@ class ChatInboxTableViewController: UITableViewController {
                     
                 }
             
-            })
+        })
         
-        let innerP1 = NSPredicate(format: "sender = %@ AND receiver = %@", currentUserID, user)
-        var innerQ1 = PFQuery(className: "Message", predicate: innerP1)
-        innerQ1.whereKey("itemID", equalTo: item)
+        //Getting the number of unread messages
         
-        let innerP2 = NSPredicate(format: "sender = %@ AND receiver = %@", user, currentUserID)
-        var innerQ2 = PFQuery(className: "Message", predicate: innerP2)
-        innerQ2.whereKey("itemID", equalTo: item)
-
-        var query = PFQuery.orQueryWithSubqueries([innerQ1, innerQ2])
-        query.addDescendingOrder("createdAt")
-        query.findObjectsInBackgroundWithBlock({
+        let inboxP1 = NSPredicate(format: "itemID = %@ AND user1 = %@ AND user2 = %@", item, currentUserID, user)
+        var inboxQ1 = PFQuery(className: "Inbox", predicate: inboxP1)
+        
+        let inboxP2 = NSPredicate(format: "itemID = %@ AND user1 = %@ AND user2 = %@", item, user, currentUserID)
+        var inboxQ2 = PFQuery(className: "Inbox", predicate: inboxP2)
+        
+        var inboxQuery = PFQuery.orQueryWithSubqueries([inboxQ1, inboxQ2])
+        inboxQuery.findObjectsInBackgroundWithBlock({
             (objects: [AnyObject]!, error: NSError!) -> Void in
             
-            if error == nil {
+            let inboxItem = objects[0] as! PFObject
             
-                let object = objects[0] as! PFObject
-
-                var date = object.createdAt
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.dateStyle = .MediumStyle
-                dateFormatter.timeStyle = .ShortStyle
-                dateFormatter.timeZone = NSTimeZone.localTimeZone()
-                var dateString = dateFormatter.stringFromDate(date)
-                cell.dateAndTime.text = dateString as String
+            if inboxItem["user1"] as! String == PFUser.currentUser().objectId {
                 
-                cell.latestMessage.text = object["message"] as? String
+                if inboxItem["user1LastSeen"] != nil {
+                    
+                    lastCheckDateAndTime = inboxItem["user1LastSeen"] as! NSDate
+                    
+                }
+                
+            } else {
+                
+                if inboxItem["user2LastSeen"] != nil {
+                    
+                    lastCheckDateAndTime = inboxItem["user2LastSeen"] as! NSDate
+                    
+                }
                 
             }
+            
+            //Getting the last message text
+            
+            let innerP1 = NSPredicate(format: "sender = %@ AND receiver = %@", self.currentUserID, user)
+            var innerQ1 = PFQuery(className: "Message", predicate: innerP1)
+            innerQ1.whereKey("itemID", equalTo: item)
+            
+            let innerP2 = NSPredicate(format: "sender = %@ AND receiver = %@", user, self.currentUserID)
+            var innerQ2 = PFQuery(className: "Message", predicate: innerP2)
+            innerQ2.whereKey("itemID", equalTo: item)
+            
+            var query = PFQuery.orQueryWithSubqueries([innerQ1, innerQ2])
+            query.addDescendingOrder("createdAt")
+            query.findObjectsInBackgroundWithBlock({
+                (objects: [AnyObject]!, error: NSError!) -> Void in
+                
+                var unreadMessageCounter = 0
+                
+                if error == nil {
+                    
+                    let object = objects[0] as! PFObject
+                    
+                    var date = object.createdAt
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateStyle = .MediumStyle
+                    dateFormatter.timeStyle = .ShortStyle
+                    dateFormatter.timeZone = NSTimeZone.localTimeZone()
+                    var dateString = dateFormatter.stringFromDate(date)
+                    cell.dateAndTime.text = dateString as String
+                    
+                    cell.latestMessage.text = object["message"] as? String
+                    
+                    for object in objects {
+                        
+                        if object["sender"] as? String != self.currentUserID  {
+                            
+                            let messageCreated = object.createdAt as NSDate
+                            if messageCreated.compare(lastCheckDateAndTime) == NSComparisonResult.OrderedDescending {
+                                
+                                unreadMessageCounter++
+                            }
+                            
+                        }
+                    }
+                    
+                    if unreadMessageCounter != 0 {
+                        
+                        cell.unreadLabel.text = String(unreadMessageCounter)
+                        cell.unreadLabel.backgroundColor = UIColor(red: 244.0/255.0, green: 196.0/255.0, blue: 111.0/255.0, alpha: 1)
+                        
+                        cell.latestMessage.font = UIFont.boldSystemFontOfSize(13)
+                        cell.latestMessage.textColor = UIColor.blackColor()
+                        
+                        
+                    }
+                    
+                    
+                    
+                }
+            })
+            
         })
-
         
-
         return cell
     }
+    
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
