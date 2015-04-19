@@ -128,8 +128,6 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
         
         navigationController?.navigationBar.backItem?.title = ""
         
-        self.title = otherUsername
-        
         
         for subView in resultScrollView.subviews {
             

@@ -8,11 +8,13 @@
 
 import UIKit
 
-class EmailLoginViewController: UIViewController {
+class EmailLoginViewController: UIViewController, UITextFieldDelegate {
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     var processingView = UIView()
+    
+    var viewOriginalY: CGFloat = 0
 
     @IBOutlet weak var emailField: UITextField!
     
@@ -40,7 +42,41 @@ class EmailLoginViewController: UIViewController {
                 self.displayAlert("Log In Error", message: "Please make sure you input the right username and password")
             }
         }
+        
 
+    }
+    
+    func keyboardWasShown(notification: NSNotification){
+        
+        let dict: NSDictionary = notification.userInfo!
+        let s: NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let rect: CGRect = s.CGRectValue()
+        
+        UIView.animateWithDuration(0.01, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
+                
+                self.view.frame.origin.y = self.viewOriginalY - rect.height
+            
+            }, completion: {
+                (finished: Bool) in
+        })
+    }
+    
+    
+    func keyboardWillHide(notification: NSNotification){
+        
+        let dict: NSDictionary = notification.userInfo!
+        let s: NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let rect: CGRect = s.CGRectValue()
+        
+        UIView.animateWithDuration(0.01, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
+            
+            self.view.frame.origin.y = self.viewOriginalY
+            
+            }, completion: {
+                (finished: Bool) in
+        })
+        
+        
     }
     
     @IBAction func cancelLogin(sender: AnyObject) {
@@ -49,6 +85,14 @@ class EmailLoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.emailField.delegate = self
+        self.passwordField.delegate = self
+        
+        let tapViewGesture = UITapGestureRecognizer(target: self, action: "didTapView")
+        tapViewGesture.numberOfTapsRequired = 1
+        view.addGestureRecognizer(tapViewGesture)
+    
 
         // Do any additional setup after loading the view.
         // Add padding to text input
@@ -58,16 +102,33 @@ class EmailLoginViewController: UIViewController {
         let paddingViewPassword = UIView(frame: CGRectMake(0,0,10, self.passwordField.frame.height))
         passwordField.leftView = paddingViewPassword
         passwordField.leftViewMode = UITextFieldViewMode.Always
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {
         self.processingView.removeFromSuperview()
     }
+    
+    func didTapView() {
+        
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     // Function that calls the various UIAlert
     func displayAlert(title: String, message: String){

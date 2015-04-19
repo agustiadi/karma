@@ -198,6 +198,7 @@ class ChatInboxTableViewController: UITableViewController {
             destinationVC.itemID = self.itemIDArray[row!]
             destinationVC.otherUserID = self.userIDArray[row!]
             
+            
             let current_User = PFUser.currentUser()
             
             if current_User["profilePic"] != nil {
@@ -229,6 +230,7 @@ class ChatInboxTableViewController: UITableViewController {
                 let object = objects[0] as! PFObject
                 
                 destinationVC.otherUsername = object["name"] as! String
+                destinationVC.navigationItem.title = object["name"] as? String
                 
                 if object["profilePic"] == nil {
                     

@@ -8,12 +8,13 @@
 
 import UIKit
 
-class EmailSignupViewController: UIViewController {
-
+class EmailSignupViewController: UIViewController, UITextFieldDelegate {
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     var processingView = UIView()
+    
+    var viewOriginalY: CGFloat = 0
 
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
@@ -71,6 +72,14 @@ class EmailSignupViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.emailField.delegate = self
+        self.passwordField.delegate = self
+        self.nameField.delegate = self
+        
+        let tapViewGesture = UITapGestureRecognizer(target: self, action: "didTapView")
+        tapViewGesture.numberOfTapsRequired = 1
+        view.addGestureRecognizer(tapViewGesture)
 
         // Do any additional setup after loading the view.
         // Add padding to text input
@@ -83,8 +92,57 @@ class EmailSignupViewController: UIViewController {
         let paddingViewPassword = UIView(frame: CGRectMake(0,0,10, self.passwordField.frame.height))
         passwordField.leftView = paddingViewPassword
         passwordField.leftViewMode = UITextFieldViewMode.Always
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
 
     }
+    
+    func keyboardWasShown(notification: NSNotification){
+        
+        let dict: NSDictionary = notification.userInfo!
+        let s: NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let rect: CGRect = s.CGRectValue()
+        
+        UIView.animateWithDuration(0.01, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
+            
+            self.view.frame.origin.y = self.viewOriginalY - rect.height
+            
+            }, completion: {
+                (finished: Bool) in
+        })
+    }
+    
+    
+    func keyboardWillHide(notification: NSNotification){
+        
+        let dict: NSDictionary = notification.userInfo!
+        let s: NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let rect: CGRect = s.CGRectValue()
+        
+        UIView.animateWithDuration(0.01, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
+            
+            self.view.frame.origin.y = self.viewOriginalY
+            
+            }, completion: {
+                (finished: Bool) in
+        })
+        
+        
+    }
+    
+    func didTapView() {
+        
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+
+
     
     override func viewWillDisappear(animated: Bool) {
         self.processingView.removeFromSuperview()
