@@ -25,7 +25,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PMN-xi-VAd">
                                 <rect key="frame" x="67" y="425" width="240" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Facebook Login">
+                                <state key="normal" backgroundImage="Facebook Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -35,7 +35,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Jjf-hZ-baB">
                                 <rect key="frame" x="67" y="480" width="240" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Email Login">
+                                <state key="normal" backgroundImage="Email Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -45,7 +45,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="C3T-zQ-3YH">
                                 <rect key="frame" x="67" y="556" width="241" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Sign Up">
+                                <state key="normal" backgroundImage="Sign Up">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -93,6 +93,14 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="copyrightText" destination="0cQ-iQ-qHI" id="HZe-GD-jIR"/>
+                        <outlet property="divider" destination="E98-dN-lCg" id="jGs-NI-qQd"/>
+                        <outlet property="fbLoginButton" destination="PMN-xi-VAd" id="S4J-pt-2HG"/>
+                        <outlet property="loginButton" destination="Jjf-hZ-baB" id="jJn-u7-Jc7"/>
+                        <outlet property="logoText" destination="qXh-1l-Rvz" id="Zsc-qa-8bg"/>
+                        <outlet property="quoteText" destination="S41-3t-bRg" id="h3O-uK-Z6q"/>
+                        <outlet property="quoterText" destination="mnt-vI-fgO" id="WeI-oP-Vs4"/>
+                        <outlet property="signupButton" destination="C3T-zQ-3YH" id="FpT-8D-hmP"/>
                         <segue destination="tT6-XC-oB1" kind="push" identifier="emailLogin" id="gHT-xn-tWU"/>
                         <segue destination="hgd-2G-Jfj" kind="push" identifier="emailSignup" id="Ew8-XP-E5d"/>
                         <segue destination="aTB-qb-6JH" kind="push" identifier="fbLoggedIn" id="LgN-ka-Iws"/>
@@ -955,7 +963,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="B11-pF-GtJ"/>
+        <segue reference="LgN-ka-Iws"/>
         <segue reference="1Zg-gB-azE"/>
     </inferredMetricsTieBreakers>
 </document>
