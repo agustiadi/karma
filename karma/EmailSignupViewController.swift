@@ -16,6 +16,12 @@ class EmailSignupViewController: UIViewController, UITextFieldDelegate {
     
     var viewOriginalY: CGFloat = 0
 
+    @IBOutlet weak var quoterText: UILabel!
+    @IBOutlet weak var quoteText: UILabel!
+    @IBOutlet weak var logoText: UILabel!
+    @IBOutlet weak var divider: UIView!
+    @IBOutlet weak var copyrightText: UILabel!
+    @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -72,6 +78,8 @@ class EmailSignupViewController: UIViewController, UITextFieldDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        makeLayout()
         
         self.emailField.delegate = self
         self.passwordField.delegate = self
@@ -182,6 +190,36 @@ class EmailSignupViewController: UIViewController, UITextFieldDelegate {
         self.activityIndicator.stopAnimating()
         UIApplication.sharedApplication().endIgnoringInteractionEvents()
         
+    }
+    
+    func makeLayout(){
+        let viewWidth = view.frame.width
+        let viewHeight = view.frame.height
+        let viewWidthUnit = viewWidth/20
+        let viewHeightUnit = viewHeight/20
+        
+        // Logo + Quote + backButton
+        logoText.frame = CGRectMake(0, 0, viewWidth*0.5, 50)
+        logoText.center = CGPointMake(viewWidth/2, viewHeightUnit*3.4)
+        quoteText.frame = CGRectMake(0, 0, viewWidth*0.9, 50)
+        quoteText.center = CGPointMake(viewWidth/2, viewHeightUnit*5.77)
+        quoterText.frame = CGRectMake(0, 0, viewWidth*0.8, 25)
+        quoterText.center = CGPointMake(viewWidth/2, viewHeightUnit*5.77+30)
+        
+        // Copyright
+        copyrightText.frame = CGRectMake(0, viewHeight-22, viewWidth, 21)
+        
+        // Buttons
+        signupButton.frame = CGRectMake(0, 0, viewWidth*0.64, viewWidth*0.13125)
+        signupButton.center = CGPointMake(viewWidth/2, viewHeight-(viewHeightUnit*3.3))
+        passwordField.frame = CGRectMake(0, 0, viewWidth*0.64, viewWidth*0.13125)
+        passwordField.center = CGPointMake(viewWidth/2, viewHeight-(viewHeightUnit*4.3)-(viewWidth*0.13125))
+        emailField.frame = CGRectMake(0, 0, viewWidth*0.64, viewWidth*0.13125)
+        emailField.center = CGPointMake(viewWidth/2, viewHeight-(viewHeightUnit*4.6)-(viewWidth*0.2625))
+        nameField.frame = CGRectMake(0, 0, viewWidth*0.64, viewWidth*0.13125)
+        nameField.center = CGPointMake(viewWidth/2, viewHeight-(viewHeightUnit*4.9)-(viewWidth*0.39375))
+        divider.frame = CGRectMake(0, 0, viewWidth*0.64, 1)
+        divider.center = CGPointMake(viewWidth/2, viewHeight-(viewHeightUnit*5.4)-(viewWidth*0.459375))
     }
 
     

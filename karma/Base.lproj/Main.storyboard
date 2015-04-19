@@ -143,7 +143,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OaH-MW-lP2">
                                 <rect key="frame" x="67" y="556" width="240" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Sign Up">
+                                <state key="normal" backgroundImage="Sign Up">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -198,9 +198,15 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="copyrightText" destination="R3q-uK-zRq" id="UH6-q4-T4o"/>
+                        <outlet property="divider" destination="tbU-Zq-FjB" id="Gmy-DX-yid"/>
                         <outlet property="emailField" destination="ps1-CT-Shs" id="Aes-yj-bgq"/>
+                        <outlet property="logoText" destination="MIw-Nw-48E" id="6Q3-kV-GQi"/>
                         <outlet property="nameField" destination="JDC-1t-C2i" id="fXo-tS-qgg"/>
                         <outlet property="passwordField" destination="463-WX-CR1" id="PcC-fY-8No"/>
+                        <outlet property="quoteText" destination="QtF-TJ-kgW" id="voi-wr-FS5"/>
+                        <outlet property="quoterText" destination="nmJ-ht-7Dq" id="tq1-Ow-509"/>
+                        <outlet property="signupButton" destination="OaH-MW-lP2" id="tXi-8U-N9a"/>
                         <segue destination="aTB-qb-6JH" kind="push" identifier="userSignedUpViaEmail" id="Uhn-Pd-w9p"/>
                     </connections>
                 </viewController>
@@ -483,7 +489,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EGZ-KR-iEd">
                                 <rect key="frame" x="68" y="556" width="240" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Login">
+                                <state key="normal" backgroundImage="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -537,8 +543,14 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="copyrightText" destination="K5M-Je-Rt0" id="dvb-Lc-xi6"/>
+                        <outlet property="divider" destination="fVB-cp-iMA" id="a8x-D8-br9"/>
                         <outlet property="emailField" destination="3aa-1n-ZsQ" id="3Cq-DY-tbB"/>
+                        <outlet property="loginButton" destination="EGZ-KR-iEd" id="Dae-kj-h6m"/>
+                        <outlet property="logoText" destination="Dwr-q1-9nH" id="49p-mL-rEB"/>
                         <outlet property="passwordField" destination="dQP-qa-kB3" id="fRU-Ck-I92"/>
+                        <outlet property="quoteText" destination="JVP-1g-cvu" id="wr5-ti-edD"/>
+                        <outlet property="quoterText" destination="gfz-vm-Ao3" id="5Rm-VF-vaD"/>
                         <segue destination="aTB-qb-6JH" kind="push" identifier="userLoggedInViaEmail" id="B11-pF-GtJ"/>
                     </connections>
                 </viewController>
@@ -963,7 +975,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="LgN-ka-Iws"/>
+        <segue reference="Uhn-Pd-w9p"/>
         <segue reference="1Zg-gB-azE"/>
     </inferredMetricsTieBreakers>
 </document>
