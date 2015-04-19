@@ -172,6 +172,15 @@ class ChatInboxTableViewController: UITableViewController {
             if error == nil {
             
                 let object = objects[0] as! PFObject
+
+                var date = object.createdAt
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateStyle = .MediumStyle
+                dateFormatter.timeStyle = .ShortStyle
+                dateFormatter.timeZone = NSTimeZone.localTimeZone()
+                var dateString = dateFormatter.stringFromDate(date)
+                cell.dateAndTime.text = dateString as String
+                
                 cell.latestMessage.text = object["message"] as? String
                 
             }
