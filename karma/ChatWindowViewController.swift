@@ -456,6 +456,7 @@ class ChatWindowViewController: UIViewController, UIScrollViewDelegate, UITextFi
             }
             
         })
+        
     }
     
 

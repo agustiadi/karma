@@ -28,7 +28,6 @@ class ChatInboxTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         
         refreshData()
-
     }
     
     
