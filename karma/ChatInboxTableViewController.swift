@@ -22,7 +22,18 @@ class ChatInboxTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
     
+    override func viewDidAppear(animated: Bool) {
+        
+        refreshData()
+
+    }
+    
+    
+    func refreshData() {
+        
         let predicate = NSPredicate(format: "user1 = %@ OR user2 = %@", currentUserID, currentUserID)
         var query = PFQuery(className: "Inbox", predicate: predicate)
         query.addDescendingOrder("updatedAt")
@@ -52,30 +63,26 @@ class ChatInboxTableViewController: UITableViewController {
                         if user1ID == self.currentUserID {
                             
                             self.userIDArray.append(user2ID)
-                            
                         }
                         
                         if user2ID == self.currentUserID {
                             
                             self.userIDArray.append(user1ID)
-
+                            
                         }
                         
                     }
                     
                     self.tableView.reloadData()
-
+                    
+                    
                 }
-
+                
+                
             }
             
         })
-        
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        
-        self.tableView.reloadData()
+
         
     }
 
@@ -179,6 +186,10 @@ class ChatInboxTableViewController: UITableViewController {
                     
                     lastCheckDateAndTime = inboxItem["user1LastSeen"] as! NSDate
                     
+                } else {
+                    
+                    let temp = inboxItem.createdAt as NSDate
+                    lastCheckDateAndTime = temp.dateByAddingTimeInterval(-60)
                 }
                 
             } else {
@@ -187,6 +198,11 @@ class ChatInboxTableViewController: UITableViewController {
                     
                     lastCheckDateAndTime = inboxItem["user2LastSeen"] as! NSDate
                     
+                } else {
+                    
+                    let temp = inboxItem.createdAt as NSDate
+                    lastCheckDateAndTime = temp.dateByAddingTimeInterval(-60)
+
                 }
                 
             }
@@ -227,9 +243,11 @@ class ChatInboxTableViewController: UITableViewController {
                         if object["sender"] as? String != self.currentUserID  {
                             
                             let messageCreated = object.createdAt as NSDate
+                            
                             if messageCreated.compare(lastCheckDateAndTime) == NSComparisonResult.OrderedDescending {
                                 
                                 unreadMessageCounter++
+                                
                             }
                             
                         }
@@ -238,6 +256,7 @@ class ChatInboxTableViewController: UITableViewController {
                     if unreadMessageCounter != 0 {
                         
                         cell.unreadLabel.text = String(unreadMessageCounter)
+                        cell.unreadLabel.textColor = UIColor.whiteColor()
                         cell.unreadLabel.backgroundColor = UIColor(red: 244.0/255.0, green: 196.0/255.0, blue: 111.0/255.0, alpha: 1)
                         
                         cell.latestMessage.font = UIFont.boldSystemFontOfSize(13)
