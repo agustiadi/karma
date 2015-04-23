@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatInboxTableViewController: UITableViewController {
+class ChatInboxTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     
     var userIDArray = [String]()
     var itemIDArray = [String]()
@@ -23,11 +23,30 @@ class ChatInboxTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         
+        refresherControl()
+        
         refreshData()
+        
+    }
+    
+    func refresherControl() {
+        
+        //Refresher Controller Set-Up
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl!)
+        
+    }
+    
+    func refresh(send: AnyObject){
+        
+        refreshData()
+        
     }
     
     
@@ -74,14 +93,14 @@ class ChatInboxTableViewController: UITableViewController {
                     
                     self.tableView.reloadData()
                     
-                    
                 }
                 
                 
             }
             
         })
-
+        
+        self.refreshControl?.endRefreshing()
         
     }
 
@@ -112,6 +131,7 @@ class ChatInboxTableViewController: UITableViewController {
         let item = self.itemIDArray[indexPath.row]
         let user = self.userIDArray[indexPath.row]
         
+        
         var objectQuery = PFQuery(className: "Item")
         objectQuery.whereKey("objectId", equalTo: item)
         objectQuery.findObjectsInBackgroundWithBlock({
@@ -121,9 +141,9 @@ class ChatInboxTableViewController: UITableViewController {
         
                 let object = objects[0] as! PFObject
                 cell.itemName.text = object["itemName"] as? String
-        
+            
             }
-                                    
+            
         })
         
         var userQuery = PFQuery(className: "_User")
@@ -216,6 +236,14 @@ class ChatInboxTableViewController: UITableViewController {
             var innerQ2 = PFQuery(className: "Message", predicate: innerP2)
             innerQ2.whereKey("itemID", equalTo: item)
             
+            //Reseting text style and unread label
+            cell.latestMessage.textColor = UIColor.lightGrayColor()
+            cell.latestMessage.font = UIFont.systemFontOfSize(13, weight: 0)
+            cell.unreadLabel.layer.cornerRadius = 15
+            cell.unreadLabel.clipsToBounds = true
+            cell.unreadLabel.textColor = UIColor.clearColor()
+            cell.unreadLabel.backgroundColor = UIColor.clearColor()
+            
             var query = PFQuery.orQueryWithSubqueries([innerQ1, innerQ2])
             query.addDescendingOrder("createdAt")
             query.findObjectsInBackgroundWithBlock({
@@ -274,7 +302,6 @@ class ChatInboxTableViewController: UITableViewController {
         return cell
     }
     
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         performSegueWithIdentifier("inboxCellPressed", sender: self)
@@ -282,7 +309,6 @@ class ChatInboxTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         
         if segue.identifier == "inboxCellPressed" {
             

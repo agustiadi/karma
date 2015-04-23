@@ -103,9 +103,8 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
                     name.text = user["name"] as? String
                     giverName = user["name"] as! String
                     
-                    if user["profilePic"] != nil {
-                        
-                        let temp = user["profilePic"] as! PFFile
+                    if let temp: AnyObject = user["profilePic"] {
+                    
                         temp.getDataInBackgroundWithBlock{
                             (imageData: NSData!, error: NSError!) -> Void in
                             
@@ -121,21 +120,22 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
                                 println(error)
                                 
                             }
-                            
                         }
                         
+                    } else {
+                        
+                        profilePic.image = UIImage(named: "profilePlaceholder")!
+                        giverImage = UIImage(named: "profilePlaceholder")!
+                        
+                    }
+
+                
+
                     }
                 }
-            } else {
-                
-                profilePic.image = UIImage(named: "profilePlaceholder")!
-                giverImage = UIImage(named: "profilePlaceholder")!
-                
             }
-            
         }
-        
-    }
+    
     
     func getItemImages(objectID: String) {
         

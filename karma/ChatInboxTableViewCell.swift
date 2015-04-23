@@ -26,6 +26,7 @@ class ChatInboxTableViewCell: UITableViewCell {
         profilePic.clipsToBounds = true
         
         latestMessage.textColor = UIColor.lightGrayColor()
+        latestMessage.font = UIFont(name: "System Light", size: 11.0)
         
         unreadLabel.layer.cornerRadius = 15
         unreadLabel.clipsToBounds = true
