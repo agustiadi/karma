@@ -629,6 +629,8 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <segue destination="ejA-4i-wsO" kind="push" identifier="item" id="zj1-Os-Fpt"/>
                         <segue destination="FLA-tE-nWD" kind="push" identifier="chatInbox" id="o8N-Ua-Alc"/>
