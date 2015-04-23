@@ -8,6 +8,9 @@
 
 import UIKit
 
+var viewWidth:CGFloat = 0
+var viewHeight:CGFloat = 0
+
 class LandingPageViewController: UIViewController{
     @IBOutlet weak var divider: UIView!
     @IBOutlet weak var fbLoginButton: UIButton!
@@ -150,8 +153,8 @@ class LandingPageViewController: UIViewController{
     }
     
     func makeLayout(){
-        let viewWidth = view.frame.width
-        let viewHeight = view.frame.height
+        viewWidth = view.frame.width
+        viewHeight = view.frame.height
         let viewWidthUnit = viewWidth/20
         let viewHeightUnit = viewHeight/20
         

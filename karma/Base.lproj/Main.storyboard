@@ -575,7 +575,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label" id="xCc-5l-AH5">
-                                            <rect key="frame" x="17" y="257" width="92" height="48"/>
+                                            <rect key="frame" x="17" y="267" width="92" height="27"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="QG8-bC-tgA">
@@ -583,7 +583,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Item" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LLW-nR-oXh">
-                                            <rect key="frame" x="16" y="236" width="277" height="29"/>
+                                            <rect key="frame" x="16" y="238" width="277" height="27"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" red="0.49803921568627452" green="0.51764705882352946" blue="0.46274509803921571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -611,6 +611,7 @@
                                     <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="categoryTag" destination="xCc-5l-AH5" id="kqp-r4-8Hq"/>
                                     <outlet property="itemCategory" destination="eey-QM-3gS" id="7Fw-JJ-ewe"/>
                                     <outlet property="itemImage" destination="QG8-bC-tgA" id="ybD-dz-RB7"/>
                                     <outlet property="itemName" destination="LLW-nR-oXh" id="qPC-oQ-K2W"/>

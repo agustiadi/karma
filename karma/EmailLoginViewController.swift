@@ -171,8 +171,6 @@ class EmailLoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func makeLayout(){
-        let viewWidth = view.frame.width
-        let viewHeight = view.frame.height
         let viewWidthUnit = viewWidth/20
         let viewHeightUnit = viewHeight/20
         
