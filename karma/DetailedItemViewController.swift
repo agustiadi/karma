@@ -50,7 +50,7 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
         giverNameLabel.frame = CGRectMake(63, 12, viewWidth*0.5, 25)
 
         // Image + wording
-        collectionView.frame = CGRectMake(0, 48, viewWidth, 230)
+        collectionView.frame = CGRectMake(0, 48, viewWidth, 231)
         itemNameLabel.frame = CGRectMake(15, 285, viewWidth-30, 25)
         categoryTag.frame = CGRectMake(15, 315, 93, 25)
         categoryLabel.frame = CGRectMake(21, 317, 80, 21)
@@ -184,6 +184,11 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
 
     }
     
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        //#warning Incomplete method implementation -- Return the number of sections
+        return 1
+    }
+    
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return itemImagesFile.count
@@ -192,7 +197,10 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("itemImage", forIndexPath: indexPath) as! ItemImagesCollectionViewCell
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("itemImage", forIndexPath: indexPath) as! ItemImagesCollectionViewCell
+        
+        // Set cell width to 100%
+        cell.frame.size.width = self.collectionView.bounds.size.width
         
         cell.backgroundColor = UIColor.whiteColor()
         
@@ -225,7 +233,6 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
         
         return cell
     }
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
