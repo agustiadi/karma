@@ -78,15 +78,10 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
 
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.scrollEnabled = true
-
-    }
-    
-    
-    override func viewDidAppear(animated: Bool) {
         
         getUserData(giverID, name: giverNameLabel, profilePic: profilePic)
         getItemImages(objectID)
-        
+
     }
     
     func getUserData(userID: String, name: UILabel, profilePic: UIImageView){
