@@ -40,11 +40,11 @@ class ItemListTableViewCell: UITableViewCell {
 
         self.frame = CGRectMake(0, 0, viewWidth, 300)
         itemImage.frame = CGRectMake(0, 0, viewWidth, 230)
-        itemName.frame = CGRectMake(15, 237, viewWidthUnit*16, 25)
-        profilePic.frame = CGRectMake(viewWidth-15-38 , 237, 38, 38)
-        categoryTag.frame = CGRectMake(15, 268, 93, 25)
-        itemCategory.frame = CGRectMake(21, 270, 80, 21)
-        userName.frame = CGRectMake(viewWidth-15-150 , 274, 150, 21)
+        itemName.frame = CGRectMake(12, 237, viewWidthUnit*16, 25)
+        profilePic.frame = CGRectMake(viewWidth-12-38 , 237, 38, 38)
+        categoryTag.frame = CGRectMake(12, 268, 93, 25)
+        itemCategory.frame = CGRectMake(18, 270, 80, 21)
+        userName.frame = CGRectMake(viewWidth-12-150 , 274, 150, 21)
 
         
     }

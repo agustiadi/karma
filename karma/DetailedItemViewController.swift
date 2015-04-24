@@ -27,6 +27,8 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
     @IBOutlet var categoryLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var wantItBtnLabel: UIButton!
+    @IBOutlet weak var headerBackground: UIView!
+    @IBOutlet weak var categoryTag: UIImageView!
     
     @IBAction func wantItBtn(sender: AnyObject) {
         performSegueWithIdentifier("wantIt", sender: self)
@@ -37,10 +39,33 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
     var itemImageIndex = 0
     var itemImagesFile = [PFFile]()
     var itemImages = [UIImage]()
+    
+    func makeLayout(){
+        let viewWidthUnit = viewWidth/20
+        let viewHeightUnit = viewHeight/20
+        
+        // Header
+        headerBackground.frame = CGRectMake(0, 0, viewWidth, 48)
+        profilePic.frame = CGRectMake(12, 5, 38, 38)
+        giverNameLabel.frame = CGRectMake(63, 12, viewWidth*0.5, 25)
+
+        // Image + wording
+        collectionView.frame = CGRectMake(0, 48, viewWidth, 230)
+        itemNameLabel.frame = CGRectMake(15, 285, viewWidth-30, 25)
+        categoryTag.frame = CGRectMake(15, 315, 93, 25)
+        categoryLabel.frame = CGRectMake(21, 317, 80, 21)
+        descriptionLabel.frame = CGRectMake(15, 352, viewWidth-30, 40)
+
+        
+        // Buttons
+        wantItBtnLabel.frame = CGRectMake(0, viewHeight-109, viewWidth, 45)
+    }
    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        makeLayout()
         
         profilePic.layer.cornerRadius = 20
         profilePic.clipsToBounds = true
@@ -48,7 +73,6 @@ class DetailedItemViewController: UIViewController, UICollectionViewDelegateFlow
         itemNameLabel.text = nameOfItem
         
         categoryLabel.text = categoryOfItem
-        categoryLabel.font = categoryLabel.font.fontWithSize(15)
         
         descriptionLabel.numberOfLines = 0
         descriptionLabel.text = descriptionOfItem
