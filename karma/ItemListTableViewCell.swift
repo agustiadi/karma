@@ -32,13 +32,7 @@ class ItemListTableViewCell: UITableViewCell {
         
     }
     
-    override func prepareForReuse() {
-        
-        itemImage.image = nil
-        profilePic.image = nil
-        userName.text = nil
-        
-    }
+
     
     func makeLayout(){
         let viewWidthUnit = viewWidth/20

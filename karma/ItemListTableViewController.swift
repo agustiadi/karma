@@ -12,12 +12,12 @@ class ItemListTableViewController: UITableViewController {
     
     var objectIDs = [String]()
     var itemsName = [String]()
-    var itemsImage = [PFFile]()
+    var itemsImage = [String:UIImage]()
     var descriptions = [String]()
     var categories = [String]()
     var userIDs = [String]()
-    var userName = [String]()
-    var userImageFile = [PFFile]()
+    var userName = [String:String]()
+    var profilePic = [String:UIImage]()
     
     var inboxBarButtonItem = UIBarButtonItem()
 
@@ -79,6 +79,7 @@ class ItemListTableViewController: UITableViewController {
         startActivityIndicator()
         
         refreshItemData()
+        
 
     }
     
@@ -87,7 +88,6 @@ class ItemListTableViewController: UITableViewController {
         performSegueWithIdentifier("chatInbox", sender: self)
     }
     
-   
     
     func refresherControl() {
         
@@ -129,6 +129,11 @@ class ItemListTableViewController: UITableViewController {
 
     }
     
+    func updateTable(){
+        
+            self.tableView.reloadData()
+    }
+    
     
     func refreshItemData() {
         
@@ -144,12 +149,14 @@ class ItemListTableViewController: UITableViewController {
             self.categories.removeAll(keepCapacity: true)
             self.userIDs.removeAll(keepCapacity: true)
             self.userName.removeAll(keepCapacity: true)
-            self.userImageFile.removeAll(keepCapacity: true)
+            self.profilePic.removeAll(keepCapacity: true)
+            self.updateTable()
             
             if error == nil {
                 
                 for item in itemObjects {
-
+                    
+                    let objectid = item.objectId
                     
                     let userObject = item["userID"] as! PFObject
                     self.objectIDs.append(item.objectId)
@@ -157,11 +164,62 @@ class ItemListTableViewController: UITableViewController {
                     self.itemsName.append(item["itemName"] as! String)
                     self.descriptions.append(item["itemDescription"] as! String)
                     self.categories.append(item["categories"] as! String)
-                    self.itemsImage.append(item["image_1"] as! PFFile)
+                    
+                        //Get Item Images
+                        let itemPic = item["image_1"] as! PFFile
+                        itemPic.getDataInBackgroundWithBlock{
+                            (imageData: NSData!, error: NSError!) -> Void in
+                            
+                            if error == nil {
+                                
+                                let image = UIImage(data: imageData)
+                                self.itemsImage[objectid] = image!
+                                self.updateTable()
+
+                            }
+                        }
+                        
+                        var userQuery = PFQuery(className: "_User")
+                        userQuery.whereKey("objectId", equalTo: userObject.objectId)
+                        userQuery.findObjectsInBackgroundWithBlock({
+                            (objects: [AnyObject]!, error: NSError!) -> Void in
+                            
+                            if error == nil {
+                                
+                                let selectedUser = objects[0] as! PFUser
+                                let selectedUserName = selectedUser["name"] as! String
+                                    
+                                self.userName[objectid] = selectedUserName
+                                self.updateTable()
+                                
+                                if let temp: AnyObject = selectedUser["profilePic"] {
+                                    
+                                    temp.getDataInBackgroundWithBlock({
+                                        (imageData: NSData!, error: NSError!) -> Void in
+                                        if error == nil {
+                                            let image = UIImage(data: imageData)
+                                                
+                                                self.profilePic[objectid] = image!
+                                                self.updateTable()
+                                            
+                                        } else {
+                                            println(error)
+                                        }
+                                    })
+                                    
+                                } else {
+                                    self.profilePic[objectid] = UIImage(named: "profilePlaceholder")
+                                    self.updateTable()
+                                }
+                            }
+                        })
+
                     
                 }
-            
-                self.tableView.reloadData()
+                
+                self.updateTable()
+                    
+               
                 self.stopActivityIndicator()
             }
         }
@@ -210,98 +268,22 @@ class ItemListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 300
     }
-
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as! ItemListTableViewCell
         
-        cell.tag = indexPath.row
+        let objectid = self.objectIDs[indexPath.row]
         
-        let queue : dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)
-        dispatch_async(queue, {
-        
-        self.itemsImage[indexPath.row].getDataInBackgroundWithBlock{
-            (imageData: NSData!, error: NSError!) -> Void in
-            
-            if error == nil {
-                
-                let image = UIImage(data: imageData)
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                    
-                    if (cell.tag == indexPath.row){
-                        cell.itemImage.image = image
-                    }
-                })
-                
-            } else {
-                
-                println(error)
-            }
-        }
+        cell.itemImage.image = itemsImage[objectid]
+        cell.userName.text = userName[objectid]
+        cell.profilePic.image = profilePic[objectid]
         
         cell.itemName.text = self.itemsName[indexPath.row]
         cell.itemCategory.text = self.categories[indexPath.row]
         
-        var userQuery = PFQuery(className: "_User")
-        userQuery.whereKey("objectId", equalTo: self.userIDs[indexPath.row])
-        userQuery.findObjectsInBackgroundWithBlock({
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            
-            if error == nil {
-                    
-                    let selectedUser = objects[0] as! PFUser
-                    let selectedUserName = selectedUser["name"] as! String
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        
-                        if (cell.tag == indexPath.row){
-                            
-                            cell.userName.text = selectedUserName
-                        }
-                    })
-                    
-                    
-                    if let temp: AnyObject = selectedUser["profilePic"] {
-                        
-                        temp.getDataInBackgroundWithBlock({
-                            (imageData: NSData!, error: NSError!) -> Void in
-                            if error == nil {
-                                
-                                let image = UIImage(data: imageData)
-                                
-                                dispatch_async(dispatch_get_main_queue(), {
-                                    
-                                    if (cell.tag == indexPath.row){
-                                        
-                                        cell.profilePic.image = image
-
-                                    }
-                                    
-                                })
-                                
-                                
-                            } else {
-                                println(error)
-                            }
-                            
-                        })
-                        
-                    } else {
-                        cell.profilePic.image = UIImage(named: "profilePlaceholder")
-                    }
-                
-            }
-            
-        })
-    })
-        
-        
         return cell
     }
-    
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
