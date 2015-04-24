@@ -29,6 +29,15 @@ class ItemListTableViewCell: UITableViewCell {
         profilePic.layer.cornerRadius = 20.0
         profilePic.clipsToBounds = true
         
+        
+    }
+    
+    override func prepareForReuse() {
+        
+        itemImage.image = nil
+        profilePic.image = nil
+        userName.text = nil
+        
     }
     
     func makeLayout(){

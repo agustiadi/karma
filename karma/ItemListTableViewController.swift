@@ -214,15 +214,27 @@ class ItemListTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as! ItemListTableViewCell
         
-        itemsImage[indexPath.row].getDataInBackgroundWithBlock{
+        cell.tag = indexPath.row
+        
+        let queue : dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)
+        dispatch_async(queue, {
+        
+        self.itemsImage[indexPath.row].getDataInBackgroundWithBlock{
             (imageData: NSData!, error: NSError!) -> Void in
             
             if error == nil {
                 
                 let image = UIImage(data: imageData)
-                cell.itemImage.image = image
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    if (cell.tag == indexPath.row){
+                        cell.itemImage.image = image
+                    }
+                })
                 
             } else {
                 
@@ -230,41 +242,61 @@ class ItemListTableViewController: UITableViewController {
             }
         }
         
-        cell.itemName.text = itemsName[indexPath.row]
-        cell.itemCategory.text = categories[indexPath.row]
+        cell.itemName.text = self.itemsName[indexPath.row]
+        cell.itemCategory.text = self.categories[indexPath.row]
         
         var userQuery = PFQuery(className: "_User")
-        userQuery.whereKey("objectId", equalTo: userIDs[indexPath.row])
+        userQuery.whereKey("objectId", equalTo: self.userIDs[indexPath.row])
         userQuery.findObjectsInBackgroundWithBlock({
             (objects: [AnyObject]!, error: NSError!) -> Void in
             
-            let selectedUser = objects[0] as! PFUser
-            let selectedUserName = selectedUser["name"] as! String
-            cell.userName.text = selectedUserName
-                
-            if let temp: AnyObject = selectedUser["profilePic"] {
-                
-                temp.getDataInBackgroundWithBlock({
-                    (imageData: NSData!, error: NSError!) -> Void in
-                    if error == nil {
+            if error == nil {
+                    
+                    let selectedUser = objects[0] as! PFUser
+                    let selectedUserName = selectedUser["name"] as! String
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
                         
-                        let image = UIImage(data: imageData)
-                        cell.profilePic.image = image
+                        if (cell.tag == indexPath.row){
+                            
+                            cell.userName.text = selectedUserName
+                        }
+                    })
+                    
+                    
+                    if let temp: AnyObject = selectedUser["profilePic"] {
+                        
+                        temp.getDataInBackgroundWithBlock({
+                            (imageData: NSData!, error: NSError!) -> Void in
+                            if error == nil {
+                                
+                                let image = UIImage(data: imageData)
+                                
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    
+                                    if (cell.tag == indexPath.row){
+                                        
+                                        cell.profilePic.image = image
+
+                                    }
+                                    
+                                })
+                                
+                                
+                            } else {
+                                println(error)
+                            }
+                            
+                        })
                         
                     } else {
-                        println(error)
+                        cell.profilePic.image = UIImage(named: "profilePlaceholder")
                     }
-                    
-                })
-                
-                
-            } else {
-            
-                cell.profilePic.image = UIImage(named: "profilePlaceholder")
                 
             }
-        
+            
         })
+    })
         
         
         return cell
